@@ -1,0 +1,18 @@
+{
+    "menages": [
+        {
+            "name": "spy001",
+            "step": 9,
+            "master": {
+                "binary": "/opt/spiders/spiders-snooper"
+            }
+        },
+        {
+            "name": "spy002",
+            "step": 9,
+            "master": {
+                "binary": "/opt/spiders/spiders-snooper"
+            }
+        }
+    ]
+}

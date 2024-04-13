@@ -1,0 +1,12 @@
+{
+    "version": "0.1.0",
+    "menages": [
+        {
+            "name": "dossier",
+            "step": 0,
+            "master": {
+                "binary": "/opt/spiders/spiders-dossier"
+            }
+        }
+    ]
+}
