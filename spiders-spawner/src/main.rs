@@ -1,6 +1,6 @@
 // use clap::Parser;
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::fs::File;
 use std::io::BufReader;
 use clap::Parser;
@@ -41,25 +41,20 @@ struct Cli {
     fluid_file: Option<PathBuf>,
 }
 
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
 
     println!("cli: {:?}", cli);
 
-    // let solid_file = if Same(solid) = cli.solid_file {
-    //     solid
-    // } else {
-    //     PathBuf::new()
-    // }
-
-    let file = File::open("./config/solid.json")?;
-    let reader = BufReader::new(file);
+    let solid_file = File::open(cli.solid_file.unwrap_or(Path::new("./config/solid.json").to_path_buf()))?;
+    // let solid_file = File::open(cli.solid_file.unwrap_or(Path::new("~/.config/spiders/solid.json").to_path_buf()))?;
+    let reader = BufReader::new(solid_file);
     let solid: SolidConfig = serde_json::from_reader(reader)?;
     println!("solid config {:?}", solid);
 
-    let file = File::open("./config/fluid.json")?;
-    let reader = BufReader::new(file);
+    let fluid_file = File::open(cli.fluid_file.unwrap_or(Path::new("./config/fluid.json").to_path_buf()))?;
+    // let fluid_file = File::open(cli.fluid_file.unwrap_or(Path::new("~/.cache/spiders/fluid.json").to_path_buf()));
+    let reader = BufReader::new(fluid_file);
     let fluid: FluidConfig = serde_json::from_reader(reader)?;
     println!("fluid config {:?}", fluid);
 
