@@ -1,13 +1,8 @@
-// use clap::Parser;
-
 use std::path::{Path, PathBuf};
 use std::fs::File;
 use std::io::BufReader;
 use clap::Parser;
-//use futures::io::BufReader;
 use serde::Deserialize;
-// #[allow(unused_imports)]
-// use serde_json::Value;
 
 #[derive(Deserialize, Debug)]
 pub struct RoleMaster {
