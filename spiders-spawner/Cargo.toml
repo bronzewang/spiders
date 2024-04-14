@@ -1,16 +1,21 @@
 [package]
 name = "spiders-spawner"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
+authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com"]
+description = "spawner for tribers instance named spiders"
+license = "MIT OR Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 tribers = { version = "0" }
 
+anyhow = "1"
+thiserror = "1"
+
 futures = { version = "0.3" }
 async-trait = { version = "0.1.74" }
-
-serde = { version = "1" }
-serde_json = { version = "1.0" }
 
 tokio = { version = "1", features = ["full"] }
 console = { version = "0.15" }
@@ -22,3 +27,6 @@ opentelemetry_sdk = { version = "0.21", features = ["metrics", "rt-tokio"] }
 opentelemetry-stdout = { version = "0.2", features = ["metrics"] }
 
 clap = { version = "4", features = ["derive", "env"] }
+
+serde = { version = "1" }
+serde_json = { version = "1.0" }

@@ -1,6 +1,45 @@
 [package]
 name = "spiders-dossier"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
+authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com"]
+description = "dossier menages for tribers isntance named spiders"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
+tribers = { version = "0" }
+
+anyhow = "1"
+thiserror = "1"
+
+futures = { version = "0.3" }
+async-trait = { version = "0.1" }
+
+tokio = { version = "1", features = ["full"] }
+console = { version = "0.15" }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+opentelemetry = { version = "0.21", features = ["metrics"] }
+opentelemetry_sdk = { version = "0.21", features = ["metrics", "rt-tokio"] }
+opentelemetry-stdout = { version = "0.2", features = ["metrics"] }
+
+clap = { version = "4", features = ["derive", "env"] }
+
+serde = { version = "1" }
+serde_json = { version = "1.0" }
+
+http = { version = "1.0"}
+hyper = { version = "1.0", features = ["full"] }
+tower = { version = "0.4", features = ["util"] }
+tower-http = { version = "0.5", features = ["add-extension"] }
+axum = { version = "0.7" }
+axum-login = { version = "0.15" }
+
+askama = { version = "0.12", features = ["with-axum"] }
+askama_axum = { version = "0.4" }
+
+nusb = { version = "0.1" }
+
+sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
+sea-orm = { version = "0.12" }
