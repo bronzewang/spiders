@@ -49,5 +49,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>>{
 
     println!("cli: {:?}", cli);
 
+    for dev in nusb::list_devices().unwrap() {
+        println!("dev {:#?}", dev);
+    }
+
     Ok(())
 }
