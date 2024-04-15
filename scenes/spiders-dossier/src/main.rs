@@ -26,13 +26,24 @@ pub struct Snooper {
     pub name: String,
     pub toolkits: Vec<Toolkit>,
 }
+
 #[derive(clap::Parser, Debug)]
 struct Cli {
-    #[arg(short, long)]
-    inner_path: Option<PathBuf>,
-    #[arg(short, long)]
-    xmass_path: Option<PathBuf>,
+    #[arg(long = "fibase")]
+    fluid_ibase: Option<PathBuf>,
+    #[arg(long = "fxmass")]
+    fluid_xmass: Option<PathBuf>,
+    #[arg(long = "fxplug")]
+    fluid_xplug: Option<PathBuf>,
+
+    #[arg(long = "sibase")]
+    solid_ibase: Option<PathBuf>,
+    #[arg(long = "sxmass")]
+    solid_xmass: Option<PathBuf>,
+    #[arg(long = "sxplug")]
+    solid_xplug: Option<PathBuf>,
 }
+
 fn main() -> Result<(), Box<dyn std::error::Error>>{
     let cli = Cli::parse();
 

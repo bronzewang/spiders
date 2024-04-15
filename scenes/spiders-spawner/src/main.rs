@@ -30,10 +30,24 @@ pub struct FluidConfig {
 
 #[derive(clap::Parser, Debug)]
 struct Cli {
-    #[arg(short='s', long="solid")]
+    #[arg(short = 's', long = "solid")]
     solid_file: Option<PathBuf>,
-    #[arg(short='f', long="fluid")]
+    #[arg(short = 'f', long = "fluid")]
     fluid_file: Option<PathBuf>,
+
+    #[arg(long = "fibase")]
+    fluid_ibase: Option<PathBuf>,
+    #[arg(long = "fxmass")]
+    fluid_xmass: Option<PathBuf>,
+    #[arg(long = "fxplug")]
+    fluid_xplug: Option<PathBuf>,
+
+    #[arg(long = "sibase")]
+    solid_ibase: Option<PathBuf>,
+    #[arg(long = "sxmass")]
+    solid_xmass: Option<PathBuf>,
+    #[arg(long = "sxplug")]
+    solid_xplug: Option<PathBuf>,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
