@@ -13,6 +13,7 @@ anyhow = "1"
 thiserror = "1"
 
 futures = { version = "0.3" }
+futures-util = { version = "0.3" }
 async-trait = { version = "0.1" }
 
 tokio = { version = "1", features = ["full"] }
@@ -43,3 +44,6 @@ nusb = { version = "0.1" }
 
 sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
 sea-orm = { version = "0.12" }
+
+tokio-udev = { version = "0.9" }
+rumqttc = { version = "0.24" }
