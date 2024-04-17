@@ -2495,6 +2495,7 @@ dependencies = [
  "thiserror",
  "tokio",
  "tokio-serial",
+ "tokio-util",
  "tower",
  "tower-http",
  "tracing",
