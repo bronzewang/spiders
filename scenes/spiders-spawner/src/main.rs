@@ -1,6 +1,4 @@
-use std::path::{Path, PathBuf};
-use std::fs::File;
-use std::io::BufReader;
+use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
 use clap::Parser;
 use serde::Deserialize;
 
@@ -16,38 +14,31 @@ pub struct Menage {
     pub master: RoleMaster,
 }
 
+// 上电初始化一次的参数 'static
 #[derive(Deserialize, Debug)]
-pub struct SolidConfig {
+pub struct Innate {
+    pub fibase_valver: PathBuf,
+    pub sibase_valver: PathBuf,
+    pub fibase_snaper: PathBuf,
+    pub sibase_snaper: PathBuf,
+    pub sibase_larder: PathBuf,
+    pub fibase_larder: PathBuf,
+    pub sxmass_larder: PathBuf,
+    pub fxmass_larder: PathBuf,
+    pub sxplug_larder: PathBuf,
+    pub fxplug_larder: PathBuf,
+
     pub surname: String,
     pub version: String,
     pub menages: Vec<Menage>,
 }
 
-#[derive(Deserialize, Debug)]
-pub struct FluidConfig {
-    pub menages: Vec<Menage>,
-}
-
 #[derive(clap::Parser, Debug)]
 struct Cli {
-    #[arg(short = 's', long = "solid")]
-    solid_file: Option<PathBuf>,
-    #[arg(short = 'f', long = "fluid")]
-    fluid_file: Option<PathBuf>,
-
-    #[arg(long = "fibase")]
-    fluid_ibase: Option<PathBuf>,
-    #[arg(long = "fxmass")]
-    fluid_xmass: Option<PathBuf>,
-    #[arg(long = "fxplug")]
-    fluid_xplug: Option<PathBuf>,
-
-    #[arg(long = "sibase")]
-    solid_ibase: Option<PathBuf>,
-    #[arg(long = "sxmass")]
-    solid_xmass: Option<PathBuf>,
-    #[arg(long = "sxplug")]
-    solid_xplug: Option<PathBuf>,
+    #[arg(short = 's', long = "solid_innate")]
+    solid_innate: Option<PathBuf>,
+    #[arg(short = 'f', long = "fluid_innate")]
+    fluid_innate: Option<PathBuf>,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -55,17 +46,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("cli: {:?}", cli);
 
-    let solid_file = File::open(cli.solid_file.unwrap_or(Path::new("./config/solid.json").to_path_buf()))?;
-    // let solid_file = File::open(cli.solid_file.unwrap_or(Path::new("~/.config/spiders/solid.json").to_path_buf()))?;
-    let reader = BufReader::new(solid_file);
-    let solid: SolidConfig = serde_json::from_reader(reader)?;
-    println!("solid config {:?}", solid);
-
-    let fluid_file = File::open(cli.fluid_file.unwrap_or(Path::new("./config/fluid.json").to_path_buf()))?;
-    // let fluid_file = File::open(cli.fluid_file.unwrap_or(Path::new("~/.cache/spiders/fluid.json").to_path_buf()));
-    let reader = BufReader::new(fluid_file);
-    let fluid: FluidConfig = serde_json::from_reader(reader)?;
-    println!("fluid config {:?}", fluid);
+    let innate_path = cli.solid_innate.unwrap_or(cli.fluid_innate.unwrap_or(Path::new("./utils/innate.json").to_path_buf()));
+    let innate_file = File::open(innate_path)?;
+    let innate_reader = BufReader::new(innate_file);
+    let innate: Innate = serde_json::from_reader(innate_reader)?;
+    println!("innate {:?}", innate);
 
     Ok(())
 }
