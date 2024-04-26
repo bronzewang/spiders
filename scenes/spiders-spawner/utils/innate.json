@@ -1,0 +1,31 @@
+{
+    "fibase_valver": "",
+    "sibase_valver": "",
+    "fibase_snaper": "",
+    "sibase_snaper": "",
+    "sibase_larder": "",
+    "fibase_larder": "",
+    "sxmass_larder": "",
+    "fxmass_larder": "",
+    "sxplug_larder": "",
+    "fxplug_larder": "",
+
+    "surname": "spiders",
+    "version": "0.1",
+    "menages": [
+        {
+            "name": "spy001",
+            "step": 9,
+            "master": {
+                "binary": "/opt/spiders/spiders-snooper"
+            }
+        },
+        {
+            "name": "spy002",
+            "step": 9,
+            "master": {
+                "binary": "/opt/spiders/spiders-snooper"
+            }
+        }
+    ]
+}
