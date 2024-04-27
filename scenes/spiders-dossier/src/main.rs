@@ -1,9 +1,11 @@
 use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
 use clap::Parser;
-use futures_util::future::ready;
-use futures_util::stream::StreamExt;
+// use futures_util::future::ready;
+// use futures_util::stream::StreamExt;
 use serde::Deserialize;
-use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
+// use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
+
+extern crate udev;
 
 pub struct Canbus {
     pub baudrate: u32,
@@ -64,7 +66,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
 
     println!("cli: {:?}", cli);
 
-    let innate_path = cli.solid_innate.unwrap_or(cli.fluid_innate.unwrap_or(Path::new("./utils/innate.json").to_path_buf()));
+    let innate_path = cli.fluid_innate.unwrap_or(cli.solid_innate.unwrap_or(Path::new("./utils/innate.json").to_path_buf()));
     let innate_file = File::open(innate_path)?;
     let innate_reader = BufReader::new(innate_file);
     let innate: Innate = serde_json::from_reader(innate_reader)?;
@@ -74,27 +76,47 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     //     println!("dev {:#?}", dev);
     // }
 
-    let builder = MonitorBuilder::new()
-        .expect("Couldn't create builder")
-        .match_subsystem_devtype("usb", "usb_device")
-        .expect("Failed to add filter for USB devices");
+    // let builder = MonitorBuilder::new()
+    //     .expect("Couldn't create builder")
+    //     .match_subsystem_devtype("usb", "usb_device")
+    //     .expect("Failed to add filter for USB devices");
 
-    let monitor: AsyncMonitorSocket = builder
-        .listen()
-        .expect("Couldn't create MonitorSocket")
-        .try_into()
-        .expect("Couldn't create AsyncMonitorSocket");
-    monitor.for_each(|event| {
-        if let Ok(event) = event {
-            println!(
-                "Hotplug event: {}: {}",
-                event.event_type(),
-                event.device().syspath().display()
-            );
+    // let monitor: AsyncMonitorSocket = builder
+    //     .listen()
+    //     .expect("Couldn't create MonitorSocket")
+    //     .try_into()
+    //     .expect("Couldn't create AsyncMonitorSocket");
+    // monitor.for_each(|event| {
+    //     if let Ok(event) = event {
+    //         println!(
+    //             "Hotplug event: {}: {}",
+    //             event.event_type(),
+    //             event.device().syspath().display()
+    //         );
+    //     }
+    //     ready(())
+    // }).await;
+    // println!("udev return");
+
+    let mut enumerator = udev::Enumerator::new()?;
+    // enumerator.match_subsystem("usb")?;
+
+    for device in enumerator.scan_devices()? {
+        // println!("{:#?}", device.syspath());
+        // println!("{:#?}", device.devpath());
+        println!();
+        println!("{:#?}", device);
+
+        println!("  [properties]");
+        for property in device.properties() {
+            println!("    - {:?} {:?}", property.name(), property.value());
         }
-        ready(())
-    }).await;
-    println!("udev return");
+
+        println!("  [attributes]");
+        for attribute in device.attributes() {
+            println!("    - {:?} {:?}", attribute.name(), attribute.value());
+        }
+    }
 
     Ok(())
 }

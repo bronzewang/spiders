@@ -45,5 +45,6 @@ nusb = { version = "0.1" }
 sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
 sea-orm = { version = "0.12" }
 
+udev = { version = "0.7" }
 tokio-udev = { version = "0.9" }
 rumqttc = { version = "0.24" }
