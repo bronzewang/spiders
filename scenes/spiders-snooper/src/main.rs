@@ -19,6 +19,7 @@ pub struct Innate {
     pub sxplug_larder: PathBuf,
     pub fxplug_larder: PathBuf,
 }
+// static INNATE: Innate = static_cell();
 
 #[derive(clap::Parser, Debug)]
 struct Cli {
@@ -27,8 +28,6 @@ struct Cli {
     #[arg(short = 'f', long = "fluid_innate")]
     fluid_innate: Option<PathBuf>,
 }
-
-// static INNATE: Innate = static_cell();
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>>{

@@ -5,8 +5,6 @@ use clap::Parser;
 use serde::Deserialize;
 // use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
 
-extern crate udev;
-
 pub struct Canbus {
     pub baudrate: u32,
 }
