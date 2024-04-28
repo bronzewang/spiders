@@ -2348,6 +2348,7 @@ dependencies = [
  "sea-orm",
  "serde",
  "serde_json",
+ "spiders-scheme",
  "sqlx",
  "thiserror",
  "tokio",
@@ -2358,6 +2359,19 @@ dependencies = [
  "tracing-subscriber",
  "tribers",
  "udev",
+]
+
+[[package]]
+name = "spiders-scheme"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "sea-orm",
+ "serde",
+ "serde_json",
+ "sqlx",
+ "thiserror",
+ "tribers",
 ]
 
 [[package]]

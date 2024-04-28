@@ -5,36 +5,6 @@ use clap::Parser;
 use serde::Deserialize;
 // use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
 
-pub struct Canbus {
-    pub baudrate: u32,
-}
-pub struct Current {
-    pub crnt: u32,
-}
-pub struct Voltage {
-    pub volt: u32,
-}
-pub enum Caliber {
-    Canbus(Canbus),
-    Current(Current),
-    Voltage(Voltage),
-}
-
-pub struct Utensil {
-    pub calibers: Vec<Caliber>,
-}
-
-pub struct Toolkit {
-    pub name: String,
-    // device: Device,
-    pub calibers: Vec<Utensil>,
-}
-
-pub struct Snooper {
-    pub name: String,
-    pub toolkits: Vec<Toolkit>,
-}
-
 // 上电初始化一次的参数 'static
 #[derive(Deserialize, Debug)]
 pub struct Innate {
@@ -69,10 +39,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let innate_reader = BufReader::new(innate_file);
     let innate: Innate = serde_json::from_reader(innate_reader)?;
     println!("innate {:?}", innate);
-
-    // for dev in nusb::list_devices().unwrap() {
-    //     println!("dev {:#?}", dev);
-    // }
 
     // let builder = MonitorBuilder::new()
     //     .expect("Couldn't create builder")

@@ -9,6 +9,8 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 tribers = { version = "0" }
 
+spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
+
 anyhow = "1"
 thiserror = "1"
 

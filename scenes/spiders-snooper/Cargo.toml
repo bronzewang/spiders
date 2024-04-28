@@ -8,6 +8,8 @@ description = "menage snooper for tribers instance named spiders"
 [dependencies]
 tribers = { version = "0" }
 
+spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
+
 anyhow = { version = "1" }
 thiserror  = { version = "1" }
 
