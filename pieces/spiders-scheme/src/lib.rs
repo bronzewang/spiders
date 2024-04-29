@@ -1,7 +1,3 @@
-
-// temple
-// assets
-
 mod caliber;
 mod utensil;
 mod toolkit;

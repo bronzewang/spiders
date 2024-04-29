@@ -409,12 +409,44 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1aaf95b3e5c8f23aa320147307562d361db0ae0d51242340f558153b4eb2439b"
 
 [[package]]
+name = "educe"
+version = "0.5.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e4bd92664bf78c4d3dba9b7cdafce6fa15b13ed3ed16175218196942e99168a8"
+dependencies = [
+ "enum-ordinalize",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.60",
+]
+
+[[package]]
 name = "either"
 version = "1.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a47c1c47d2f5964e29c61246e81db715514cd532db6b5116a25ea3c03d6780a2"
 dependencies = [
  "serde",
+]
+
+[[package]]
+name = "enum-ordinalize"
+version = "4.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fea0dcfa4e54eeb516fe454635a95753ddd39acda650ce703031c6973e315dd5"
+dependencies = [
+ "enum-ordinalize-derive",
+]
+
+[[package]]
+name = "enum-ordinalize-derive"
+version = "4.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0d28318a75d4aead5c4db25382e8ef717932d0346600cacae6357eb5941bc5ff"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.60",
 ]
 
 [[package]]
@@ -1321,7 +1353,7 @@ dependencies = [
  "ouroboros",
  "rust_decimal",
  "sea-orm-macros",
- "sea-query",
+ "sea-query 0.30.7",
  "sea-query-binder",
  "serde",
  "serde_json",
@@ -1366,6 +1398,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "sea-query"
+version = "0.31.0-rc.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "111e290c5bb78b2e17d669b069ff56d4e454f52a666a28ac002b7cdaadbb8dcc"
+dependencies = [
+ "educe",
+ "inherent",
+ "ordered-float",
+]
+
+[[package]]
 name = "sea-query-binder"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1374,7 +1417,7 @@ dependencies = [
  "bigdecimal",
  "chrono",
  "rust_decimal",
- "sea-query",
+ "sea-query 0.30.7",
  "serde_json",
  "sqlx",
  "time",
@@ -1487,6 +1530,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "sea-orm",
+ "sea-query 0.31.0-rc.5",
  "serde",
  "serde_json",
  "sqlx",

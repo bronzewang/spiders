@@ -17,7 +17,7 @@ pub struct Menage {
 // 上电初始化一次的参数 'static
 #[derive(Deserialize, Debug)]
 pub struct Innate {
-    pub temple: PathBuf,        //spider数据库保存路径  assets.db
+    pub shrine: PathBuf,        //spider数据库保存路径  assets.db
 
     pub fibase_valver: PathBuf,
     pub sibase_valver: PathBuf,
