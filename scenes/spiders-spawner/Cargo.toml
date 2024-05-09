@@ -10,6 +10,11 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 tribers = { version = "0" }
+# tribers-spawner = { git = "git@github.com:cuprumwz/tribers.git", rev = "" }
+# tribers-spawner = { git = "git@github.com:cuprumwz/tribers.git", rev = "HEAD" }
+# tribers-spawner = { git = "git@github.com:cuprumwz/tribers.git", rev = "1bdfc404ae25f4cf8366e960b6f75acee98b208d" }
+# tribers-spawner = { git = "https://github.com/cuprumwz/tribers.git", rev = "1bdfc404ae25f4cf8366e960b6f75acee98b208d" }
+tribers-spawner = { git = "https://github.com/cuprumwz/tribers.git" }
 
 anyhow = "1"
 thiserror = "1"

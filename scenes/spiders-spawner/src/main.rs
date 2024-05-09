@@ -1,5 +1,6 @@
 use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
 use clap::Parser;
+use tribers_spawner::{Innate};
 
 #[derive(clap::Parser, Debug)]
 struct Cli {
