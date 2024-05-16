@@ -1,0 +1,17 @@
+syntax = "proto3"
+
+// option java_multiple_files = true;
+// option java_package = "fun.cuprumwz.tribers.whisper";
+// option java_outer_classname = "WhisperProto";
+
+package operate;
+
+service Operate {
+    // 登签
+    rpc Sign(SignRequest) returns (SignRespond) {}
+
+    // 验证能力
+    rpc Ability(AbilityRequest) returns (AbilityRespond) {}
+
+    // 控制
+}
