@@ -1,0 +1,18 @@
+syntax = "proto3"
+
+// option java_multiple_files = true;
+// option java_package = "fun.cuprumwz.snooper.arcader";
+// option java_outer_classname = "ArcaderProto";
+
+package arcader;
+
+// 对外的api接口，类似restful接口
+service Arcader {
+    // 登签
+    rpc Sign(SignRequest) returns (SignRespond) {}
+
+    // 验证能力
+    rpc Ability(AbilityRequest) returns (AbilityRespond) {}
+
+    // 控制
+}
