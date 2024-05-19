@@ -1,12 +1,13 @@
 syntax = "proto3"
 
 // option java_multiple_files = true;
-// option java_package = "fun.cuprumwz.tribers.whisper";
-// option java_outer_classname = "WhisperProto";
+// option java_package = "fun.cuprumwz.snooper.arcader";
+// option java_outer_classname = "ArcaderProto";
 
-package operate;
+package arcader;
 
-service Operate {
+// 对外的api接口，类似restful接口
+service Arcader {
     // 登签
     rpc Sign(SignRequest) returns (SignRespond) {}
 
