@@ -1,13 +1,13 @@
 syntax = "proto3"
 
 // option java_multiple_files = true;
-// option java_package = "fun.cuprumwz.snooper.arcader";
-// option java_outer_classname = "ArcaderProto";
+// option java_package = "fun.cuprumwz.snooper.greeter";
+// option java_outer_classname = "GreeterProto";
 
-package arcader;
+package greeter;
 
 // 对外的api接口，类似restful接口
-service Arcader {
+service Greeter {
     // 登签
     rpc Sign(SignRequest) returns (SignRespond) {}
 
