@@ -1,18 +1,24 @@
 syntax = "proto3"
 
-// option java_multiple_files = true;
-// option java_package = "fun.cuprumwz.snooper.greeter";
-// option java_outer_classname = "GreeterProto";
-
 package greeter;
 
 // 对外的api接口，类似restful接口
 service Greeter {
     // 登签
-    rpc Sign(SignRequest) returns (SignRespond) {}
+    rpc Sign(SignPing) returns (SignPong) {}
 
-    // 验证能力
-    rpc Ability(AbilityRequest) returns (AbilityRespond) {}
+	// 链路维持
+    rpc Keep(SignPing) returns (SignPong) {}
 
-    // 控制
+    // Toolkit列表
+    rpc ToolkitList(ToolkitListPing) returns (ToolkitListPong) {}
+
+    // Snooper列表
+    rpc SnooperList(SnooperListPing) returns (SnooperListPong) {}
+
+    // Snooper新建
+    rpc SnooperCreate() returns () {}
+
+    // Toolkit更新Owner
+    rpc ToolkitOwner() returns () {}
 }
