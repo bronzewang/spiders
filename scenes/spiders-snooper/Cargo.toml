@@ -49,3 +49,8 @@ sea-orm = { version = "0.12" }
 sigrok = { git = "https://github.com/cuprumwz/sigrok-rs.git" }
 serialport = { version = "3.2.0" }
 tokio-serial = { version = "5.4" }
+
+tonic = { verison = "0" }
+
+[build-dependencies]
+tonic-build = { version = "0" }

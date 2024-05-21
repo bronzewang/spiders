@@ -12,32 +12,43 @@ service Greeter {
     rpc Sign(SignPing) returns (SignPong) {}
 
 	// 超时断开
-    rpc Keep() returns () {}
+    // rpc Keep() returns () {}
 
     // Toolkit列表
-    rpc ToolkitList(ToolkitListPing) returns (ToolkitListPong)
+    // rpc ToolkitList(ToolkitListPing) returns (ToolkitListPong)
 
 	// Toolkit配置
-    rpc ToolkitConfig() returns ()
+    // rpc ToolkitConfig() returns ()
 
 	// Toolkit启动，识别utensil
-    rpc ToolkitStartup() returns ()
+    // rpc ToolkitStartup() returns ()
 
     // Toolkit附着
-    rpc ToolkitAttach(ToolkitAttachPing) returns (ToolkitAttachPong) {}
+    // rpc ToolkitAttach(ToolkitAttachPing) returns (ToolkitAttachPong) {}
 
 	// Toolkit脱离
-    rpc ToolkitDetach(ToolkitDetachPing) returns (ToolkitDetachPong) {}
+    // rpc ToolkitDetach(ToolkitDetachPing) returns (ToolkitDetachPong) {}
 
 	// 器具清单
-	rpc UtensilList(UtensilListPing) returns (UtensilListPonge) {}
+	// rpc UtensilList(UtensilListPing) returns (UtensilListPonge) {}
 
 	// utensil需要编号来让basanos识别，否则测试用例无法兼容所有的snooper
 	// 编号信息要入数据库
-	rpc UtensilIdentify() returns () {}
+	// rpc UtensilIdentify() returns () {}
 
 	// 怎么批量编号utensil，web端处理
 
     // 验证能力
 	// rpc Ability(AbilityPing) returns (AbilityPong) {}
+}
+
+// 签到信息
+message SignPing {
+	// 时间戳
+	int64 timestamp = 1;
+	string name = 2;
+}
+message SignPong {
+	// 时间戳
+	int64 timestamp = 1;
 }
