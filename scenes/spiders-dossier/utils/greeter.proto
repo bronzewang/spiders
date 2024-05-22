@@ -8,17 +8,41 @@ service Greeter {
     rpc Sign(SignPing) returns (SignPong) {}
 
 	// 链路维持
-    rpc Keep(SignPing) returns (SignPong) {}
+    // rpc Keep(SignPing) returns (SignPong) {}
 
     // Toolkit列表
-    rpc ToolkitList(ToolkitListPing) returns (ToolkitListPong) {}
+    // rpc ToolkitList(ToolkitListPing) returns (ToolkitListPong) {}
 
     // Snooper列表
-    rpc SnooperList(SnooperListPing) returns (SnooperListPong) {}
+    // rpc SnooperList(SnooperListPing) returns (SnooperListPong) {}
 
     // Snooper新建
-    rpc SnooperCreate() returns () {}
+    // rpc SnooperCreate() returns () {}
 
     // Toolkit更新Owner
-    rpc ToolkitOwner() returns () {}
+    // rpc ToolkitOwner() returns () {}
+}
+
+// 签到信息
+message SignPing {
+	// 时间戳
+	int64 timestamp = 1;
+	string name = 2;
+}
+message SignPong {
+	// 时间戳
+	int64 timestamp = 1;
+}
+
+message Snooper {
+	int32 id = 1;
+	string name = 2;
+	repeated Toolkit toolkits = 5;
+}
+
+message Toolkit {
+	int32 id = 1;
+	string name = 2;
+	// /dev/ttyUSB1:115200或192.168.1.100:8000
+	string path = 3;
 }

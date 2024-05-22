@@ -1,8 +1,13 @@
 {
+    "fibase_shrine": "",
+    "sibase_shrine": "",
+
     "fibase_valver": "",
     "sibase_valver": "",
+
     "fibase_snaper": "",
     "sibase_snaper": "",
+
     "sibase_larder": "",
     "fibase_larder": "",
     "sxmass_larder": "",
@@ -10,16 +15,18 @@
     "sxplug_larder": "",
     "fxplug_larder": "",
 
-    "toolkits": [
-        {
-            "kind": "serial",
-            "name": "serial0",
-            "args": "/dev/ttyUSB0"
-        },
-        {
-            "kind": "sigrok",
-            "name": "sigrok0",
-            "args": "/dev/sigrok"
-        }
-    ]
+    "name": "dossier",
+
+    // "toolkits": [
+    //     {
+    //         "kind": "serial",
+    //         "name": "serial0",
+    //         "args": "/dev/ttyUSB0"
+    //     },
+    //     {
+    //         "kind": "sigrok",
+    //         "name": "sigrok0",
+    //         "args": "/dev/sigrok"
+    //     }
+    // ]
 }

@@ -1,0 +1,59 @@
+syntax = "proto3"
+
+package scheme;
+
+message Snooper {
+	int32 id = 1;
+	string name = 2;
+	repeated Toolkit toolkits = 5;
+}
+
+message Toolkit {
+	int32 id = 1;
+	string name = 2;
+	// /dev/ttyUSB1:115200或192.168.1.100:8000
+	string path = 3;
+	repeated Utensil utensils = 5;
+}
+
+message Utensil {
+	int32 id = 1;
+	// string name = 2;
+	repeated Caliber calibers = 5;
+}
+
+message Caliber {
+	int32 id = 1;
+	oneof {
+		Serial serial = 5;
+		Canbus canbus = 6;
+	}
+}
+
+message Serial {
+	// 串口参数
+	int32 baudrate = 1;
+}
+
+message Canbus {
+	// 串口参数
+	int32 baudrate = 1;
+}
+
+message Wireio {
+	int32 switch = 1;	// 接口开关
+	int32 current = 2;	// 电流采集
+	int32 voltage = 3;	// 电压采集
+	CurrentLimit climit = 4;	// 电流限制
+	VoltageLimit vlimit = 4;	// 电压限制
+}
+
+message CurrentLimit {
+	int32 min = 1;
+	int32 max = 2;
+}
+
+message VoltageLimit {
+	int32 min = 1;
+	int32 max = 2;
+}

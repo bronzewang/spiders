@@ -1,14 +1,5 @@
 use sea_orm::entity::prelude::*;
 
-// use crate::Utensil;
-
-// pub struct Toolkit {
-//     pub name: String,
-//     // device: Device,
-//     pub calibers: Vec<Utensil>,
-//     pub owner: bool,
-// }
-
 #[derive(Copy, Clone, Default, Debug, DeriveEntity)]
 pub struct Entity;
 

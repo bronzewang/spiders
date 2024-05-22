@@ -1,12 +1,5 @@
 use sea_orm::entity::prelude::*;
 
-// use crate::Toolkit;
-
-// pub struct Snooper {
-//     pub name: String,
-//     pub toolkits: Vec<Toolkit>,
-// }
-
 // Snooper entity
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "snooper")]
