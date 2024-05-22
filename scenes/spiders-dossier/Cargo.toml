@@ -50,3 +50,11 @@ sea-orm = { version = "0.12" }
 udev = { version = "0.7" }
 tokio-udev = { version = "0.9" }
 rumqttc = { version = "0.24" }
+
+tonic = { version = "0.11" }
+prost = { version = "0.12" }
+prost-types = { version = "0.12" }
+
+[build-dependencies]
+tonic-build = { version = "0.11" }
+prost-build = { version = "0.12" }

@@ -50,7 +50,10 @@ sigrok = { git = "https://github.com/cuprumwz/sigrok-rs.git" }
 serialport = { version = "3.2.0" }
 tokio-serial = { version = "5.4" }
 
-tonic = { verison = "0" }
+tonic = { version = "0.11" }
+prost = { version = "0.12" }
+prost-types = { version = "0.12" }
 
 [build-dependencies]
 tonic-build = { version = "0.11" }
+prost-build = { version = "0.12" }
