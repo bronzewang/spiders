@@ -15,3 +15,11 @@ serde_json = { version = "1" }
 sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
 sea-orm = { version = "1.0.0-rc.4" }
 sea-query = { version = "0.31.0-rc", default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"] }
+
+tonic = { version = "0.11" }
+prost = { version = "0.12" }
+prost-types = { version = "0.12" }
+
+[build-dependencies]
+tonic-build = { version = "0.11" }
+prost-build = { version = "0.12" }

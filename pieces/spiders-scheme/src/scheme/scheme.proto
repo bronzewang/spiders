@@ -1,4 +1,4 @@
-syntax = "proto3"
+syntax = "proto3";
 
 package scheme;
 
@@ -24,7 +24,7 @@ message Utensil {
 
 message Caliber {
 	int32 id = 1;
-	oneof {
+	oneof load {
 		Serial serial = 5;
 		Canbus canbus = 6;
 	}
@@ -45,7 +45,7 @@ message Wireio {
 	int32 current = 2;	// 电流采集
 	int32 voltage = 3;	// 电压采集
 	CurrentLimit climit = 4;	// 电流限制
-	VoltageLimit vlimit = 4;	// 电压限制
+	VoltageLimit vlimit = 5;	// 电压限制
 }
 
 message CurrentLimit {

@@ -53,4 +53,4 @@ tokio-serial = { version = "5.4" }
 tonic = { verison = "0" }
 
 [build-dependencies]
-tonic-build = { version = "0" }
+tonic-build = { version = "0.11" }
