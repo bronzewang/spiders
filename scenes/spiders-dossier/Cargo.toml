@@ -27,6 +27,8 @@ opentelemetry = { version = "0.23", features = ["metrics"] }
 opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
 opentelemetry-stdout = { version = "0.4", features = ["metrics"] }
 opentelemetry-appender-log = { version = "0.4", default-features = false }
+opentelemetry-prometheus = { version = "0.16" }
+prometheus = { version = "0.13" }
 
 log = { version = "0.4" }
 

@@ -4,12 +4,17 @@ use clap::Parser;
 // use futures_util::stream::StreamExt;
 use serde::Deserialize;
 // use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
-use axum::{response::Html, routing::get, Router};
+use axum::{response::Html, extract::State, routing::get, Router};
 use log::{error, Level};
-use opentelemetry::KeyValue;
 use opentelemetry_appender_log::OpenTelemetryLogBridge;
-use opentelemetry_sdk::logs::{Config, LoggerProvider};
+use opentelemetry_sdk::{logs::{Config, LoggerProvider}, metrics::SdkMeterProvider};
 use opentelemetry_sdk::Resource;
+use prometheus::{Registry};
+use std::sync::Arc;
+use opentelemetry::{
+    metrics::{Counter, Histogram, MeterProvider as _, Unit},
+    KeyValue,
+};
 
 use spiders_scheme::SPIDERS_WEB_PORT_BASE;
 
@@ -52,6 +57,13 @@ struct Cli {
     sibase_innate: Option<PathBuf>,
 }
 
+#[derive(Debug)]
+struct AppState {
+    registry: Registry,
+    http_counter: Counter<u64>,
+    http_body_gauge: Histogram<u64>,
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let cli = Cli::parse();
@@ -79,8 +91,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     log::set_boxed_logger(Box::new(otel_log_appender)).unwrap();
     log::set_max_level(Level::Error.to_level_filter());
 
+    let registry = Registry::new();
+    let exporter = opentelemetry_prometheus::exporter()
+        .with_registry(registry.clone())
+        .build()?;
+    let provider = SdkMeterProvider::builder().with_reader(exporter).build();
+
+    let meter = provider.meter("spiders-dossier");
+    let state = Arc::new(AppState {
+        registry,
+        http_counter: meter
+            .u64_counter("http_requests_total")
+            .with_description("Total number of HTTP requests made.")
+            .init(),
+        http_body_gauge: meter
+            .u64_histogram("example.http_response_size")
+            .with_unit(Unit::new("By"))
+            .with_description("The metrics HTTP response sizes in bytes.")
+            .init(),
+    });
+
     // build our application with a route
-    let app = Router::new().route("/", get(handler));
+    let app = Router::new().route("/", get(handler)).with_state(state);
     let listener = tokio::net::TcpListener::bind(format!("127.0.0.1:{}",
                                                          SPIDERS_WEB_PORT_BASE+innate.id))
         .await
@@ -92,7 +124,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     Ok(())
 }
 
-async fn handler() -> Html<&'static str> {
+async fn handler(State(state): State<Arc<AppState>>) -> Html<&'static str> {
+    error!("{:?}", state);
+    error!("{:?} {:?} {:?}", state.registry, state.http_counter, state.http_body_gauge);
+
+    error!("respond");
     Html("<h1>Hello, World! I am Spiders.</h1>")
 }
 
