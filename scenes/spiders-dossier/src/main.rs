@@ -1,9 +1,6 @@
 use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
 use clap::Parser;
-// use futures_util::future::ready;
-// use futures_util::stream::StreamExt;
 use serde::Deserialize;
-// use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
 use axum::{response::Html, extract::State, routing::get, Router};
 use log::{error, Level};
 use opentelemetry_appender_log::OpenTelemetryLogBridge;
@@ -75,6 +72,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let innate: Innate = serde_json::from_reader(innate_reader)?;
     println!("innate {:?}", innate);
 
+    udev_parse().await?;
+
     let exporter = opentelemetry_stdout::LogExporterBuilder::default().build();
     let logger_provider = LoggerProvider::builder()
         .with_config(
@@ -132,79 +131,89 @@ async fn handler(State(state): State<Arc<AppState>>) -> Html<&'static str> {
     Html("<h1>Hello, World! I am Spiders.</h1>")
 }
 
-// fn udev_parse()
-// {
-//     let builder = MonitorBuilder::new()
-//         .expect("Couldn't create builder")
-//         .match_subsystem_devtype("usb", "usb_device")
-//         .expect("Failed to add filter for USB devices");
+// use futures_util::future::ready;
+// use futures_util::stream::StreamExt;
+// use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
 
-//     let monitor: AsyncMonitorSocket = builder
-//         .listen()
-//         .expect("Couldn't create MonitorSocket")
-//         .try_into()
-//         .expect("Couldn't create AsyncMonitorSocket");
-//     monitor.for_each(|event| {
-//         if let Ok(event) = event {
-//             println!(
-//                 "Hotplug event: {}: {}",
-//                 event.event_type(),
-//                 event.device().syspath().display()
-//             );
-//         }
-//         ready(())
-//     }).await;
-//     println!("udev return");
+#[allow(unused)]
+async fn udev_parse() -> Result<(), Box<dyn std::error::Error>>
+{
+    // println!("udev init");
+    // let builder = MonitorBuilder::new()
+    //     .expect("Couldn't create builder")
+    //     .match_subsystem_devtype("usb", "usb_device")
+    //     .expect("Failed to add filter for USB devices");
+    // let monitor: AsyncMonitorSocket = builder
+    //     .listen()
+    //     .expect("Couldn't create MonitorSocket")
+    //     .try_into()
+    //     .expect("Couldn't create AsyncMonitorSocket");
+    // monitor.for_each(|event| {
+    //     if let Ok(event) = event {
+    //         println!(
+    //             "Hotplug event: {}: {}",
+    //             event.event_type(),
+    //             event.device().syspath().display()
+    //         );
+    //     }
+    //     ready(())
+    // }).await;
+    // println!("udev free");
 
-//     let mut enumerator = udev::Enumerator::new()?;
-//     // enumerator.match_subsystem("usb")?;
+    println!("udev enumerator init");
+    let mut enumerator = udev::Enumerator::new()?;
+    enumerator.match_subsystem("usb")?;
+    enumerator.match_property("ID_SIGROK", "1");
 
-//     for device in enumerator.scan_devices()? {
-//         // println!("{:#?}", device.syspath());
-//         // println!("{:#?}", device.devpath());
-//         println!();
-//         println!("{:#?}", device);
+    for device in enumerator.scan_devices()? {
+        // println!("{:#?}", device.syspath());
+        // println!("{:#?}", device.devpath());
+        println!();
+        println!("{:#?}", device);
 
-//         println!("  [properties]");
-//         for property in device.properties() {
-//             println!("    - {:?} {:?}", property.name(), property.value());
-//         }
+        println!("  [properties]");
+        for property in device.properties() {
+            println!("    - {:?} {:?}", property.name(), property.value());
+        }
 
-//         println!("  [attributes]");
-//         for attribute in device.attributes() {
-//             println!("    - {:?} {:?}", attribute.name(), attribute.value());
-//         }
-//     }
+        println!("  [attributes]");
+        for attribute in device.attributes() {
+            println!("    - {:?} {:?}", attribute.name(), attribute.value());
+        }
+    }
+    println!("udev enumerator free");
 
-//     tracing_subscriber::registry()
-//         .with(
-//             tracing_subscriber::EnvFilter::try_from_default_env()
-//                 .unwrap_or_else(|_| "example_websockets=debug,tower_http=debug".into()),
-//         )
-//         .with(tracing_subscriber::fmt::layer())
-//         .init();
+    Ok(())
+}
 
-//     let assets_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("assets");
+    // tracing_subscriber::registry()
+    //     .with(
+    //         tracing_subscriber::EnvFilter::try_from_default_env()
+    //             .unwrap_or_else(|_| "example_websockets=debug,tower_http=debug".into()),
+    //     )
+    //     .with(tracing_subscriber::fmt::layer())
+    //     .init();
 
-//     // build our application with some routes
-//     let app = Router::new()
-//         .fallback_service(ServeDir::new(assets_dir).append_index_html_on_directories(true))
-//         .route("/ws", get(ws_handler))
-//         // logging so we can see whats going on
-//         .layer(
-//             TraceLayer::new_for_http()
-//                 .make_span_with(DefaultMakeSpan::default().include_headers(true)),
-//         );
+    // let assets_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("assets");
 
-//     // run it with hyper
-//     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
-//         .await
-//         .unwrap();
-//     tracing::debug!("listening on {}", listener.local_addr().unwrap());
-//     axum::serve(
-//         listener,
-//         app.into_make_service_with_connect_info::<SocketAddr>(),
-//     )
-//     .await
-//     .unwrap();
-// }
+    // // build our application with some routes
+    // let app = Router::new()
+    //     .fallback_service(ServeDir::new(assets_dir).append_index_html_on_directories(true))
+    //     .route("/ws", get(ws_handler))
+    //     // logging so we can see whats going on
+    //     .layer(
+    //         TraceLayer::new_for_http()
+    //             .make_span_with(DefaultMakeSpan::default().include_headers(true)),
+    //     );
+
+    // // run it with hyper
+    // let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    //     .await
+    //     .unwrap();
+    // tracing::debug!("listening on {}", listener.local_addr().unwrap());
+    // axum::serve(
+    //     listener,
+    //     app.into_make_service_with_connect_info::<SocketAddr>(),
+    // )
+    // .await
+    // .unwrap();
