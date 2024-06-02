@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = [
+  "scenes/spiders-spawner",
+]
+
+[package]
+name = "spiders"
+version = "0.0.0"
+edition = "2021"
+authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
+description = "A embedded framework tribe use rust"
+license = "MIT OR Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
