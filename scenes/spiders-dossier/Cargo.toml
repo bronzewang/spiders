@@ -54,6 +54,10 @@ sea-orm = { version = "0.12" }
 
 udev = { version = "0.7" }
 tokio-udev = { version = "0.9" }
+
+serialport = { version = "4" }
+tokio-serial = { version = "5" }
+
 rumqttc = { version = "0.24" }
 
 tonic = { version = "0.11" }

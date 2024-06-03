@@ -2,6 +2,9 @@
 resolver = "2"
 members = [
   "pieces/spiders-scheme",
+  "scenes/spiders-spawner",
+  "scenes/spiders-dossier",
+  "scenes/spiders-snooper",
 ]
 
 [package]

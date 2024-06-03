@@ -72,7 +72,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let innate: Innate = serde_json::from_reader(innate_reader)?;
     println!("innate {:?}", innate);
 
-    udev_parse().await?;
+    // udev_parse().await?;
+    serial_parse().await?;
 
     let exporter = opentelemetry_stdout::LogExporterBuilder::default().build();
     let logger_provider = LoggerProvider::builder()
@@ -182,6 +183,61 @@ async fn udev_parse() -> Result<(), Box<dyn std::error::Error>>
         }
     }
     println!("udev enumerator free");
+
+    Ok(())
+}
+
+use serialport::{available_ports, SerialPortType};
+
+#[allow(unused)]
+async fn serial_parse() -> Result<(), Box<dyn std::error::Error>>
+{
+    println!("1");
+    match available_ports() {
+        Ok(ports) => {
+            println!("ports count {}", ports.len());
+            for p in ports {
+                println!("ports name {}", p.port_name);
+                match p.port_type {
+                    SerialPortType::UsbPort(info) => {
+                        println!("Type: USB info {:?}", info);
+                        println!("    VID:{:04x} PID:{:04x}", info.vid, info.pid);
+                        println!(
+                            "     Serial Number: {}",
+                            info.serial_number.as_ref().map_or("", String::as_str)
+                        );
+                        println!(
+                            "      Manufacturer: {}",
+                            info.manufacturer.as_ref().map_or("", String::as_str)
+                        );
+                        println!(
+                            "           Product: {}",
+                            info.product.as_ref().map_or("", String::as_str)
+                        );
+                        #[cfg(feature = "usbportinfo-interface")]
+                        println!(
+                            "         Interface: {}",
+                            info.interface
+                                .as_ref()
+                                .map_or("".to_string(), |x| format!("{:02x}", *x))
+                        );
+                    }
+                    SerialPortType::BluetoothPort => {
+                        println!("Type: BluetoothPort");
+                    }
+                    SerialPortType::PciPort => {
+                        println!("Type: PciPort");
+                    }
+                    SerialPortType::Unknown => {
+                        println!("Type: Unknown");
+                    }
+                }
+            }
+        }
+        Err(e) => {
+            eprintln!("{:?}", e);
+        }
+    }
 
     Ok(())
 }
