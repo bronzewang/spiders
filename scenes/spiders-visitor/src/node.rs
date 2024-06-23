@@ -1,6 +1,7 @@
 use leptos::*;
 use leptos_struct_table::*;
-use sea_orm::entity::prelude::*;
+use sea_orm::{entity::prelude::*};
+// use ::chrono::NaiveDate;
 
 // This generates the component NodeTable
 #[derive(TableRow)]
@@ -10,7 +11,10 @@ use sea_orm::entity::prelude::*;
 pub struct Model {
     #[sea_orm(primary_key)]
     pub id: u32,
-    pub title: String,
+    pub name: String,
+    pub addr: String,
+
+    // pub logtime: NaiveDate,
 
     // #[table(skip)]
     // pub author: Author,
@@ -48,10 +52,12 @@ impl ActiveModelBehavior for ActiveModel {
 
 #[component]
 pub fn Node() -> impl IntoView {
+
     let rows = vec![
         Model {
             id: 1,
-            title: "The Great Gatsby".to_string(),
+            name: "nodeaio".to_string(),
+            addr: "192.168.3.200".to_string(),
             // author: Author {
             //     first_name: "F. Scott".to_string(),
             //     last_name: "Fitzgerald".to_string(),
@@ -61,7 +67,8 @@ pub fn Node() -> impl IntoView {
         },
         Model {
             id: 2,
-            title: "The Grapes of Wrath".to_string(),
+            name: "nodew01".to_string(),
+            addr: "192.168.3.201".to_string(),
             // author: Author {
             //     first_name: "John".to_string(),
             //     last_name: "Steinbeck".to_string(),

@@ -16,6 +16,11 @@ fn main() {
             .set_max_level(tracing::Level::DEBUG)
             .build(),
     );
+
+    // let conn = Database::connect("sqlite::memory:")
+    //     .await
+    //     .expect("Database connection failed");
+
     mount_to_body(|| {
         view! {
             // <BookList />
