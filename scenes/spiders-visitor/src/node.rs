@@ -2,6 +2,43 @@ use leptos::*;
 use leptos_struct_table::*;
 use ::chrono::NaiveDate;
 
+// This generates the component BookTable
+#[derive(TableRow, Clone)]
+#[table(sortable, impl_vec_data_provider)]
+pub struct Book {
+    pub id: u32,
+    pub title: String,
+
+    // instead of accessing `item.publish_date` directly, we use a getter `item.get_publish_date()`
+    #[table(getter = "get_publish_date")]
+    pub publish_date: NaiveDate,
+
+    #[table(skip)]
+    pub author: Author,
+
+    // specified that there is a getter method `author_name()`
+    pub author_name: FieldGetter<String>,
+}
+
+impl Book {
+    // if no otherwise specified the getter method should have the same name as the `FieldGetter` field
+    pub fn author_name(&self) -> String {
+        format!("{} {}", self.author.first_name, self.author.last_name)
+    }
+
+    // getter for publish date
+    pub fn get_publish_date(&self) -> NaiveDate {
+        // do sth...
+        self.publish_date
+    }
+}
+
+#[derive(Clone)]
+pub struct Author {
+    pub first_name: String,
+    pub last_name: String,
+}
+
 #[component]
 pub fn Node() -> impl IntoView {
     let rows = vec![
@@ -52,53 +89,4 @@ pub fn Node() -> impl IntoView {
             <TableContent rows />
         </table>
     }
-
 }
-
-// This generates the component BookTable
-#[derive(TableRow, Clone)]
-#[table(sortable, impl_vec_data_provider)]
-pub struct Book {
-    pub id: u32,
-    pub title: String,
-
-    // instead of accessing `item.publish_date` directly, we use a getter `item.get_publish_date()`
-    #[table(getter = "get_publish_date")]
-    pub publish_date: NaiveDate,
-
-    #[table(skip)]
-    pub author: Author,
-
-    // specified that there is a getter method `author_name()`
-    pub author_name: FieldGetter<String>,
-}
-
-impl Book {
-    // if no otherwise specified the getter method should have the same name as the `FieldGetter` field
-    pub fn author_name(&self) -> String {
-        format!("{} {}", self.author.first_name, self.author.last_name)
-    }
-
-    // getter for publish date
-    pub fn get_publish_date(&self) -> NaiveDate {
-        // do sth...
-        self.publish_date
-    }
-}
-
-#[derive(Clone)]
-pub struct Author {
-    pub first_name: String,
-    pub last_name: String,
-}
-
-
-// use leptos::*;
-// use leptos_struct_table::*;
-// fn main() {
-//     _ = console_log::init_with_level(log::Level::Debug);
-//     console_error_panic_hook::set_once();
-
-//     mount_to_body(|| {
-//     })
-// }
