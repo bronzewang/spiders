@@ -1,5 +1,5 @@
 [package]
-name = "spiders-visitor"
+name = "spiders-visitor-backend"
 version = "0.0.0"
 description = "A Tauri App"
 authors = ["you"]

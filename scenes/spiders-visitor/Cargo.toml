@@ -1,5 +1,5 @@
 [package]
-name = "spiders-visitor-ui"
+name = "spiders-visitor"
 version = "0.0.0"
 edition = "2021"
 
@@ -13,10 +13,15 @@ js-sys = "0.3"
 serde = { version = "1", features = ["derive"] }
 serde-wasm-bindgen = "0.6"
 console_error_panic_hook = "0.1.7"
-leptonic = { version = "0.5", features = ["full", "csr"] }
+# leptonic = { version = "0.5", features = ["full", "csr"] }
+# leptonic = { git = "https://github.com/lpotthast/leptonic.git", features = ["full", "csr"] }
 tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3" }
 tracing-wasm = { version = "0.2" }
+leptos-struct-table = { version = "0.10", features = ["chrono"] }
+chrono = { version = "0.4" }
+console_log = { version = "1" }
+log = { version = "0.4" }
 
 [workspace]
 members = ["src-tauri"]
