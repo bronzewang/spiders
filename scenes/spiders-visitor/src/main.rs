@@ -1,6 +1,9 @@
 // mod app;
 // use app::*;
 
+// mod book;
+// use book::*;
+
 mod node;
 use node::*;
 
@@ -15,7 +18,8 @@ fn main() {
     );
     mount_to_body(|| {
         view! {
-            <Node/>
+            // <BookList />
+            <Node />
         }
     })
 }
