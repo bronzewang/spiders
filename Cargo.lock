@@ -3089,6 +3089,10 @@ name = "spiders"
 version = "0.0.0"
 
 [[package]]
+name = "spiders-bailor"
+version = "0.0.0"
+
+[[package]]
 name = "spiders-dossier"
 version = "0.0.1"
 dependencies = [
@@ -3138,7 +3142,7 @@ dependencies = [
 
 [[package]]
 name = "spiders-scheme"
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
  "anyhow",
  "prost",
