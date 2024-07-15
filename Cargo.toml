@@ -6,6 +6,7 @@ members = [
   "scenes/spiders-spawner",
   "scenes/spiders-dossier",
   "scenes/spiders-snooper",
+  # "scenes/spiders-visitor",
 ]
 
 [package]
@@ -16,6 +17,71 @@ authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
 description = "A embedded framework tribe use rust"
 license = "MIT OR Apache-2.0"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# Defines a size-optimized profile for the WASM bundle in release mode
+[profile.wasm-release]
+inherits = "release"
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = "abort"
 
 [dependencies]
+# tribers = { version = "0" }
+
+# spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
+
+# anyhow = "1"
+# thiserror = "1"
+
+# futures = { version = "0.3" }
+# futures-util = { version = "0.3" }
+# async-trait = { version = "0.1" }
+
+# tokio = { version = "1", features = ["full"] }
+# console = { version = "0.15" }
+# tracing = { version = "0.1" }
+# tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# tracing-opentelemetry = { version = "0.24" }
+
+# opentelemetry = { version = "0.23", features = ["metrics"] }
+# opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
+# opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
+# opentelemetry-appender-log = { version = "0.4", default-features = false }
+# opentelemetry-prometheus = { version = "0.16" }
+# prometheus = { version = "0.13" }
+
+# log = { version = "0.4" }
+
+# leptos = { version = "0.6", features = ["nightly"] }
+# leptos_axum = { version = "0.6", optional = true }
+# leptos_meta = { version = "0.6", features = ["nightly"] }
+# leptos_router = { version = "0.6", features = ["nightly"] }
+
+# clap = { version = "4", features = ["derive", "env"] }
+
+# serde = { version = "1" }
+# serde_json = { version = "1.0" }
+
+# http = { version = "1.0"}
+# hyper = { version = "1.0", features = ["full"] }
+# tower = { version = "0.4", features = ["util"] }
+# tower-http = { version = "0.5", features = ["add-extension"] }
+# axum = { version = "0.7", optional = true }
+# # axum-login = { version = "0.15" }
+
+# nusb = { version = "0.1" }
+
+# sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
+# sea-orm = { version = "0.12" }
+
+# udev = { version = "0.7" }
+# tokio-udev = { version = "0.9" }
+
+# serialport = { version = "4" }
+# tokio-serial = { version = "5" }
+
+# rumqttc = { version = "0.24" }
+
+# tonic = { version = "0.11" }
+# prost = { version = "0.12" }
+# prost-types = { version = "0.12" }
