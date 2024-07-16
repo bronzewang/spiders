@@ -1,78 +1,96 @@
 [package]
 name = "spiders-dossier"
-version = "0.0.1"
-edition = "2021"
 authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com"]
 description = "dossier menages for tribers isntance named spiders"
-license = "MIT OR Apache-2.0"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
 
 [lib]
 crate-type = ["cdylib", "rlib" ]
 
 [dependencies]
-tribers = { version = "0" }
+tribers = { workspace = true, optional = true }
 
-spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
+# spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
 
-anyhow = "1"
-thiserror = "1"
+leptos = { workspace = true, features = ["nightly"] }
+leptos_meta = { workspace = true, features = ["nightly"] }
+leptos_router = { workspace = true, features = ["nightly"] }
 
-futures = { version = "0.3" }
-futures-util = { version = "0.3" }
-async-trait = { version = "0.1" }
+leptos_axum = { workspace = true, optional = true }
 
-tokio = { version = "1", features = ["full"] }
-console = { version = "0.15" }
-tracing = { version = "0.1" }
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-tracing-opentelemetry = { version = "0.24" }
+axum = { workspace = true, optional = true }
+cfg-if = { workspace = true }
+console_error_panic_hook = { workspace = true }
+console_log = { workspace = true }
+http = { workspace = true }
+log = { workspace = true }
+simple_logger = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+tower = { workspace = true, features = ["full"] }
+tower-http = { workspace = true, features = ["full"] }
+wasm-bindgen = { workspace = true }
 
-opentelemetry = { version = "0.23", features = ["metrics"] }
-opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
-opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
-opentelemetry-appender-log = { version = "0.4", default-features = false }
-opentelemetry-prometheus = { version = "0.16" }
-prometheus = { version = "0.13" }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
 
-log = { version = "0.4" }
+# futures = { version = "0.3" }
+# futures-util = { version = "0.3" }
+# async-trait = { version = "0.1" }
 
-leptos = { version = "0.6", features = ["nightly"] }
-leptos_axum = { version = "0.6", optional = true }
-leptos_meta = { version = "0.6", features = ["nightly"] }
-leptos_router = { version = "0.6", features = ["nightly"] }
+# tokio = { version = "1", features = ["full"] }
+# console = { version = "0.15" }
+# tracing = { version = "0.1" }
+# tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# tracing-opentelemetry = { version = "0.24" }
 
-clap = { version = "4", features = ["derive", "env"] }
+# opentelemetry = { version = "0.23", features = ["metrics"] }
+# opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
+# opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
+# opentelemetry-appender-log = { version = "0.4", default-features = false }
+# opentelemetry-prometheus = { version = "0.16" }
+# prometheus = { version = "0.13" }
 
-serde = { version = "1" }
-serde_json = { version = "1.0" }
+# log = { version = "0.4" }
 
-http = { version = "1.0"}
-hyper = { version = "1.0", features = ["full"] }
-tower = { version = "0.4", features = ["util"] }
-tower-http = { version = "0.5", features = ["add-extension"] }
-axum = { version = "0.7", optional = true }
-# axum-login = { version = "0.15" }
+# leptos = { version = "0.6", features = ["nightly"] }
+# leptos_axum = { version = "0.6", optional = true }
+# leptos_meta = { version = "0.6", features = ["nightly"] }
+# leptos_router = { version = "0.6", features = ["nightly"] }
 
-nusb = { version = "0.1" }
+# clap = { version = "4", features = ["derive", "env"] }
 
-sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
-sea-orm = { version = "0.12" }
+# serde = { version = "1" }
+# serde_json = { version = "1.0" }
 
-udev = { version = "0.7" }
-tokio-udev = { version = "0.9" }
+# http = { version = "1.0"}
+# hyper = { version = "1.0", features = ["full"] }
+# tower = { version = "0.4", features = ["util"] }
+# tower-http = { version = "0.5", features = ["add-extension"] }
+# axum = { version = "0.7", optional = true }
+# # axum-login = { version = "0.15" }
 
-serialport = { version = "4" }
-tokio-serial = { version = "5" }
+# nusb = { version = "0.1" }
 
-rumqttc = { version = "0.24" }
+# sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
+# sea-orm = { version = "0.12" }
 
-tonic = { version = "0.12" }
-prost = { version = "0.12" }
-prost-types = { version = "0.12" }
+# udev = { version = "0.7" }
+# tokio-udev = { version = "0.9" }
+
+# serialport = { version = "4" }
+# tokio-serial = { version = "5" }
+
+# rumqttc = { version = "0.24" }
+
+tonic = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
 
 [build-dependencies]
-tonic-build = { version = "0.12" }
-prost-build = { version = "0.12" }
+tonic-build = { workspace = true }
+prost-build = { workspace = true }
 
 [features]
 default = [ "ssr" ]
