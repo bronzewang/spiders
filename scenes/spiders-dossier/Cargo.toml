@@ -27,60 +27,50 @@ console_log = { workspace = true }
 http = { workspace = true }
 log = { workspace = true }
 simple_logger = { workspace = true }
-tokio = { workspace = true, features = ["full"] }
-tower = { workspace = true, features = ["full"] }
-tower-http = { workspace = true, features = ["full"] }
+tokio = { workspace = true, optional = true, features = ["full"] }
+tower = { workspace = true, optional = true, features = ["full"] }
+tower-http = { workspace = true, optional = true, features = ["full"] }
 wasm-bindgen = { workspace = true }
 
 anyhow = { workspace = true }
 thiserror = { workspace = true }
 
-# futures = { version = "0.3" }
-# futures-util = { version = "0.3" }
-# async-trait = { version = "0.1" }
+futures = { workspace = true }
+futures-util = { workspace = true }
+async-trait = { workspace = true }
 
-# tokio = { version = "1", features = ["full"] }
 # console = { version = "0.15" }
-# tracing = { version = "0.1" }
-# tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-# tracing-opentelemetry = { version = "0.24" }
+tracing = { workspace = true, optional = true }
+tracing-subscriber = { workspace = true, optional = true, features = ["env-filter"] }
+tracing-opentelemetry = { workspace = true, optional = true }
 
-# opentelemetry = { version = "0.23", features = ["metrics"] }
-# opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
-# opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
-# opentelemetry-appender-log = { version = "0.4", default-features = false }
-# opentelemetry-prometheus = { version = "0.16" }
-# prometheus = { version = "0.13" }
+opentelemetry = { version = "0.23", features = ["metrics"] }
+opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
+opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
+opentelemetry-appender-log = { version = "0.4", default-features = false }
+opentelemetry-prometheus = { version = "0.16" }
+prometheus = { version = "0.13" }
 
-# log = { version = "0.4" }
+clap = { workspace = true }
 
-# leptos = { version = "0.6", features = ["nightly"] }
-# leptos_axum = { version = "0.6", optional = true }
-# leptos_meta = { version = "0.6", features = ["nightly"] }
-# leptos_router = { version = "0.6", features = ["nightly"] }
+serde = { version = "1" }
+serde_json = { version = "1.0" }
 
-# clap = { version = "4", features = ["derive", "env"] }
+# serde = { worksapce = true }
+# serde_json = { workspace = true }
 
-# serde = { version = "1" }
-# serde_json = { version = "1.0" }
+hyper = { workspace = true, features = ["full"] }
 
-# http = { version = "1.0"}
-# hyper = { version = "1.0", features = ["full"] }
-# tower = { version = "0.4", features = ["util"] }
-# tower-http = { version = "0.5", features = ["add-extension"] }
-# axum = { version = "0.7", optional = true }
-# # axum-login = { version = "0.15" }
+nusb = { workspace = true, optional = true }
 
-# nusb = { version = "0.1" }
+sqlx = { workspace = true, optional = true, features = ["sqlite", "time", "runtime-tokio"] }
+sea-orm = { workspace = true, optional = true }
 
-# sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
-# sea-orm = { version = "0.12" }
+udev = { workspace = true, optional = true }
+tokio-udev = { workspace = true, optional = true }
 
-# udev = { version = "0.7" }
-# tokio-udev = { version = "0.9" }
-
-# serialport = { version = "4" }
-# tokio-serial = { version = "5" }
+serialport = { workspace = true, optional = true }
+tokio-serial = { workspace = true, optional = true }
 
 # rumqttc = { version = "0.24" }
 
@@ -98,16 +88,21 @@ default = [ "ssr" ]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
 ssr = [
     "dep:axum",
-    # "dep:tokio",
-    # "dep:tower",
-    # "dep:tower-http",
-    # "dep:leptos_axum",
+    "dep:tokio",
+    "dep:tower",
+    "dep:tower-http",
+    "dep:leptos_axum",
     "leptos/ssr",
     "leptos_meta/ssr",
     "leptos_router/ssr",
-    # "dep:tracing",
-    # "dep:sqlx",
-    # "dep:xml",
+    "dep:tracing",
+    "dep:sqlx",
+    "dep:sea-orm",
+    "dep:nusb",
+    "dep:udev",
+    "dep:tokio-udev",
+    "dep:serialport",
+    "dep:tokio-serial"
 ]
 
 [package.metadata.leptos]

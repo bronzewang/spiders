@@ -13,13 +13,14 @@ use opentelemetry::{
     KeyValue,
 };
 
-use spiders_scheme::SPIDERS_WEB_PORT_BASE;
+// use spiders_scheme::SPIDERS_WEB_PORT_BASE;
+const SPIDERS_WEB_PORT_BASE: u16 = 62999;
 
-pub mod greeter {
-	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
-}
+// pub mod greeter {
+// 	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
+// }
 
-pub use greeter::*;
+// pub use greeter::*;
 
 // 上电初始化一次的参数 'static
 #[derive(Deserialize, Debug)]
