@@ -59,7 +59,7 @@ serde_json = { version = "1.0" }
 # serde = { worksapce = true }
 # serde_json = { workspace = true }
 
-hyper = { workspace = true, features = ["full"] }
+hyper = { workspace = true, optional = true, features = ["full"] }
 
 nusb = { workspace = true, optional = true }
 
@@ -74,13 +74,13 @@ tokio-serial = { workspace = true, optional = true }
 
 # rumqttc = { version = "0.24" }
 
-tonic = { workspace = true }
-prost = { workspace = true }
-prost-types = { workspace = true }
+tonic = { workspace = true, optional = true }
+# prost = { workspace = true, optional = true }
+# prost-types = { workspace = true, optional = true }
 
 [build-dependencies]
-tonic-build = { workspace = true }
-prost-build = { workspace = true }
+tonic-build = { workspace = true, optional = true }
+# prost-build = { workspace = true, optional = true }
 
 [features]
 default = [ "ssr" ]
@@ -102,7 +102,10 @@ ssr = [
     "dep:udev",
     "dep:tokio-udev",
     "dep:serialport",
-    "dep:tokio-serial"
+    "dep:tokio-serial",
+    "dep:hyper",
+    "dep:tonic",
+    "dep:tonic-build"
 ]
 
 [package.metadata.leptos]
