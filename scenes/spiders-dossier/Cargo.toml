@@ -34,6 +34,7 @@ wasm-bindgen = { workspace = true }
 
 anyhow = { workspace = true }
 thiserror = { workspace = true }
+lazy_static = { worksapce = true }
 
 futures = { workspace = true }
 futures-util = { workspace = true }
