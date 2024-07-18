@@ -1,12 +1,14 @@
 [workspace]
 resolver = "2"
-members = [
-  # "pieces/spiders-scheme",
-  # "pieces/spiders-bailor",
-  # "scenes/spiders-spawner",
-  "scenes/spiders-dossier",
-  # "scenes/spiders-snooper",
-  # "scenes/spiders-visitor",
+members = [ "pieces/widget",
+  # "pieces/widget",
+  # "pieces/bailor",
+  # "pieces/scheme",
+  # "pieces/bailor",
+  # "scenes/spawner",
+  "scenes/dossier",
+  # "scenes/snooper",
+  # "scenes/visitor",
 ]
 
 [package]
