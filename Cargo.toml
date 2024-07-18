@@ -48,6 +48,10 @@ leptos_router = { version = "0.6", features = ["nightly"] }
 
 leptos_axum = { version = "0.6" }
 
+# leptos-chartistry = { version = "0.1" }
+leptos-struct-table = { version = "0.10" }
+# leptonic = { version = "0.5" }
+
 axum = { version = "0.7" }
 cfg-if = { version = "1" }
 console_error_panic_hook = { version = "0.1.7" }

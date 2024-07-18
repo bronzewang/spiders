@@ -20,6 +20,10 @@ leptos_router = { workspace = true, features = ["nightly"] }
 
 leptos_axum = { workspace = true, optional = true }
 
+# leptos-chartistry = { workspace = true }
+leptos-struct-table = { workspace = true }
+# leptonic = { workspace = true }
+
 axum = { workspace = true, optional = true }
 cfg-if = { workspace = true }
 console_error_panic_hook = { workspace = true }
