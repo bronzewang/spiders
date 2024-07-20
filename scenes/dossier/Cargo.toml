@@ -20,9 +20,9 @@ leptos_router = { workspace = true, features = ["nightly"] }
 
 leptos_axum = { workspace = true, optional = true }
 
-# leptos-chartistry = { workspace = true }
+leptos-chartistry = { workspace = true }
 leptos-struct-table = { workspace = true }
-# leptonic = { workspace = true }
+# leptonic = { workspace = true, features = ["nightly"] }
 
 axum = { workspace = true, optional = true }
 cfg-if = { workspace = true }

@@ -553,8 +553,10 @@ checksum = "a21f936df1771bf62b77f047b726c4625ff2e8aa607c01ec06e5a05bd8463401"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
+ "js-sys",
  "num-traits",
  "serde",
+ "wasm-bindgen",
  "windows-targets 0.52.6",
 ]
 
@@ -1693,6 +1695,19 @@ dependencies = [
  "typed-builder",
  "typed-builder-macro",
  "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "leptos-chartistry"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b52022d33b753a78de85db8a7a8ac41a03706fc4624445f0c20a1007510dc9a2"
+dependencies = [
+ "chrono",
+ "leptos",
+ "leptos-use",
+ "log",
  "web-sys",
 ]
 
@@ -3462,6 +3477,7 @@ dependencies = [
  "hyper",
  "lazy_static",
  "leptos",
+ "leptos-chartistry",
  "leptos-struct-table",
  "leptos_axum",
  "leptos_meta",
