@@ -22,7 +22,7 @@ leptos_axum = { workspace = true, optional = true }
 
 leptos-chartistry = { workspace = true }
 leptos-struct-table = { workspace = true }
-# leptonic = { workspace = true, features = ["nightly"] }
+leptonic = { workspace = true, features = ["nightly"] }
 
 axum = { workspace = true, optional = true }
 cfg-if = { workspace = true }

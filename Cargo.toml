@@ -51,6 +51,8 @@ leptos_axum = { version = "0.6" }
 leptos-chartistry = { version = "0.1" }
 leptos-struct-table = { version = "0.10" }
 # leptonic = { version = "0.5", features = ["nightly"] }
+leptonic = { git = "https://github.com/lpotthast/leptonic.git", features = ["nightly"] }
+# leptonic = { git = git@github.com:lpotthast/leptonic.git, features = ["nightly"] }
 
 axum = { version = "0.7" }
 cfg-if = { version = "1" }
