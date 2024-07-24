@@ -27,6 +27,7 @@ message Caliber {
 	oneof load {
 		Serial serial = 5;
 		Canbus canbus = 6;
+		wiring wiring = 7;
 	}
 }
 
@@ -40,7 +41,7 @@ message Canbus {
 	int32 baudrate = 1;
 }
 
-message Wireio {
+message Wiring {
 	int32 switch = 1;	// 接口开关
 	int32 current = 2;	// 电流采集
 	int32 voltage = 3;	// 电压采集

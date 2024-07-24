@@ -7,6 +7,7 @@ use opentelemetry_appender_log::OpenTelemetryLogBridge;
 use opentelemetry_sdk::{logs::{Config, LoggerProvider}, metrics::SdkMeterProvider};
 use prometheus::{Registry};
 use std::sync::Arc;
+use std::error::Error;
 use opentelemetry::{
     metrics::{Counter, Histogram, MeterProvider as _, Unit},
     KeyValue,
@@ -56,13 +57,18 @@ struct Cli {
 
 #[derive(Debug)]
 struct AppState {
+	toolkit: Vec<Toolkit>
+	snooper: Vec<Snooper>
+
     registry: Registry,
     http_counter: Counter<u64>,
     http_body_gauge: Histogram<u64>,
 }
 
+static INNATE: std:sync::OnceLock<Innate> = std::sync::OnceLock::new();
+
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>>{
+async fn main() -> Result<(), Box<dyn Error>>{
     use leptos::*;
     // use leptos::{logging::log};
     use leptos_axum::{generate_route_list, LeptosRoutes};
@@ -77,8 +83,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let innate: Innate = serde_json::from_reader(innate_reader)?;
     println!("innate {:?}", innate);
 
-    udev_parse().await?;
-    serial_parse().await?;
+	INNATE.set(innate);
+	//let _ = INNATE.set(innate);
+
+	toolkit_init().await?
 
     let exporter = opentelemetry_stdout::LogExporterBuilder::default().build();
     let logger_provider = LoggerProvider::builder()
@@ -104,7 +112,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
 
     let meter = provider.meter("spiders-dossier");
     let state = Arc::new(AppState {
-        registry,
+		toolkit: Vec::new(),
+		snooper: Vec::new(),
+        registry: registry,
         http_counter: meter
             .u64_counter("http_requests_total")
             .with_description("Total number of HTTP requests made.")
@@ -128,12 +138,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     // Generate the list of routes in your Leptos App
     let routes = generate_route_list(App);
 
+	use std::net::SocketAddr;
+    let addr: SocketAddr = conf.leptos_options.site_addr.parse();
+	addr.set_port(addr.port()+innate.id);
+
     let app = Router::new()
         .route("/api", get(handler)).with_state(state)
         .leptos_routes(&leptos_options, routes, || view! { <App/> })
         .fallback(file_and_error_handler)
         .with_state(leptos_options);
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
+    let listener = tokio::net::TcpListener::bind("{}", addr).await.unwrap();
 
     // run it
     error!("listening on {}", listener.local_addr().unwrap());
@@ -150,66 +165,101 @@ async fn handler(State(state): State<Arc<AppState>>) -> Html<&'static str> {
     Html("<h1>Hello, World! I am Spiders.</h1>")
 }
 
-// use futures_util::future::ready;
-// use futures_util::stream::StreamExt;
-// use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
-
-#[allow(unused)]
-async fn udev_parse() -> Result<(), Box<dyn std::error::Error>>
+async fn toolkit_init() -> Result<(), Box<dyn Error>>
 {
-    // println!("udev init");
-    // let builder = MonitorBuilder::new()
-    //     .expect("Couldn't create builder")
-    //     .match_subsystem_devtype("usb", "usb_device")
-    //     .expect("Failed to add filter for USB devices");
-    // let monitor: AsyncMonitorSocket = builder
-    //     .listen()
-    //     .expect("Couldn't create MonitorSocket")
-    //     .try_into()
-    //     .expect("Couldn't create AsyncMonitorSocket");
-    // monitor.for_each(|event| {
-    //     if let Ok(event) = event {
-    //         println!(
-    //             "Hotplug event: {}: {}",
-    //             event.event_type(),
-    //             event.device().syspath().display()
-    //         );
-    //     }
-    //     ready(())
-    // }).await;
-    // println!("udev free");
+	use futures_util::future::ready;
+	use futures_util::stream::StreamExt;
+	use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
 
-    println!("udev enumerator init");
-    let mut enumerator = udev::Enumerator::new()?;
-    enumerator.match_subsystem("usb")?;
-    enumerator.match_property("ID_SIGROK", "1");
+	// 创建sigrok事件监控任务
+    let builder = MonitorBuilder::new()
+		.expect("Couldn't create builder")
+		.match_subsystem_devtype("usb", "usb_device")
+		.expect("Failed to add filter for USB devices");
+	let monitor: AsyncMonitorSocket = builder
+		.listen()
+		.expect("Couldn't create MonitorSocket")
+		.try_into()
+		.expect("Couldn't create AsyncMonitorSocket");
+	monitor.for_each(toolkit_sigrok_event).await;
 
-    for device in enumerator.scan_devices()? {
-        // println!("{:#?}", device.syspath());
-        // println!("{:#?}", device.devpath());
-        println!();
-        println!("{:#?}", device);
+	// 创建sigrok定期采集任务
+	tokio::spawn(toolkit_sigrok_glean);
 
-        println!("  [properties]");
-        for property in device.properties() {
-            println!("    - {:?} {:?}", property.name(), property.value());
-        }
+	// 创建serial事件监控任务
+    let builder = MonitorBuilder::new()
+		.expect("Couldn't create builder")
+		.match_subsystem_devtype("usb", "usb_device")
+		.expect("Failed to add filter for USB devices");
+	let monitor: AsyncMonitorSocket = builder
+		.listen()
+		.expect("Couldn't create MonitorSocket")
+		.try_into()
+		.expect("Couldn't create AsyncMonitorSocket");
+	monitor.for_each(toolkit_sigrok_event).await;
 
-        println!("  [attributes]");
-        for attribute in device.attributes() {
-            println!("    - {:?} {:?}", attribute.name(), attribute.value());
-        }
-    }
-    println!("udev enumerator free");
+	// 创建serial定期采集任务
+	tokio::spawn(toolkit_serial_glean);
+}
+
+async fn toolkit_sigrok_event(event) -> Result<(), Box<dyn Error>>
+{
+	if let Ok(event) = event {
+		println!(
+			"Hotplug event: {}: {}",
+			event.event_type(),
+			event.device().syspath().display()
+		);
+	}
+	ready(())
+}
+
+async fn toolkit_sigrok_glean() -> Result<(), Box<dyn Error>>
+{
+	loop {
+		println!("udev enumerator init");
+		let mut enumerator = udev::Enumerator::new()?;
+		enumerator.match_subsystem("usb")?;
+		enumerator.match_property("ID_SIGROK", "1");
+		 
+		for device in enumerator.scan_devices()? {
+		    // println!("{:#?}", device.syspath());
+		    // println!("{:#?}", device.devpath());
+		    println!();
+		    println!("{:#?}", device);
+		 
+		    println!("  [properties]");
+		    for property in device.properties() {
+		        println!("    - {:?} {:?}", property.name(), property.value());
+		    }
+		 
+		    println!("  [attributes]");
+		    for attribute in device.attributes() {
+		        println!("    - {:?} {:?}", attribute.name(), attribute.value());
+		    }
+		}
+		println!("udev enumerator free");
+	}
 
     Ok(())
 }
 
-use serialport::{available_ports, SerialPortType};
-
-#[allow(unused)]
-async fn serial_parse() -> Result<(), Box<dyn std::error::Error>>
+async fn toolkit_serial_event(event) -> Result<(), Box<dyn Error>>
 {
+	if let Ok(event) = event {
+		println!(
+			"Hotplug event: {}: {}",
+			event.event_type(),
+			event.device().syspath().display()
+		);
+	}
+	ready(())
+}
+
+async fn toolkit_serial_glean() -> Result<(), Box<dyn Error>>
+{
+	use serialport::{available_ports, SerialPortType};
+
     match available_ports() {
         Ok(ports) => {
             println!("ports count {}", ports.len());
