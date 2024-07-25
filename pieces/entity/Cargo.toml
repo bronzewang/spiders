@@ -1,8 +1,19 @@
 [package]
-name = "entity"
+name = "spiders-entity"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 authors.workspace = true
 
 [dependencies]
+tribers = { version = "0" }
+
+# anyhow = { version = "1" }
+# thiserror  = { version = "1" }
+
+serde = { version = "1" }
+serde_json = { version = "1" }
+
+sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
+sea-orm = { version = "1.0.0-rc.4" }
+sea-query = { version = "0.31.0-rc", default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"] }

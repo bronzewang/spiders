@@ -6,5 +6,20 @@ authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
 description = "Spiders leptos widget"
 license = "MIT OR Apache-2.0"
 
-
 [dependencies]
+tribers = { workspace = true, optional = true }
+
+leptos-use = { workspace = true }
+leptos-chartistry = { workspace = true }
+leptos-struct-table = { workspace = true }
+leptonic = { workspace = true, features = ["nightly"] }
+
+tokio = { workspace = true, features = ["full"] }
+
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+# lazy_static = { worksapce = true }
+
+futures = { workspace = true }
+futures-util = { workspace = true }
+async-trait = { workspace = true }

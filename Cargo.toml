@@ -1,10 +1,10 @@
 [workspace]
 resolver = "2"
-members = [ "pieces/entity", "pieces/widget",
-  # "pieces/widget",
+members = [
+  "pieces/entity",
+  "pieces/scheme",
+  #"pieces/widget",
   # "pieces/bailor",
-  # "pieces/scheme",
-  # "pieces/entity",
   # "scenes/spawner",
   "scenes/dossier",
   # "scenes/snooper",
@@ -41,6 +41,11 @@ authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
 
 [workspace.dependencies]
 tribers = { version = "0" }
+
+spiders-entity = { path = "./pieces/entity" }
+spiders-scheme = { path = "./pieces/scheme" }
+# spiders-widget = { path = "./pieces/widget" }
+# spiders-bailor = { path = "./pieces/bailor" }
 
 leptos = { version = "0.6", features = ["nightly"] }
 leptos_meta = { version = "0.6", features = ["nightly"] }

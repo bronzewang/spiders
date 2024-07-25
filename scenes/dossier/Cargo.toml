@@ -12,7 +12,10 @@ crate-type = ["cdylib", "rlib" ]
 [dependencies]
 tribers = { workspace = true, optional = true }
 
-# spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
+spiders-entity = { workspace = true }
+spiders-scheme = { workspace = true }
+# spiders-widget = { workspace = true }
+# spiders-bailor = { workspace = true }
 
 leptos = { workspace = true, features = ["nightly"] }
 leptos_meta = { workspace = true, features = ["nightly"] }
@@ -39,7 +42,7 @@ wasm-bindgen = { workspace = true }
 
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-lazy_static = { worksapce = true }
+# lazy_static = { worksapce = true }
 
 futures = { workspace = true }
 futures-util = { workspace = true }

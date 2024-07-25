@@ -27,7 +27,7 @@ message Caliber {
 	oneof load {
 		Serial serial = 5;
 		Canbus canbus = 6;
-		wiring wiring = 7;
+		Wiring wiring = 7;
 	}
 }
 
