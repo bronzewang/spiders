@@ -1,0 +1,2 @@
+委托代理
+一个与spiders服务器通讯的库，让basanos包含来提供python访问接口

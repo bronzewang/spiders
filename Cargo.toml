@@ -1,10 +1,10 @@
 [workspace]
 resolver = "2"
-members = [ "pieces/widget",
+members = [ "pieces/entity", "pieces/widget",
   # "pieces/widget",
   # "pieces/bailor",
   # "pieces/scheme",
-  # "pieces/bailor",
+  # "pieces/entity",
   # "scenes/spawner",
   "scenes/dossier",
   # "scenes/snooper",
