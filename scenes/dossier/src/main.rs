@@ -13,9 +13,6 @@ use opentelemetry::{
     KeyValue,
 };
 
-// // use spiders_scheme::SPIDERS_WEB_PORT_BASE;
-// const SPIDERS_WEB_PORT_BASE: u16 = 62999;
-
 // pub mod greeter {
 // 	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
 // }
@@ -70,7 +67,6 @@ static INNATE: std:sync::OnceLock<Innate> = std::sync::OnceLock::new();
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>>{
     use leptos::*;
-    // use leptos::{logging::log};
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use spiders_dossier::{app::*, fallback::file_and_error_handler};
 
