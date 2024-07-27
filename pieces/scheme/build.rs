@@ -30,6 +30,6 @@ fn main() {
     // prost_wkt_build::add_serde(out, descriptor);
 
     tonic_build::configure()
-        .compile(&["proto/object.proto"], &["proto"])
+        .compile(&["proto/server.proto"], &["proto"])
         .unwrap();
 }
