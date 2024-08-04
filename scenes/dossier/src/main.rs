@@ -1,6 +1,6 @@
-use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
-use clap::Parser;
-use serde::Deserialize;
+// use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
+// use clap::Parser;
+// use serde::Deserialize;
 use axum::{response::Html, extract::State, routing::get, Router};
 use log::{error, Level};
 use opentelemetry_appender_log::OpenTelemetryLogBridge;
@@ -15,8 +15,8 @@ use opentelemetry::{
 
 #[derive(Debug)]
 struct AppState {
-	toolkit: Vec<Toolkit>,
-	snooper: Vec<Snooper>,
+	// toolkit: Vec<Toolkit>,
+	// snooper: Vec<Snooper>,
 
     registry: Registry,
     http_counter: Counter<u64>,
@@ -29,7 +29,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use spiders_dossier::{app::*, fallback::file_and_error_handler};
 
-	toolkit_init().await?;
+	// toolkit_init().await?;
 
     let exporter = opentelemetry_stdout::LogExporterBuilder::default().build();
     let logger_provider = LoggerProvider::builder()
@@ -55,8 +55,8 @@ async fn main() -> Result<(), Box<dyn Error>>{
 
     let meter = provider.meter("spiders-dossier");
     let state = Arc::new(AppState {
-		toolkit: Vec::new(),
-		snooper: Vec::new(),
+		// toolkit: Vec::new(),
+		// snooper: Vec::new(),
         registry: registry,
         http_counter: meter
             .u64_counter("http_requests_total")
@@ -81,9 +81,9 @@ async fn main() -> Result<(), Box<dyn Error>>{
     // Generate the list of routes in your Leptos App
     let routes = generate_route_list(App);
 
-	use std::net::SocketAddr;
-    let addr: SocketAddr = conf.leptos_options.site_addr.parse();
-	addr.set_port(addr.port()+innate.id);
+	// use std::net::SocketAddr;
+    // let addr: SocketAddr = conf.leptos_options.site_addr.parse();
+	// addr.set_port(addr.port()+innate.id);
 
     let app = Router::new()
         .route("/api", get(handler)).with_state(state)

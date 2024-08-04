@@ -1,52 +1,52 @@
 // 采集udev和serial设备信息，保存在一个vec中
 
-use std::error::Error;
+// use std::error::Error;
 
 // 驱动方式
-#[deny(dead_code)]
+#[allow(dead_code)]
 pub enum Means {
 	Serial,
 	Sigrok,
 }
 
-async fn toolkit_init() -> Result<(), Box<dyn Error>>
-{
-	// use futures_util::future::ready;
-	// use futures_util::stream::StreamExt;
-	// use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
+// async fn toolkit_init() -> Result<(), Box<dyn Error>>
+// {
+// 	use futures_util::future::ready;
+// 	use futures_util::stream::StreamExt;
+// 	use tokio_udev::{AsyncMonitorSocket, MonitorBuilder};
 
-	// // 创建sigrok事件监控任务
-    // let builder = MonitorBuilder::new()
-	// 	.expect("Couldn't create builder")
-	// 	.match_subsystem_devtype("usb", "usb_device")
-	// 	.expect("Failed to add filter for USB devices");
-	// let monitor: AsyncMonitorSocket = builder
-	// 	.listen()
-	// 	.expect("Couldn't create MonitorSocket")
-	// 	.try_into()
-	// 	.expect("Couldn't create AsyncMonitorSocket");
-	// monitor.for_each(toolkit_sigrok_event).await;
+// 	// 创建sigrok事件监控任务
+//     let builder = MonitorBuilder::new()
+// 		.expect("Couldn't create builder")
+// 		.match_subsystem_devtype("usb", "usb_device")
+// 		.expect("Failed to add filter for USB devices");
+// 	let monitor: AsyncMonitorSocket = builder
+// 		.listen()
+// 		.expect("Couldn't create MonitorSocket")
+// 		.try_into()
+// 		.expect("Couldn't create AsyncMonitorSocket");
+// 	monitor.for_each(toolkit_sigrok_event).await;
 
-	// // 创建sigrok定期采集任务
-	// tokio::spawn(toolkit_sigrok_glean);
+// 	// 创建sigrok定期采集任务
+// 	tokio::spawn(toolkit_sigrok_glean);
 
-	// // 创建serial事件监控任务
-    // let builder = MonitorBuilder::new()
-	// 	.expect("Couldn't create builder")
-	// 	.match_subsystem_devtype("usb", "usb_device")
-	// 	.expect("Failed to add filter for USB devices");
-	// let monitor: AsyncMonitorSocket = builder
-	// 	.listen()
-	// 	.expect("Couldn't create MonitorSocket")
-	// 	.try_into()
-	// 	.expect("Couldn't create AsyncMonitorSocket");
-	// monitor.for_each(toolkit_sigrok_event).await;
+// 	// 创建serial事件监控任务
+//     let builder = MonitorBuilder::new()
+// 		.expect("Couldn't create builder")
+// 		.match_subsystem_devtype("usb", "usb_device")
+// 		.expect("Failed to add filter for USB devices");
+// 	let monitor: AsyncMonitorSocket = builder
+// 		.listen()
+// 		.expect("Couldn't create MonitorSocket")
+// 		.try_into()
+// 		.expect("Couldn't create AsyncMonitorSocket");
+// 	monitor.for_each(toolkit_sigrok_event).await;
 
-	// // 创建serial定期采集任务
-	// tokio::spawn(toolkit_serial_glean);
+// 	// 创建serial定期采集任务
+// 	tokio::spawn(toolkit_serial_glean);
 
-	Ok(())
-}
+// 	Ok(())
+// }
 
 // async fn toolkit_sigrok_event(event) -> Result<(), Box<dyn Error>>
 // {
