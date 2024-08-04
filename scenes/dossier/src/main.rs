@@ -1,6 +1,3 @@
-// use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
-// use clap::Parser;
-// use serde::Deserialize;
 use axum::{response::Html, extract::State, routing::get, Router};
 use log::{error, Level};
 use opentelemetry_appender_log::OpenTelemetryLogBridge;

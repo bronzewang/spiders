@@ -4,13 +4,13 @@ use leptos_router::*;
 // use serde::{Deserialize, Serialize};
 // use thiserror::Error;
 use crate::page::{
-    snooper::Snooper,
-    toolkit::Toolkit,
+snooper::SnooperView,
+toolkit::ToolkitView,
 };
 
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct State {
-    pub debug: RwSignal<bool>,
+pub debug: RwSignal<bool>,
 }
 
 #[component]
@@ -25,13 +25,13 @@ pub fn App() -> impl IntoView {
         <Router trailing_slash=TrailingSlash::Exact>
             <SiteHeader />
             <main>
-                <Routes>
-                    <Route path="/snooper" view=Snooper />
-                    <Route path="/toolkit" view=Toolkit />
-                    <Route path="/*any" view=NotFound />
-                </Routes>
+            <Routes>
+            <Route path="/snooper" view=SnooperView />
+            <Route path="/toolkit" view=ToolkitView />
+        // <Route path="/*any" view=NotFound />
+            </Routes>
             </main>
-        </Router>
+            </Router>
     }
 }
 
@@ -40,8 +40,13 @@ fn SiteHeader() -> impl IntoView {
     view! {
         <header>
             <nav>
-                <p><A href="/snooper">"Snooper"</A></p>
-                <p><A href="/toolkit">"Toolkit"</A></p>
+                <A href="/snooper">
+                    <strong>"Snooper"</strong>
+                </A>
+                <span>" "</span>
+                <A href="/toolkit">
+                    <strong>"Toolkit"</strong>
+                </A>
             </nav>
             // <div class="badges">
             //     <p>
@@ -64,18 +69,45 @@ fn SiteHeader() -> impl IntoView {
     }
 }
 
-#[component]
-fn NotFound() -> impl IntoView {
-    view! {
-        <article id="status404">
-            <p class="background-box">
-                <h1 class="connect-heading">"Page not found"</h1>
-                "The page you are looking for does not exist."
-            </p>
-        </article>
-    }
-}
+// #[component]
+// pub fn Nav() -> impl IntoView {
+//     view! {
+//         <header class="header">
+//             <nav class="inner">
+//                 <A href="/">
+//                     <strong>"HN"</strong>
+//                 </A>
+//                 <A href="/new">
+//                     <strong>"New"</strong>
+//                 </A>
+//                 <A href="/show">
+//                     <strong>"Show"</strong>
+//                 </A>
+//                 <A href="/ask">
+//                     <strong>"Ask"</strong>
+//                 </A>
+//                 <A href="/job">
+//                     <strong>"Jobs"</strong>
+//                 </A>
+//                 <a class="github" href="http://github.com/leptos-rs/leptos" target="_blank" rel="noreferrer">
+//                     "Built with Leptos"
+//                 </a>
+//             </nav>
+//         </header>
+//     }
+// }
 
+// #[component]
+// fn NotFound() -> impl IntoView {
+//     view! {
+//         <article id="status404">
+//             <p class="background-box">
+//                 <h1 class="connect-heading">"Page not found"</h1>
+//                 "The page you are looking for does not exist."
+//             </p>
+//         </article>
+//     }
+// }
 
 pub fn provide_app_context() {
     provide_context(State::default());
