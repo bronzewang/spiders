@@ -1,4 +1,4 @@
-use lazy_static::lazy_static;
+// use lazy_static::lazy_static;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;

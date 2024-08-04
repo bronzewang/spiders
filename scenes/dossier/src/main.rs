@@ -13,16 +13,10 @@ use opentelemetry::{
     KeyValue,
 };
 
-// pub mod greeter {
-// 	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
-// }
-
-// pub use greeter::*;
-
 #[derive(Debug)]
 struct AppState {
-	toolkit: Vec<Toolkit>
-	snooper: Vec<Snooper>
+	toolkit: Vec<Toolkit>,
+	snooper: Vec<Snooper>,
 
     registry: Registry,
     http_counter: Counter<u64>,
@@ -35,7 +29,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use spiders_dossier::{app::*, fallback::file_and_error_handler};
 
-	toolkit_init().await?
+	toolkit_init().await?;
 
     let exporter = opentelemetry_stdout::LogExporterBuilder::default().build();
     let logger_provider = LoggerProvider::builder()
@@ -97,7 +91,6 @@ async fn main() -> Result<(), Box<dyn Error>>{
         .fallback(file_and_error_handler)
         .with_state(leptos_options);
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    let listener = tokio::net::TcpListener::bind("{}", addr).await.unwrap();
 
     // run it
     error!("listening on {}", listener.local_addr().unwrap());

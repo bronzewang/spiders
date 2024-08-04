@@ -1,10 +1,12 @@
 // 采集udev和serial设备信息，保存在一个vec中
-enum {
+
+// 驱动方式
+enum Means {
 	Serial,
 	Sigrok,
 }
 
-pub FLUID_TABLE
+// pub FLUID_TABLE
 
 async fn toolkit_init() -> Result<(), Box<dyn Error>>
 {
