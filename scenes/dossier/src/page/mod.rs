@@ -1,2 +1,2 @@
-mod snooper;
-mod toolkit;
+pub(crate) mod snooper;
+pub(crate) mod toolkit;

@@ -1,2 +1,2 @@
-mod solid;
-mod fluid;
+pub(crate) mod solid;
+pub(crate) mod fluid;
