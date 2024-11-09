@@ -1,0 +1,40 @@
+model Snooper {
+    #[key]
+    #[auto]
+    id: Id,
+
+    name: String,
+
+    toolkits: [Toolkit],
+}
+
+model Toolkit {
+    #[key]
+    #[auto]
+    id: Id,
+
+    name: String,
+    
+    utensils: [Utensil],
+    
+    #[unique]
+    snooper_id: Option<Id<Snooper>>,
+
+    #[relation(key = snooper_id, references = id)]
+    snooper: Snooper,
+}
+
+model Utensil {
+    #[key]
+    #[auto]
+    id: Id,
+
+    name: String,
+
+    #[unique]
+    tooklit_id: Id<Toolkit>,
+
+    #[relation(key = tooklit_id, references = id)]
+    tooklit: Toolkit,
+}
+
