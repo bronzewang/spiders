@@ -1,5 +1,5 @@
-#[cfg(seaorm)]
+#[cfg(feature = "seaorm")]
 mod seaorm;
 
-#[cfg(toasty)]
+#[cfg(feature = "toasty")]
 mod toasty;

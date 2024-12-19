@@ -1,3 +1,5 @@
+#![allow(unused_imports)]
+
 mod snooper;
 mod toolkit;
 mod utensil;

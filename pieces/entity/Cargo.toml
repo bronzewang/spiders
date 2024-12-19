@@ -14,14 +14,15 @@ thiserror  = { version = "1" }
 serde = { version = "1" }
 serde_json = { version = "1" }
 
-sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
-sea-orm = { version = "1.0.0-rc.4", optional = true }
-sea-query = { version = "0.31.0-rc", default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"], optional = true }
+sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"], optional = true }
+sea-orm = { version = "1", optional = true }
+sea-query = { version = "0.32", default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"], optional = true }
 
-toasty = { git = "https://github.com/tokio-rs/toasty.git", optional = true }
-toasty-sqlite = { git = "https://github.com/tokio-rs/toasty.git", optional = true }
+# toasty = { git = "https://github.com/tokio-rs/toasty.git", optional = true }
+# toasty-sqlite = { git = "https://github.com/tokio-rs/toasty.git", optional = true }
 
 [features]
 default = ["seaorm"]
-seaorm = ["dep:sea-orm", "dep:sea-query"]
-toasty = ["dep:toasty", "dep:toasty-sqlite"]
+seaorm = ["dep:sea-orm", "dep:sea-query", "dep:sqlx"]
+# toasty = ["dep:toasty", "dep:toasty-sqlite"]
+toasty = []
