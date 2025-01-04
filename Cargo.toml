@@ -47,25 +47,26 @@ spiders-scheme = { path = "./pieces/scheme" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
-leptos = { version = "0.6", features = ["nightly"] }
-leptos_meta = { version = "0.6", features = ["nightly"] }
-leptos_router = { version = "0.6", features = ["nightly"] }
+leptos = { version = "0.7" }
+leptos_meta = { version = "0.7" }
+leptos_router = { version = "0.7" }
 
-leptos_axum = { version = "0.6" }
+leptos_axum = { version = "0.7" }
 
-leptos-use = { version = "0.10" }
-leptos-chartistry = { version = "0.1" }
-leptos-struct-table = { version = "0.10" }
-# leptonic = { version = "0.5", features = ["nightly"] }
-leptonic = { git = "https://github.com/lpotthast/leptonic.git", features = ["nightly"] }
+leptos-use = { version = "0.15" }
+# leptos-chartistry = { version = "0.2" }
+# leptos-struct-table = { version = "0.10" }
+# leptonic = { version = "0.5" }
+# leptonic = { git = "https://github.com/lpotthast/leptonic.git" }
+thaw = { version = "0.4" }
 
-axum = { version = "0.7" }
+axum = { version = "0.8" }
 cfg-if = { version = "1" }
 console_error_panic_hook = { version = "0.1.7" }
 console_log = { version = "1" }
 log = { version = "0.4.20" }
 simple_logger = { version = "4.2.0" }
-wasm-bindgen = "=0.2.92"
+wasm-bindgen = "0.2"
 
 anyhow = { version = "1" }
 thiserror = { version = "1" }

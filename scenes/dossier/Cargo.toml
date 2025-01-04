@@ -16,16 +16,17 @@ spiders-scheme = { workspace = true, optional = true }
 # spiders-widget = { workspace = true }
 spiders-entity = { workspace = true, optional = true }
 
-leptos = { workspace = true, features = ["nightly"] }
-leptos_meta = { workspace = true, features = ["nightly"] }
-leptos_router = { workspace = true, features = ["nightly"] }
+leptos = { workspace = true }
+leptos_meta = { workspace = true }
+leptos_router = { workspace = true }
 
 leptos_axum = { workspace = true, optional = true }
 
 leptos-use = { workspace = true }
-leptos-chartistry = { workspace = true }
-leptos-struct-table = { workspace = true }
-leptonic = { workspace = true, features = ["nightly"] }
+# leptos-chartistry = { workspace = true }
+# leptos-struct-table = { workspace = true }
+# leptonic = { workspace = true }
+thaw = { workspace = true }
 
 axum = { workspace = true, optional = true }
 cfg-if = { workspace = true }
@@ -93,7 +94,7 @@ tonic-build = { workspace = true, optional = true }
 [features]
 default = [ "ssr" ]
 
-hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
+hydrate = ["leptos/hydrate"]
 ssr = [
     "leptos/ssr",
     "leptos_meta/ssr",
