@@ -60,7 +60,10 @@ leptos-use = { version = "0.15" }
 # leptonic = { git = "https://github.com/lpotthast/leptonic.git" }
 thaw = { version = "0.4" }
 
-axum = { version = "0.8" }
+# for leptos 0.7->axum 0.7
+# axum = { version = "0.8" }
+axum = { version = "0.7" }
+
 cfg-if = { version = "1" }
 console_error_panic_hook = { version = "0.1" }
 console_log = { version = "1" }
