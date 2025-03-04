@@ -35,9 +35,9 @@ struct Cli {
     sibase_innate: Option<PathBuf>,
 }
 
-static INNATE: std:sync::OnceLock<Innate> = std::sync::OnceLock::new();
+static INNATE: std::sync::OnceLock<Innate> = std::sync::OnceLock::new();
 
-pub(crate) innate()
+pub(crate) fn innate()
 {
     let cli = Cli::parse();
     println!("cli: {:?}", cli);
