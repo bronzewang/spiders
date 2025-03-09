@@ -1,6 +1,6 @@
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos_router::{components::{Route, Router, Routes, A}, StaticSegment};
 // use serde::{Deserialize, Serialize};
 // use thiserror::Error;
 use crate::page::{
@@ -22,13 +22,13 @@ pub fn App() -> impl IntoView {
     // let fallback = || view! { "Page not found." }.into_view();
 
     view! {
-        <Router trailing_slash=TrailingSlash::Exact>
+        <Router>
             <SiteHeader />
             <main>
-                <Routes>
-                    <Route path="/snooper" view=SnooperView />
-                    <Route path="/toolkit" view=ToolkitView />
-                    // <Route path="/*any" view=NotFound />
+                <Routes fallback=|| "Not found.">
+                    <Route path=StaticSegment("/snooper") view=SnooperView />
+                    <Route path=StaticSegment("/toolkit") view=ToolkitView />
+                    // <Route path=StaticSegment("/*any") view=NotFound />
                 </Routes>
             </main>
         </Router>

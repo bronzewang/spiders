@@ -22,7 +22,7 @@ struct AppState {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>>{
-    use leptos::*;
+    use leptos::prelude::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use spiders_dossier::{app::*, fallback::file_and_error_handler};
 
@@ -72,7 +72,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     //     .await
     //     .unwrap();
 
-    let conf = get_configuration(None).await.unwrap();
+    let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
