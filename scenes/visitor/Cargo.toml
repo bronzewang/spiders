@@ -1,7 +1,10 @@
 [package]
 name = "spiders-visitor"
 version = "0.0.0"
-edition = "2021"
+description = "Spiders visitor desktop"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
 
 [profile.release]
 codegen-units = 1

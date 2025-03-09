@@ -1,10 +1,10 @@
 [package]
 name = "spiders-scheme"
-version.workspace = true
+version = "0.0.0"
+description = "Spiders seaorm model"
 edition.workspace = true
 license.workspace = true
 authors.workspace = true
-description = "Spiders seaorm model"
 
 [dependencies]
 tribers = { version = "0" }

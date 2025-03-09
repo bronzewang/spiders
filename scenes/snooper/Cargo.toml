@@ -1,9 +1,10 @@
 [package]
 name = "spiders-snooper"
 version = "0.1.0"
-edition = "2021"
-authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com"]
 description = "menage snooper for tribers instance named spiders"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
 
 [dependencies]
 tribers = { version = "0" }

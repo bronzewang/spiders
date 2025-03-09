@@ -1,10 +1,10 @@
 [package]
 name = "spiders-dossier"
-authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com"]
+version = "0.0.0"
 description = "dossier menages for tribers isntance named spiders"
-version.workspace = true
 edition.workspace = true
 license.workspace = true
+authors.workspace = true
 
 [lib]
 crate-type = ["cdylib", "rlib" ]

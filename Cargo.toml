@@ -14,9 +14,9 @@ members = [
 [package]
 name = "spiders"
 version = "0.0.0"
-edition = "2021"
+edition = "2024"
 license = "MIT OR Apache-2.0"
-authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
+authors = ["Bronze Wang <cuprumwz@foxmail.com>"]
 description = "A embedded framework tribe use rust"
 
 # need to be applied only to wasm build
