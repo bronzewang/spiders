@@ -23,10 +23,9 @@ leptos_router = { workspace = true }
 leptos_axum = { workspace = true, optional = true }
 
 leptos-use = { workspace = true }
-# leptos-chartistry = { workspace = true }
-# leptos-struct-table = { workspace = true }
-# leptonic = { workspace = true }
+leptos-struct-table = { workspace = true }
 thaw = { workspace = true }
+charming = { workspace = true }
 
 axum = { workspace = true, optional = true }
 cfg-if = { workspace = true }
@@ -46,7 +45,6 @@ thiserror = { workspace = true }
 
 futures = { workspace = true }
 futures-util = { workspace = true }
-async-trait = { workspace = true }
 
 # console = { version = "0.15" }
 tracing = { workspace = true, optional = true }

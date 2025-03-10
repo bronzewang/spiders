@@ -56,6 +56,7 @@ leptos_axum = { version = "0.7" }
 leptos-use = { version = "0.15" }
 leptos-struct-table = { version = "0.14.0-beta2" }
 thaw = { version = "0.4" }
+charming = { version = "0.4" }
 
 # for leptos 0.7->axum 0.7
 # axum = { version = "0.8" }
@@ -74,7 +75,6 @@ lazy_static = { version = "1" }
 
 futures = { version = "0.3" }
 futures-util = { version = "0.3" }
-async-trait = { version = "0.1" }
 tokio = { version = "1", features = ["full"] }
 console = { version = "0.15" }
 tracing = { version = "0.1" }

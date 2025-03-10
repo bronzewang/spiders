@@ -1943,6 +1943,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "leptos-struct-table"
+version = "0.14.0-beta2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53bb425925d86978234af38f12e44571fa24790c4097c1ad840c7c99dcd9b3fd"
+dependencies = [
+ "leptos",
+ "leptos-struct-table-macro",
+ "leptos-use",
+ "send_wrapper",
+ "serde",
+ "thiserror 1.0.69",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "leptos-struct-table-macro"
+version = "0.13.0-beta2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5f532e98aabb7a52784f24a04612826d2c1f81ea70014709db92a8126bfe13b1"
+dependencies = [
+ "darling",
+ "heck 0.4.1",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.100",
+]
+
+[[package]]
 name = "leptos-use"
 version = "0.15.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3925,7 +3954,6 @@ name = "spiders-dossier"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "async-trait",
  "axum",
  "cfg-if",
  "clap",
@@ -3936,6 +3964,7 @@ dependencies = [
  "http",
  "hyper",
  "leptos",
+ "leptos-struct-table",
  "leptos-use",
  "leptos_axum",
  "leptos_meta",
