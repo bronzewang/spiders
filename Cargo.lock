@@ -4103,6 +4103,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "spiders-widget"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "futures",
+ "futures-util",
+ "leptos-struct-table",
+ "leptos-use",
+ "thaw",
+ "thiserror 1.0.69",
+ "tokio",
+ "tribers",
+]
+
+[[package]]
 name = "spin"
 version = "0.9.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"

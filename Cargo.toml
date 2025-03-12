@@ -3,7 +3,7 @@ resolver = "2"
 members = [
   "pieces/entity",
   "pieces/scheme",
-  #"pieces/widget",
+  "pieces/widget",
   # "pieces/bailor",
   # "scenes/spawner",
   "scenes/dossier",

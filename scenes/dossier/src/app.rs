@@ -26,6 +26,7 @@ pub fn App() -> impl IntoView {
             <SiteHeader />
             <main>
                 <Routes fallback=|| "Not found.">
+                    <Route path=StaticSegment("/") view=|| {"Hello Spiders"} />
                     <Route path=StaticSegment("/snooper") view=SnooperView />
                     <Route path=StaticSegment("/toolkit") view=ToolkitView />
                     // <Route path=StaticSegment("/*any") view=NotFound />
