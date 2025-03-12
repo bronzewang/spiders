@@ -4109,6 +4109,7 @@ dependencies = [
  "anyhow",
  "futures",
  "futures-util",
+ "leptos",
  "leptos-struct-table",
  "leptos-use",
  "thaw",
