@@ -1,0 +1,57 @@
+[package]
+name = "spiders-visitor"
+version = "0.0.0"
+description = "Spiders visitor desktop"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[profile.release]
+codegen-units = 1
+lto = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+leptos = { version = "0.6", features = ["csr"] }
+leptos_meta = { version = "0.6", features = ["csr"] }
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+serde-wasm-bindgen = "0.6"
+console_error_panic_hook = "0.1.7"
+# leptonic = { version = "0.5", features = ["full", "csr"] }
+# leptonic = { git = "https://github.com/lpotthast/leptonic.git", features = ["full", "csr"] }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3" }
+tracing-wasm = { version = "0.2" }
+leptos-struct-table = { version = "0.10", features = ["chrono"] }
+chrono = { version = "0.4" }
+console_log = { version = "1" }
+log = { version = "0.4" }
+
+anyhow = { version = "1" }
+thiserror = { version = "1" }
+
+# sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
+sea-orm = { version = "0.12" }
+sea-query = { version = "0.31.0-rc", default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"] }
+
+# tonic = { version = "0.11" }
+# prost = { version = "0.12" }
+# prost-types = { version = "0.12" }
+
+# [build-dependencies]
+# tonic-build = { version = "0.11" }
+# prost-build = { version = "0.12" }
+
+# [workspace]
+# members = ["src-tauri"]
+
+# # [package.metadata.leptonic]
+# # # REQUIRED: Leptonic's build-script will copy the Leptonic themes to this directory.
+# # style-dir = "style"
+
+# # # REQUIRED: Leptonic's build-script will copy static JS dependencies to this directory.
+# # js-dir = "public/js"
