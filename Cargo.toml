@@ -1,14 +1,14 @@
 [workspace]
 resolver = "2"
 members = [
-  "pieces/entity",
-  "pieces/scheme",
-  "pieces/widget",
+  # "pieces/entity",
+  # "pieces/scheme",
+  # "pieces/widget",
   # "pieces/bailor",
   # "spiders-spawner",
-  "spiders-dossier",
+  # "spiders-dossier",
   # "spiders-snooper",
-  # "spiders-visitor",
+  "spiders-visitor",
 ]
 
 [package]
