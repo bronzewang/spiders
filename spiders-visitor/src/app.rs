@@ -1,12 +1,12 @@
 pub struct App<'a> {
-    pub _title: &'a str,
+    pub title: &'a str,
     pub quit: bool,
 }
 
 impl<'a> App<'a> {
     pub fn new(title: &'a str) -> Self {
         App {
-            _title: title,
+            title: title,
             quit: false,
         }
     }
