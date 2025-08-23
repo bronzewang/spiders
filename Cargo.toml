@@ -5,10 +5,10 @@ members = [
   "pieces/scheme",
   "pieces/widget",
   # "pieces/bailor",
-  # "scenes/spawner",
-  "scenes/dossier",
-  # "scenes/snooper",
-  # "scenes/visitor",
+  # "spiders-spawner",
+  "spiders-dossier",
+  # "spiders-snooper",
+  # "spiders-visitor",
 ]
 
 [package]
@@ -25,19 +25,19 @@ codegen-units = 1
 lto = true
 opt-level = 'z'
 
-# Defines a size-optimized profile for the WASM bundle in release mode
-[profile.wasm-release]
-inherits = "release"
-opt-level = 'z'
-lto = true
-codegen-units = 1
-panic = "abort"
+# # Defines a size-optimized profile for the WASM bundle in release mode
+# [profile.wasm-release]
+# inherits = "release"
+# opt-level = 'z'
+# lto = true
+# codegen-units = 1
+# panic = "abort"
 
 [workspace.package]
 version = "0.0.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
-authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
+authors = ["Bronze Wang<cuprumwz@foxmail.com>"]
 
 [workspace.dependencies]
 tribers = { version = "0" }
@@ -47,31 +47,10 @@ spiders-scheme = { path = "./pieces/scheme" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
-leptos = { version = "0.7" }
-leptos_meta = { version = "0.7" }
-leptos_router = { version = "0.7" }
+ratatui = "0.29"
+crossterm = "0.29"
 
-leptos_axum = { version = "0.7" }
-
-leptos-use = { version = "0.15" }
-leptos-struct-table = { version = "0.14.0-beta2" }
-thaw = { version = "0.4" }
-charming = { version = "0.4" }
-
-# for leptos 0.7->axum 0.7
-# axum = { version = "0.8" }
-axum = { version = "0.7" }
-
-cfg-if = { version = "1" }
-console_error_panic_hook = { version = "0.1" }
-console_log = { version = "1" }
-log = { version = "0.4" }
-simple_logger = { version = "5" }
-wasm-bindgen = "0.2"
-
-anyhow = { version = "1" }
-thiserror = { version = "1" }
-lazy_static = { version = "1" }
+axum = { version = "0.8" }
 
 futures = { version = "0.3" }
 futures-util = { version = "0.3" }
@@ -81,12 +60,12 @@ tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 tracing-opentelemetry = { version = "0.24" }
 
-opentelemetry = { version = "0.23", features = ["metrics"] }
-opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
-opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
-opentelemetry-appender-log = { version = "0.4", default-features = false }
-opentelemetry-prometheus = { version = "0.16" }
-prometheus = { version = "0.13" }
+opentelemetry = { version = "0.30", features = ["metrics"] }
+opentelemetry_sdk = { version = "0.30", features = ["metrics", "rt-tokio"] }
+opentelemetry-stdout = { version = "0.30", features = ["metrics", "metrics"] }
+opentelemetry-appender-log = { version = "0.30", default-features = false }
+opentelemetry-prometheus = { version = "0.29" }
+# prometheus = { version = "0.14" }
 
 clap = { version = "4", features = ["derive", "env"] }
 
@@ -95,28 +74,48 @@ serde_json = { version = "1.0" }
 
 http = { version = "1.0"}
 hyper = { version = "1.0", features = ["full"] }
-tower = { version = "0.4", features = ["full"] }
-tower-http = { version = "0.5", features = ["full"] }
+tower = { version = "0.5", features = ["full"] }
+tower-http = { version = "0.6", features = ["full"] }
 
-nusb = { version = "0.1" }
+nusb = { version = "0.2" }
 
-sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"] }
-sea-orm = { version = "0.12" }
+sqlx = { version = "0.8", features = ["sqlite", "time", "runtime-tokio"] }
+sea-orm = { version = "1" }
 
-udev = { version = "0.7" }
+udev = { version = "0.9" }
 tokio-udev = { version = "0.9" }
 
 serialport = { version = "4" }
 tokio-serial = { version = "5" }
 
-# rumqttc = { version = "0.24" }
+tonic = { version = "0.14" }
+prost = { version = "0.14" }
+prost-types = { version = "0.14" }
+tonic-build = { version = "0.14" }
+prost-build = { version = "0.14" }
 
-tonic = { version = "0.12" }
-prost = { version = "0.12" }
-prost-types = { version = "0.12" }
-tonic-build = { version = "0.12" }
-prost-build = { version = "0.12" }
+anyhow = { version = "1" }
+thiserror = { version = "1" }
+lazy_static = { version = "1" }
 
-# [workspace.build-dependencies]
-# tonic-build = { version = "0.12" }
-# prost-build = { version = "0.12" }
+# leptos = { version = "0.7" }
+# leptos_meta = { version = "0.7" }
+# leptos_router = { version = "0.7" }
+
+# leptos_axum = { version = "0.7" }
+
+# leptos-use = { version = "0.15" }
+# leptos-struct-table = { version = "0.14.0-beta2" }
+# thaw = { version = "0.4" }
+# charming = { version = "0.4" }
+
+# # for leptos 0.7->axum 0.7
+# # axum = { version = "0.8" }
+# axum = { version = "0.7" }
+
+# cfg-if = { version = "1" }
+# console_error_panic_hook = { version = "0.1" }
+# console_log = { version = "1" }
+# log = { version = "0.4" }
+# simple_logger = { version = "5" }
+# wasm-bindgen = "0.2"
