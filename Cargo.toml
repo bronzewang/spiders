@@ -50,7 +50,13 @@ spiders-scheme = { path = "./pieces/scheme" }
 ratatui = "0.29"
 crossterm = "0.29"
 
+eyre = "0.6.8"
+dora-node-api = { version = "0.3", features = ["tracing"] }
+dora-operator-api = { version = "0.3", features = ["tracing"] }
+
 axum = { version = "0.8" }
+
+cfg-if = { version = "1" }
 
 futures = { version = "0.3" }
 futures-util = { version = "0.3" }
@@ -59,6 +65,7 @@ console = { version = "0.15" }
 tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 tracing-opentelemetry = { version = "0.24" }
+log = { version = "0.4" }
 
 opentelemetry = { version = "0.30", features = ["metrics"] }
 opentelemetry_sdk = { version = "0.30", features = ["metrics", "rt-tokio"] }
@@ -113,9 +120,7 @@ lazy_static = { version = "1" }
 # # axum = { version = "0.8" }
 # axum = { version = "0.7" }
 
-# cfg-if = { version = "1" }
 # console_error_panic_hook = { version = "0.1" }
 # console_log = { version = "1" }
-# log = { version = "0.4" }
 # simple_logger = { version = "5" }
 # wasm-bindgen = "0.2"

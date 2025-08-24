@@ -6,16 +6,80 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 
-[lib]
+# [lib]
 # crate-type = ["cdylib", "rlib" ]
 
 [dependencies]
-tribers = { workspace = true, optional = true }
+tribers = { workspace = true }
 
-spiders-entity = { workspace = true, optional = true }
-spiders-scheme = { workspace = true, optional = true }
+spiders-entity = { workspace = true }
+spiders-scheme = { workspace = true }
 # spiders-widget = { workspace = true }
-# spiders-bailor = { workspace = true, optional = true }
+# spiders-bailor = { workspace = true }
+
+ratatui = { workspace = true }
+crossterm = { workspace = true }
+
+eyre = { workspace = true }
+dora-node-api = { workspace = true }
+dora-operator-api = { workspace = true }
+
+axum = { workspace = true }
+
+cfg-if = { workspace = true }
+
+http = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+tower = { workspace = true, features = ["full"] }
+tower-http = { workspace = true, features = ["full"] }
+
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+lazy_static = { worksapce = true }
+
+futures = { workspace = true }
+futures-util = { workspace = true }
+
+# console = { version = "0.15" }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
+tracing-opentelemetry = { workspace = true }
+
+opentelemetry = { version = "0.23", features = ["metrics"] }
+opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
+opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
+opentelemetry-appender-log = { version = "0.4", default-features = false }
+opentelemetry-prometheus = { version = "0.16" }
+prometheus = { version = "0.13" }
+
+clap = { workspace = true }
+
+serde = { worksapce = true }
+serde_json = { workspace = true }
+
+hyper = { workspace = true, features = ["full"] }
+
+nusb = { workspace = true }
+
+sqlx = { workspace = true, features = ["sqlite", "time", "runtime-tokio"] }
+sea-orm = { workspace = true }
+
+udev = { workspace = true }
+tokio-udev = { workspace = true }
+
+serialport = { workspace = true }
+tokio-serial = { workspace = true }
+
+tonic = { workspace = true }
+# prost = { workspace = true }
+# prost-types = { workspace = true }
+
+[build-dependencies]
+tonic-build = { workspace = true }
+# prost-build = { workspace = true }
+
+[features]
+
 
 # leptos = { workspace = true }
 # leptos_meta = { workspace = true }
@@ -27,67 +91,8 @@ spiders-scheme = { workspace = true, optional = true }
 # leptos-struct-table = { workspace = true }
 # thaw = { workspace = true }
 # charming = { workspace = true }
-
-# axum = { workspace = true, optional = true }
-# cfg-if = { workspace = true }
+# wasm-bindgen = { workspace = true }
+# simple_logger = { workspace = true }
 # console_error_panic_hook = { workspace = true }
 # console_log = { workspace = true }
-# http = { workspace = true }
 # log = { workspace = true }
-# simple_logger = { workspace = true }
-# tokio = { workspace = true, optional = true, features = ["full"] }
-# tower = { workspace = true, optional = true, features = ["full"] }
-# tower-http = { workspace = true, optional = true, features = ["full"] }
-# wasm-bindgen = { workspace = true }
-
-# anyhow = { workspace = true }
-# thiserror = { workspace = true }
-# # lazy_static = { worksapce = true }
-
-# futures = { workspace = true }
-# futures-util = { workspace = true }
-
-# # console = { version = "0.15" }
-# tracing = { workspace = true, optional = true }
-# tracing-subscriber = { workspace = true, optional = true, features = ["env-filter"] }
-# tracing-opentelemetry = { workspace = true, optional = true }
-
-# opentelemetry = { version = "0.23", features = ["metrics"] }
-# opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
-# opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
-# opentelemetry-appender-log = { version = "0.4", default-features = false }
-# opentelemetry-prometheus = { version = "0.16" }
-# prometheus = { version = "0.13" }
-
-# clap = { workspace = true }
-
-# serde = { version = "1" }
-# serde_json = { version = "1.0" }
-
-# # serde = { worksapce = true }
-# # serde_json = { workspace = true }
-
-# hyper = { workspace = true, optional = true, features = ["full"] }
-
-# nusb = { workspace = true, optional = true }
-
-# sqlx = { workspace = true, optional = true, features = ["sqlite", "time", "runtime-tokio"] }
-# sea-orm = { workspace = true, optional = true }
-
-# udev = { workspace = true, optional = true }
-# tokio-udev = { workspace = true, optional = true }
-
-# serialport = { workspace = true, optional = true }
-# tokio-serial = { workspace = true, optional = true }
-
-# # rumqttc = { version = "0.24" }
-
-# tonic = { workspace = true, optional = true }
-# # prost = { workspace = true, optional = true }
-# # prost-types = { workspace = true, optional = true }
-
-# [build-dependencies]
-# tonic-build = { workspace = true, optional = true }
-# # prost-build = { workspace = true, optional = true }
-
-[features]

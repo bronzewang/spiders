@@ -1,14 +1,28 @@
-use axum::{response::Html, extract::State, routing::get, Router};
-use log::{error, Level};
 use opentelemetry_appender_log::OpenTelemetryLogBridge;
 use opentelemetry_sdk::{logs::{Config, LoggerProvider}, metrics::SdkMeterProvider};
 use prometheus::{Registry};
-use std::sync::Arc;
-use std::error::Error;
 use opentelemetry::{
     metrics::{Counter, Histogram, MeterProvider as _, Unit},
     KeyValue,
 };
+use std::sync::Arc;
+use std::error::Error;
+use std::net::SocketAddr;
+use log::{error, Level};
+
+use spiders_dossier::{app::*};
+
+pub mod greeter {
+	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
+}
+
+pub use greeter::*;
+
+#[derive(Debug, Parser)]
+struct Cli {
+    #[arg(short, long)]
+    addr: Option<SocketAddr>,
+}
 
 #[derive(Debug)]
 struct AppState {
@@ -16,15 +30,14 @@ struct AppState {
 	// snooper: Vec<Snooper>,
 
     registry: Registry,
-    http_counter: Counter<u64>,
-    http_body_gauge: Histogram<u64>,
+    tonic_counter: Counter<u64>,
+    tonic_body_gauge: Histogram<u64>,
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>>{
-    use leptos::prelude::*;
-    use leptos_axum::{generate_route_list, LeptosRoutes};
-    use spiders_dossier::{app::*, fallback::file_and_error_handler};
+async fn main() -> Result<(), Box<dyn Error>> {
+
+    let cli = Cli::parse();
 
 	// toolkit_init().await?;
 
@@ -55,51 +68,75 @@ async fn main() -> Result<(), Box<dyn Error>>{
 		// toolkit: Vec::new(),
 		// snooper: Vec::new(),
         registry: registry,
-        http_counter: meter
-            .u64_counter("http_requests_total")
-            .with_description("Total number of HTTP requests made.")
+        tonic_counter: meter
+            .u64_counter("tonic_requests_total")
+            .with_description("Total number of TONIC requests made.")
             .init(),
-        http_body_gauge: meter
-            .u64_histogram("example.http_response_size")
+        tonic_body_gauge: meter
+            .u64_histogram("example.tonic_response_size")
             .with_unit(Unit::new("By"))
-            .with_description("The metrics HTTP response sizes in bytes.")
+            .with_description("The metrics TONIC response sizes in bytes.")
             .init(),
     });
-    // build our application with a route
-    // let app = Router::new().route("/", get(handler)).with_state(state);
-    // let listener = tokio::net::TcpListener::bind(format!("127.0.0.1:{}",
-    //                                                      SPIDERS_WEB_PORT_BASE+innate.id))
-    //     .await
-    //     .unwrap();
 
-    let conf = get_configuration(None).unwrap();
-    let addr = conf.leptos_options.site_addr;
-    let leptos_options = conf.leptos_options;
-    // Generate the list of routes in your Leptos App
-    let routes = generate_route_list(App);
-
-	// use std::net::SocketAddr;
-    // let addr: SocketAddr = conf.leptos_options.site_addr.parse();
+    let addr = cli.addr.unwrap_or_else(|| "[::1]:29000".parse().unwrap());
 	// addr.set_port(addr.port()+innate.id);
 
-    let app = Router::new()
-        .route("/api", get(handler)).with_state(state)
-        .leptos_routes(&leptos_options, routes, || view! { <App/> })
-        .fallback(file_and_error_handler)
-        .with_state(leptos_options);
-    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
+    tokio::select! {
+        dora_result = dora_server(state) => {
+            println!("dora task completed with result: {}", dora_result);
+        },
+        tonic_result = tonic_server(state, addr) => {
+            println!("tonic task completed with result: {}", tonic_result);
+        },
+    }
 
-    // run it
-    error!("listening on {}", listener.local_addr().unwrap());
-    axum::serve(listener, app).await.unwrap();
+    println("spider dossier Doone!!!");
 
     Ok(())
 }
 
-async fn handler(State(state): State<Arc<AppState>>) -> Html<&'static str> {
-    error!("{:?}", state);
-    error!("{:?} {:?} {:?}", state.registry, state.http_counter, state.http_body_gauge);
+async fn dora_server(state: Arc<AppState>) {
+    let (_node, mut events) = DoraNode::init_from_env()?;
+    // let (_node, mut events) =
+    //     DoraNode::init_from_node_id(NodeId::from("spiders-dossier-dyn".to_string()))?;
 
-    error!("respond");
-    Html("<h1>Hello, World! I am Spiders.</h1>")
+    while let Some(event) = events.recv_async().await {
+        match event {
+            Event::Input {
+                id,
+                metadata: _,
+                data,
+            } => match id.as_str() {
+                // "message" => {
+                //     let received_string: &str =
+                //         TryFrom::try_from(&data).context("expected string message")?;
+                //     println!("sink received message: {received_string}");
+                //     if !received_string.starts_with("operator received random value ") {
+                //         bail!("unexpected message format (should start with 'operator received random value')")
+                //     }
+                //     if !received_string.ends_with(" ticks") {
+                //         bail!("unexpected message format (should end with 'ticks')")
+                //     }
+                // }
+                // other => eprintln!("Ignoring unexpected input `{other}`"),
+                other => println!("Input `{other}`"),
+            },
+            Event::Stop(_) => {
+                println!("Received stop");
+            }
+            Event::InputClosed { id } => {
+                println!("Input `{id}` was closed");
+            }
+            other => eprintln!("Received unexpected input: {other:?}"),
+        }
+    }
+}
+
+async fn tonic_server(state: Arc<AppState>, addr: SocketAddr) {
+    error!("listening on {}", addr);
+    Server::builder()
+        .add_service(GreeterServer::new(greeter))
+        .serve(addr)
+        .await?;
 }
