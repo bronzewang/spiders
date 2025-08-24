@@ -12,8 +12,8 @@ authors.workspace = true
 [dependencies]
 tribers = { workspace = true }
 
-spiders-entity = { workspace = true }
-spiders-scheme = { workspace = true }
+# spiders-entity = { workspace = true }
+# spiders-scheme = { workspace = true }
 # spiders-widget = { workspace = true }
 # spiders-bailor = { workspace = true }
 
@@ -35,7 +35,7 @@ tower-http = { workspace = true, features = ["full"] }
 
 anyhow = { workspace = true }
 thiserror = { workspace = true }
-lazy_static = { worksapce = true }
+lazy_static = { workspace = true }
 
 futures = { workspace = true }
 futures-util = { workspace = true }
@@ -44,17 +44,18 @@ futures-util = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true, features = ["env-filter"] }
 tracing-opentelemetry = { workspace = true }
+log = { workspace = true }
 
-opentelemetry = { version = "0.23", features = ["metrics"] }
-opentelemetry_sdk = { version = "0.23", features = ["metrics", "rt-tokio"] }
-opentelemetry-stdout = { version = "0.4", features = ["metrics", "metrics"] }
-opentelemetry-appender-log = { version = "0.4", default-features = false }
-opentelemetry-prometheus = { version = "0.16" }
-prometheus = { version = "0.13" }
+opentelemetry = { workspace = true, features = ["metrics"] }
+opentelemetry_sdk = { workspace = true, features = ["metrics", "rt-tokio"] }
+opentelemetry-stdout = { workspace = true, features = ["metrics", "metrics"] }
+opentelemetry-appender-log = { workspace = true, default-features = false }
+opentelemetry-prometheus = { workspace = true }
+prometheus = { workspace = true }
 
 clap = { workspace = true }
 
-serde = { worksapce = true }
+serde = { workspace = true }
 serde_json = { workspace = true }
 
 hyper = { workspace = true, features = ["full"] }
@@ -71,11 +72,13 @@ serialport = { workspace = true }
 tokio-serial = { workspace = true }
 
 tonic = { workspace = true }
-# prost = { workspace = true }
-# prost-types = { workspace = true }
+tonic-prost = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
 
 [build-dependencies]
 tonic-build = { workspace = true }
+tonic-prost-build = { workspace = true }
 # prost-build = { workspace = true }
 
 [features]

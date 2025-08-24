@@ -6,7 +6,7 @@ members = [
   # "pieces/widget",
   # "pieces/bailor",
   # "spiders-spawner",
-  # "spiders-dossier",
+  "spiders-dossier",
   # "spiders-snooper",
   "spiders-visitor",
 ]
@@ -42,8 +42,8 @@ authors = ["Bronze Wang<cuprumwz@foxmail.com>"]
 [workspace.dependencies]
 tribers = { version = "0" }
 
-spiders-entity = { path = "./pieces/entity" }
-spiders-scheme = { path = "./pieces/scheme" }
+# spiders-entity = { path = "./pieces/entity" }
+# spiders-scheme = { path = "./pieces/scheme" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
@@ -51,8 +51,8 @@ ratatui = "0.29"
 crossterm = "0.29"
 
 eyre = "0.6.8"
-dora-node-api = { version = "0.3", features = ["tracing"] }
-dora-operator-api = { version = "0.3", features = ["tracing"] }
+dora-node-api = { version = "0.3" }
+dora-operator-api = { version = "0.3" }
 
 axum = { version = "0.8" }
 
@@ -72,7 +72,7 @@ opentelemetry_sdk = { version = "0.30", features = ["metrics", "rt-tokio"] }
 opentelemetry-stdout = { version = "0.30", features = ["metrics", "metrics"] }
 opentelemetry-appender-log = { version = "0.30", default-features = false }
 opentelemetry-prometheus = { version = "0.29" }
-# prometheus = { version = "0.14" }
+prometheus = { version = "0.14" }
 
 clap = { version = "4", features = ["derive", "env"] }
 
@@ -96,9 +96,11 @@ serialport = { version = "4" }
 tokio-serial = { version = "5" }
 
 tonic = { version = "0.14" }
+tonic-prost = { version = "0.14" }
 prost = { version = "0.14" }
 prost-types = { version = "0.14" }
 tonic-build = { version = "0.14" }
+tonic-prost-build = { version = "0.14" }
 prost-build = { version = "0.14" }
 
 anyhow = { version = "1" }

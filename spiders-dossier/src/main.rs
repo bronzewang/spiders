@@ -1,10 +1,13 @@
+use clap::Parser;
+use dora_node_api::{DoraNode, Event};
 use opentelemetry_appender_log::OpenTelemetryLogBridge;
-use opentelemetry_sdk::{logs::{Config, LoggerProvider}, metrics::SdkMeterProvider};
+use opentelemetry_sdk::{logs::SdkLoggerProvider, metrics::SdkMeterProvider, Resource};
 use prometheus::{Registry};
 use opentelemetry::{
     metrics::{Counter, Histogram, MeterProvider as _, Unit},
     KeyValue,
 };
+use tonic::transport::Server;
 use std::sync::Arc;
 use std::error::Error;
 use std::net::SocketAddr;
@@ -41,13 +44,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 	// toolkit_init().await?;
 
-    let exporter = opentelemetry_stdout::LogExporterBuilder::default().build();
-    let logger_provider = LoggerProvider::builder()
-        .with_config(
-            Config::default().with_resource(opentelemetry_sdk::Resource::new(vec![KeyValue::new(
-                "service.name",
-                "spiders-dossier",
-            )]))
+    let exporter = opentelemetry_stdout::LogExporter::default();
+    let logger_provider = SdkLoggerProvider::builder()
+        .with_resource(
+            Resource::builder()
+                .with_service_name("log-appender-tracing-example")
+                .build(),
         )
         .with_simple_exporter(exporter)
         .build();
@@ -91,12 +93,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
         },
     }
 
-    println("spider dossier Doone!!!");
+    println!("spider dossier Doone!!!");
 
     Ok(())
 }
 
-async fn dora_server(state: Arc<AppState>) {
+async fn dora_server(state: Arc<AppState>) -> Result<(), Error> {
     let (_node, mut events) = DoraNode::init_from_env()?;
     // let (_node, mut events) =
     //     DoraNode::init_from_node_id(NodeId::from("spiders-dossier-dyn".to_string()))?;
@@ -131,12 +133,14 @@ async fn dora_server(state: Arc<AppState>) {
             other => eprintln!("Received unexpected input: {other:?}"),
         }
     }
+    Ok(());
 }
 
-async fn tonic_server(state: Arc<AppState>, addr: SocketAddr) {
+async fn tonic_server(state: Arc<AppState>, addr: SocketAddr) -> Result<(), Error> {
     error!("listening on {}", addr);
     Server::builder()
         .add_service(GreeterServer::new(greeter))
         .serve(addr)
         .await?;
+    Ok(());
 }
