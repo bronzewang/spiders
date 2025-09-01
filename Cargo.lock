@@ -4277,6 +4277,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serialport",
+ "spiders-scheme",
  "sqlx",
  "thiserror 1.0.69",
  "tokio",
@@ -4293,6 +4294,20 @@ dependencies = [
  "tracing-subscriber",
  "tribers",
  "udev 0.9.3",
+]
+
+[[package]]
+name = "spiders-scheme"
+version = "0.0.0"
+dependencies = [
+ "prost 0.14.1",
+ "prost-build",
+ "prost-types",
+ "tonic 0.14.1",
+ "tonic-build",
+ "tonic-prost",
+ "tonic-prost-build",
+ "tribers",
 ]
 
 [[package]]
@@ -4327,6 +4342,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serialport",
+ "spiders-scheme",
  "sqlx",
  "thiserror 1.0.69",
  "tokio",
@@ -4351,6 +4367,7 @@ version = "0.0.0"
 dependencies = [
  "clap",
  "ratatui",
+ "spiders-scheme",
 ]
 
 [[package]]

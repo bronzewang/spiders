@@ -9,16 +9,18 @@ authors.workspace = true
 [dependencies]
 tribers = { version = "0" }
 
-anyhow = { version = "1" }
-thiserror  = { version = "1" }
+# anyhow = { version = "1" }
+# thiserror  = { version = "1" }
 
-serde = { version = "1" }
-serde_json = { version = "1" }
+# serde = { version = "1" }
+# serde_json = { version = "1" }
 
-tonic = { version = "0.12" }
-prost = { version = "0.12" }
-prost-types = { version = "0.12" }
+prost = { workspace = true }
+prost-types = { workspace = true }
+tonic = { workspace = true }
+tonic-prost = { workspace = true }
 
 [build-dependencies]
-tonic-build = { version = "0.12" }
-prost-build = { version = "0.12" }
+prost-build = { workspace = true }
+tonic-build = { workspace = true }
+tonic-prost-build = { workspace = true }

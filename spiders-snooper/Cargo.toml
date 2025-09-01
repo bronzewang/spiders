@@ -9,9 +9,8 @@ authors.workspace = true
 [dependencies]
 tribers = { version = "0" }
 
+spiders-scheme = { workspace = true }
 # spiders-entity = { workspace = true }
-# spiders-scheme = { workspace = true }
-# spiders-scheme = { version = "0", path = "../../pieces/spiders-scheme" }
 # spiders-widget = { workspace = true }
 # spiders-bailor = { workspace = true }
 

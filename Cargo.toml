@@ -43,7 +43,7 @@ authors = ["Bronze Wang<cuprumwz@foxmail.com>"]
 tribers = { version = "0" }
 
 # spiders-entity = { path = "./pieces/entity" }
-# spiders-scheme = { path = "./pieces/scheme" }
+spiders-scheme = { path = "./pieces/scheme" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
@@ -95,13 +95,14 @@ tokio-udev = { version = "0.9" }
 serialport = { version = "4" }
 tokio-serial = { version = "5" }
 
-tonic = { version = "0.14" }
-tonic-prost = { version = "0.14" }
 prost = { version = "0.14" }
 prost-types = { version = "0.14" }
+tonic = { version = "0.14" }
+tonic-prost = { version = "0.14" }
+
+prost-build = { version = "0.14" }
 tonic-build = { version = "0.14" }
 tonic-prost-build = { version = "0.14" }
-prost-build = { version = "0.14" }
 
 anyhow = { version = "1" }
 thiserror = { version = "1" }

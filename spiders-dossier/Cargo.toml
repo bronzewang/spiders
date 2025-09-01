@@ -13,7 +13,7 @@ authors.workspace = true
 tribers = { workspace = true }
 
 # spiders-entity = { workspace = true }
-# spiders-scheme = { workspace = true }
+spiders-scheme = { workspace = true }
 # spiders-widget = { workspace = true }
 # spiders-bailor = { workspace = true }
 
