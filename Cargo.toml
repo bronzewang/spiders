@@ -7,7 +7,7 @@ members = [
   # "pieces/bailor",
   # "spiders-spawner",
   "spiders-dossier",
-  # "spiders-snooper",
+  "spiders-snooper",
   "spiders-visitor",
 ]
 

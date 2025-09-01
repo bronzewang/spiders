@@ -29,7 +29,7 @@ fn main() {
 
     // prost_wkt_build::add_serde(out, descriptor);
 
-    tonic_build::configure()
-        .compile(&["utils/greeter.proto"], &["utils"])
+    tonic_prost_build::configure()
+        .compile_protos(&["utils/greeter.proto"], &["utils"])
         .unwrap();
 }

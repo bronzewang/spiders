@@ -1,9 +1,9 @@
 use std::{fs::File, io::BufReader, path::{Path, PathBuf}};
 use clap::Parser;
 use serde::Deserialize;
-use sigrok::config::{config_items, Configurable};
-use sigrok::data::{Datafeed, Logic};
-use sigrok::{Session, Sigrok};
+// use sigrok::config::{config_items, Configurable};
+// use sigrok::data::{Datafeed, Logic};
+// use sigrok::{Session, Sigrok};
 
 pub mod greeter {
 	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
@@ -55,33 +55,33 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let innate: Innate = serde_json::from_reader(innate_reader)?;
     println!("innate {:?}", innate);
 
-    let ctx = Sigrok::new()?;
-    let ses = Session::new(&ctx)?;
+    // let ctx = Sigrok::new()?;
+    // let ses = Session::new(&ctx)?;
 
-    let driver = ctx.drivers().into_iter().find(|x| x.name() == "demo").unwrap();
+    // let driver = ctx.drivers().into_iter().find(|x| x.name() == "demo").unwrap();
 
-    let driver = driver.init()?;
+    // let driver = driver.init()?;
 
-    for device in driver.scan(None)? {
-        ses.add_device(&device)?;
-        device.config_set(config_items::LimitSamples, &64)?;
+    // for device in driver.scan(None)? {
+    //     ses.add_device(&device)?;
+    //     device.config_set(config_items::LimitSamples, &64)?;
 
-        if let Some(group) = device.channel_groups().get(0) {
-            group.config_set(config_items::PatternMode, "sigrok")?;
-        }
+    //     if let Some(group) = device.channel_groups().get(0) {
+    //         group.config_set(config_items::PatternMode, "sigrok")?;
+    //     }
 
-        device.config_set(config_items::SampleRate, &1_000_000)?;
-    }
+    //     device.config_set(config_items::SampleRate, &1_000_000)?;
+    // }
 
-    ses.start(None, |_, data| match data {
-        Datafeed::Logic(Logic { unit_size, data }) => {
-            let _ = unit_size;
-            for byte in data {
-                println!("{}", format!("{:08b}", byte).replace("0", " "));
-            }
-        }
-        _ => {}
-    })?;
+    // ses.start(None, |_, data| match data {
+    //     Datafeed::Logic(Logic { unit_size, data }) => {
+    //         let _ = unit_size;
+    //         for byte in data {
+    //             println!("{}", format!("{:08b}", byte).replace("0", " "));
+    //         }
+    //     }
+    //     _ => {}
+    // })?;
 
     Ok(())
 }
