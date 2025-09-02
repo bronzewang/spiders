@@ -7,17 +7,17 @@ license.workspace = true
 authors.workspace = true
 
 [dependencies]
-# tribers = { version = "0" }
+tribers = { workspace = true }
 
-anyhow = { version = "1" }
-thiserror  = { version = "1" }
+anyhow = { workspace = true }
+thiserror  = { workspace = true }
 
-serde = { version = "1" }
-serde_json = { version = "1" }
+serde = { workspace = true }
+serde_json = { workspace = true }
 
-sqlx = { version = "0.7", features = ["sqlite", "time", "runtime-tokio"], optional = true }
+sqlx = { version = "0.8", optional = true, features = ["sqlite", "time", "runtime-tokio"] }
 sea-orm = { version = "1", optional = true }
-sea-query = { version = "0.32", default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"], optional = true }
+sea-query = { version = "1.0.0-rc.12", optional = true, default-features = false, features = ["thread-safe", "hashable-value", "backend-mysql", "backend-postgres", "backend-sqlite"] }
 
 # toasty = { git = "https://github.com/tokio-rs/toasty.git", optional = true }
 # toasty-sqlite = { git = "https://github.com/tokio-rs/toasty.git", optional = true }

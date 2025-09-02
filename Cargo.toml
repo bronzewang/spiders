@@ -43,7 +43,7 @@ authors = ["Bronze Wang<cuprumwz@foxmail.com>"]
 tribers = { version = "0" }
 
 spiders-scheme = { path = "./pieces/scheme" }
-# spiders-entity = { path = "./pieces/entity" }
+spiders-entity = { path = "./pieces/entity" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
@@ -86,8 +86,8 @@ tower-http = { version = "0.6", features = ["full"] }
 
 nusb = { version = "0.2" }
 
-sqlx = { version = "0.8", features = ["sqlite", "time", "runtime-tokio"] }
-sea-orm = { version = "1" }
+# sqlx = { version = "0.8", features = ["sqlite", "time", "runtime-tokio"] }
+# sea-orm = { version = "1" }
 
 udev = { version = "0.9" }
 tokio-udev = { version = "0.9" }

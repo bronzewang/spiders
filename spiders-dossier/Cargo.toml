@@ -62,8 +62,8 @@ hyper = { workspace = true, features = ["full"] }
 
 nusb = { workspace = true }
 
-sqlx = { workspace = true, features = ["sqlite", "time", "runtime-tokio"] }
-sea-orm = { workspace = true }
+# sqlx = { workspace = true, features = ["sqlite", "time", "runtime-tokio"] }
+# sea-orm = { workspace = true }
 
 udev = { workspace = true }
 tokio-udev = { workspace = true }

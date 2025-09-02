@@ -10,7 +10,7 @@ authors.workspace = true
 tribers = { version = "0" }
 
 spiders-scheme = { workspace = true }
-# spiders-entity = { workspace = true }
+spiders-entity = { workspace = true }
 # spiders-widget = { workspace = true }
 # spiders-bailor = { workspace = true }
 
@@ -59,8 +59,8 @@ hyper = { workspace = true, features = ["full"] }
 
 nusb = { workspace = true }
 
-sqlx = { workspace = true, features = ["sqlite", "time", "runtime-tokio"] }
-sea-orm = { workspace = true }
+# sqlx = { workspace = true, features = ["sqlite", "time", "runtime-tokio"] }
+# sea-orm = { workspace = true }
 
 udev = { workspace = true }
 tokio-udev = { workspace = true }
