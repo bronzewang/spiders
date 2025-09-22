@@ -19,12 +19,15 @@ spiders-entity = { workspace = true }
 
 clap = { workspace = true }
 ratatui = { workspace = true }
+crossterm = { workspace = true }
 tui-tree-widget = { workspace = true }
 
 rat-salsa = { workspace = true }
 rat-widget = { workspace = true }
 rat-theme2 = { workspace = true }
 rat-dialog = { workspace = true }
+
+anyhow = { workspace = true }
 
 # leptos = { version = "0.6", features = ["csr"] }
 # leptos_meta = { version = "0.6", features = ["csr"] }

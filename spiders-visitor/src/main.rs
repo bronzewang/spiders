@@ -1,76 +1,71 @@
-use std::error::Error;
-use std::io;
-use std::time::{Duration, Instant};
-use clap::Parser;
-use ratatui::crossterm::event::Event;
-use ratatui::Terminal;
-use ratatui::prelude::{Backend, CrosstermBackend};
-use ratatui::crossterm::terminal::{disable_raw_mode, LeaveAlternateScreen};
-use ratatui::crossterm::{event::{self, DisableMouseCapture, EnableMouseCapture, KeyCode}, execute, terminal::{enable_raw_mode, EnterAlternateScreen}};
+use anyhow::Error;
+use global::VEvent;
+use global::GlobalCtx;
+use rat_salsa::Control;
+use rat_salsa::{poll::{PollCrossterm, PollQuit, PollRendered, PollTasks, PollTimers}, run_tui, RunConfig};
+use ratatui::{buffer::Buffer, layout::Rect};
 
-use app::App;
+mod global;
 
-mod ui;
-mod app;
+fn main() -> Result<(), Error>{
 
-#[derive(Debug, Parser)]
-struct Cli {
-    #[arg(short, long, default_value_t = 100)]
-    rate: u64,
-}
+    let mut global_ctx = GlobalCtx::new();
+    let mut scenery_state = SceneryState::default();
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let cli = Cli::parse();
-    println!("Spiders Visitor startup");
-    let rate = Duration::from_millis(cli.rate);
-    enable_raw_mode()?;
-    let mut stdout = io::stdout();
-    execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
-    let backend = CrosstermBackend::new(stdout);
-    let mut terminal = Terminal::new(backend)?;
-
-    let app = App::new("Spiders Visitor");
-    let result = run(&mut terminal, app, rate);
-
-    disable_raw_mode()?;
-    execute!(terminal.backend_mut(),
-             LeaveAlternateScreen,
-             DisableMouseCapture)?;
-
-    if let Err(err) = result {
-        println!("{err:?}");
-    }
+    run_tui(
+        init,
+        render,
+        event,
+        error,
+        &mut global_ctx,
+        &mut scenery_state,
+        RunConfig::default()?
+            .poll(PollCrossterm)
+            .poll(PollTasks::default())
+            .poll(PollTimers::default())
+            .poll(PollRendered)
+            .poll(PollQuit),
+    )?;
 
     Ok(())
 }
 
-fn run<B: Backend>(
-    terminal: &mut Terminal<B>,
-    mut app: App,
-    rate: Duration
-) -> Result<(), Box<dyn Error>> {
-    let mut last_tick = Instant::now();
-    loop {
-        terminal.draw(|frame| ui::render(frame, &mut app))?;
+fn init(
+    _scenery_state: &mut SceneryState, //
+    _global_ctx: &mut GlobalCtx,
+) -> Result<(), Error>
+{
+    Ok(())
+}
 
-        let timeout = rate.saturating_sub(last_tick.elapsed());
-        if !event::poll(timeout)? {
-            app.on_tick();
-            last_tick = Instant::now();
-            continue;
-        }
-        if let Event::Key(key) = event::read()? {
-            match key.code {
-                KeyCode::Char('h') | KeyCode::Left => app.on_left(),
-                KeyCode::Char('j') | KeyCode::Down => app.on_down(),
-                KeyCode::Char('k') | KeyCode::Up => app.on_up(),
-                KeyCode::Char('l') | KeyCode::Right => app.on_right(),
-                KeyCode::Char(c) => app.on_key(c),
-                _ => (),
-            }
-        }
-        if app.quit {
-            return Ok(())
-        }
-    }
+fn render(
+    _area: Rect, //
+    _buf: &mut Buffer,
+    _scenery_state: &mut SceneryState,
+    _global_ctx: &mut GlobalCtx,
+) -> Result<(), Error>
+{
+    Ok(())
+}
+
+fn event(
+    _event: &VEvent, //
+    _scenery_state: &mut SceneryState,
+    _global_ctx: &mut GlobalCtx,
+) -> Result<Control<VEvent>, Error>
+{
+    Ok(Control::Continue)
+}
+
+fn error(
+    _error: Error, //
+    _scenery_state: &mut SceneryState,
+    _global_ctx: &mut GlobalCtx,
+) -> Result<Control<VEvent>, Error>
+{
+    Ok(Control::Continue)
+}
+
+#[derive(Debug, Default)]
+struct SceneryState {
 }
