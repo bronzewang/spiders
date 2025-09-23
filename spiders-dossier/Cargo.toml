@@ -18,7 +18,7 @@ spiders-scheme = { workspace = true }
 # spiders-bailor = { workspace = true }
 
 ratatui = { workspace = true }
-crossterm = { workspace = true }
+# crossterm = { workspace = true }
 
 eyre = { workspace = true }
 dora-node-api = { workspace = true }

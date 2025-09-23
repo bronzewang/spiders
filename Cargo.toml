@@ -48,7 +48,8 @@ spiders-entity = { path = "./pieces/entity" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
 ratatui = "0.29"
-crossterm = "0.29"
+# crossterm = "0.29"
+crossterm = "0.28"
 tui-tree-widget = "0.23"
 
 rat-salsa = "2"

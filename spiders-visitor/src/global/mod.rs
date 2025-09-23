@@ -11,11 +11,11 @@ pub struct GlobalContext {
 }
 
 impl SalsaContext<VisEvent, Error> for GlobalContext {
-    fn set_salsa_context(&mut self, app_context: SalsaAppContext<VisEvent, Error>) {
+    fn set_salsa_ctx(&mut self, app_context: SalsaAppContext<VisEvent, Error>) {
         self.context = app_context;
     }
 
-    fn salsa_context(&self) -> &SalsaAppContext<VisEvent, Error> {
+    fn salsa_ctx(&self) -> &SalsaAppContext<VisEvent, Error> {
         &self.context
     }
 }
