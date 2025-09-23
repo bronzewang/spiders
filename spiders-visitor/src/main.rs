@@ -1,10 +1,9 @@
 use anyhow::Error;
-use global::VisEvent;
 use global::GlobalContext;
+use global::VisEvent;
 use rat_salsa::Control;
 use rat_salsa::{
-    RunConfig,
-    SalsaContext,
+    RunConfig, SalsaContext,
     poll::{PollCrossterm, PollQuit, PollRendered, PollTasks, PollTimers},
     run_tui,
 };
@@ -16,16 +15,16 @@ use rat_widget::focus::HasFocus;
 use rat_widget::menu::MenuBuilder;
 use rat_widget::menu::MenuStructure;
 use rat_widget::menu::Menubar;
-use rat_widget::menu::MenubarState;
 use rat_widget::menu::MenubarLine;
 use rat_widget::menu::MenubarPopup;
+use rat_widget::menu::MenubarState;
 use rat_widget::popup::Placement;
 use rat_widget::statusline::StatusLine;
 use ratatui::layout::Constraint;
 use ratatui::layout::Layout;
+use ratatui::prelude::StatefulWidget;
 use ratatui::widgets::Block;
 use ratatui::{buffer::Buffer, layout::Rect};
-use ratatui::prelude::StatefulWidget;
 
 mod global;
 
@@ -67,16 +66,9 @@ fn render(
     state: &mut SceneryState,
     context: &mut GlobalContext,
 ) -> Result<(), Error> {
-    let l = Layout::vertical([
-        Constraint::Fill(1),
-        Constraint::Length(1),
-    ])
-    .split(area);
-    let s = Layout::horizontal([
-        Constraint::Percentage(69),
-        Constraint::Percentage(31),
-    ])
-    .split(l[1]);
+    let l = Layout::vertical([Constraint::Fill(1), Constraint::Length(1)]).split(area);
+    let s =
+        Layout::horizontal([Constraint::Percentage(69), Constraint::Percentage(31)]).split(l[1]);
 
     let menu_struct = Menu {};
     let (menu, menu_popup) = Menubar::new(&menu_struct)
@@ -107,9 +99,7 @@ fn event(
             });
         }
         VisEvent::Quit => {
-            try_flow!(
-                Control::Quit
-            );
+            try_flow!(Control::Quit);
         }
         _ => {}
     }
@@ -125,13 +115,11 @@ fn error(
 }
 
 #[derive(Debug)]
-struct Menu {
-}
+struct Menu {}
 
 impl<'a> MenuStructure<'a> for Menu {
     fn menus(&'a self, menu: &mut MenuBuilder<'a>) {
-        menu.item_parsed("_View")
-            .item_parsed("_Quit");
+        menu.item_parsed("_View").item_parsed("_Quit");
     }
 
     fn submenu(&'a self, n: usize, submenu: &mut MenuBuilder<'a>) {
@@ -159,8 +147,7 @@ impl Default for SceneryState {
 
 impl HasFocus for SceneryState {
     /// Build the focus-structure for the container.
-    fn build(&self, _builder: &mut FocusBuilder) {
-    }
+    fn build(&self, _builder: &mut FocusBuilder) {}
 
     /// Access to the flag for the rest.
     fn focus(&self) -> FocusFlag {
