@@ -1,14 +1,17 @@
 use anyhow::Error;
-use global::VisEvent;
 use global::GlobalCtx;
+use global::VisEvent;
 use rat_salsa::Control;
-use rat_salsa::{poll::{PollCrossterm, PollQuit, PollRendered, PollTasks, PollTimers}, run_tui, RunConfig};
+use rat_salsa::{
+    RunConfig,
+    poll::{PollCrossterm, PollQuit, PollRendered, PollTasks, PollTimers},
+    run_tui,
+};
 use ratatui::{buffer::Buffer, layout::Rect};
 
 mod global;
 
 fn main() -> Result<(), Error> {
-
     let mut global_ctx = GlobalCtx::new();
     let mut scenery_state = SceneryState::default();
 
@@ -33,8 +36,7 @@ fn main() -> Result<(), Error> {
 fn init(
     _scenery_state: &mut SceneryState, //
     _global_ctx: &mut GlobalCtx,
-) -> Result<(), Error>
-{
+) -> Result<(), Error> {
     Ok(())
 }
 
@@ -43,8 +45,7 @@ fn render(
     _buf: &mut Buffer,
     _scenery_state: &mut SceneryState,
     _global_ctx: &mut GlobalCtx,
-) -> Result<(), Error>
-{
+) -> Result<(), Error> {
     Ok(())
 }
 
@@ -52,8 +53,7 @@ fn event(
     _event: &VisEvent, //
     _scenery_state: &mut SceneryState,
     _global_ctx: &mut GlobalCtx,
-) -> Result<Control<VisEvent>, Error>
-{
+) -> Result<Control<VisEvent>, Error> {
     Ok(Control::Continue)
 }
 
@@ -61,11 +61,9 @@ fn error(
     _error: Error, //
     _scenery_state: &mut SceneryState,
     _global_ctx: &mut GlobalCtx,
-) -> Result<Control<VisEvent>, Error>
-{
+) -> Result<Control<VisEvent>, Error> {
     Ok(Control::Continue)
 }
 
 #[derive(Debug, Default)]
-struct SceneryState {
-}
+struct SceneryState {}

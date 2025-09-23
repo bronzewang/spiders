@@ -1,5 +1,5 @@
 // use leptos::prelude::*;
-// 
+//
 // #[component]
 // pub fn SnooperView() -> impl IntoView {
 //     view! {

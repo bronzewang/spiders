@@ -2,21 +2,21 @@ use clap::Parser;
 use dora_node_api::{DoraNode, Event};
 // use opentelemetry_appender_log::OpenTelemetryLogBridge;
 // use opentelemetry_sdk::{logs::SdkLoggerProvider, metrics::SdkMeterProvider, Resource};
-use prometheus::{Registry};
+use prometheus::Registry;
 // use opentelemetry::{
 //     metrics::{Counter, Histogram, MeterProvider as _, Unit},
 //     KeyValue,
 // };
-use tonic::transport::Server;
-use std::sync::Arc;
+use log::{Level, error};
 use std::error::Error;
 use std::net::SocketAddr;
-use log::{error, Level};
+use std::sync::Arc;
+use tonic::transport::Server;
 
 // use spiders_dossier::{app::*};
 
 pub mod greeter {
-	include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
+    include!(concat!(env!("OUT_DIR"), "/greeter.rs"));
 }
 
 pub use greeter::*;
@@ -32,9 +32,8 @@ struct Cli {
 
 #[derive(Debug)]
 struct AppState {
-	// toolkit: Vec<Toolkit>,
-	// snooper: Vec<Snooper>,
-
+    // toolkit: Vec<Toolkit>,
+    // snooper: Vec<Snooper>,
     registry: Registry,
     // tonic_counter: Counter<u64>,
     // tonic_body_gauge: Histogram<u64>,
@@ -42,10 +41,9 @@ struct AppState {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-
     let cli = Cli::parse();
 
-	// toolkit_init().await?;
+    // toolkit_init().await?;
 
     // let exporter = opentelemetry_stdout::LogExporter::default();
     // let logger_provider = SdkLoggerProvider::builder()
@@ -70,8 +68,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     // let meter = provider.meter("spiders-dossier");
     let state = Arc::new(AppState {
-		// toolkit: Vec::new(),
-		// snooper: Vec::new(),
+        // toolkit: Vec::new(),
+        // snooper: Vec::new(),
         registry: registry,
         // tonic_counter: meter
         //     .u64_counter("tonic_requests_total")
@@ -85,7 +83,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     });
 
     let addr = cli.addr.unwrap_or_else(|| "[::1]:29000".parse().unwrap());
-	// addr.set_port(addr.port()+innate.id);
+    // addr.set_port(addr.port()+innate.id);
 
     tokio::select! {
         dora_result = dora_server(state.clone()) => {
@@ -166,7 +164,9 @@ impl Greeter for MyGreeter {
         &self,
         request: tonic::Request<ToolkitListPing>,
     ) -> std::result::Result<tonic::Response<ToolkitListPong>, tonic::Status> {
-        Ok(tonic::Response::new(ToolkitListPong { toolkits: Vec::new() }))
+        Ok(tonic::Response::new(ToolkitListPong {
+            toolkits: Vec::new(),
+        }))
     }
 
     /// Snooper列表
@@ -174,7 +174,9 @@ impl Greeter for MyGreeter {
         &self,
         request: tonic::Request<SnooperListPing>,
     ) -> std::result::Result<tonic::Response<SnooperListPong>, tonic::Status> {
-        Ok(tonic::Response::new(SnooperListPong { snoopers: Vec::new() }))
+        Ok(tonic::Response::new(SnooperListPong {
+            snoopers: Vec::new(),
+        }))
     }
 }
 

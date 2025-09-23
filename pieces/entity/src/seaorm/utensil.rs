@@ -7,12 +7,11 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-	pub config: String,
+    pub config: String,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {
-}
+pub enum Relation {}
 
 // impl RelationTrait for Relation {
 //     fn def(&self) -> RelationDef {

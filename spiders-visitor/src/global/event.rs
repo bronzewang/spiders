@@ -1,4 +1,7 @@
-use rat_salsa::{event::{QuitEvent, RenderedEvent}, timer::TimeOut};
+use rat_salsa::{
+    event::{QuitEvent, RenderedEvent},
+    timer::TimeOut,
+};
 
 pub enum VisEvent {
     #[allow(dead_code)]

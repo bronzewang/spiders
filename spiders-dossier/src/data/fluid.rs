@@ -5,8 +5,8 @@
 // 驱动方式
 #[allow(dead_code)]
 pub enum Means {
-	Serial,
-	Sigrok,
+    Serial,
+    Sigrok,
 }
 
 // async fn toolkit_init() -> Result<(), Box<dyn Error>>
