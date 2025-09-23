@@ -1,6 +1,6 @@
 use rat_salsa::{event::{QuitEvent, RenderedEvent}, timer::TimeOut};
 
-pub enum VEvent {
+pub enum VisEvent {
     #[allow(dead_code)]
     Event(ratatui::crossterm::event::Event),
     #[allow(dead_code)]
@@ -9,25 +9,25 @@ pub enum VEvent {
     Quit,
 }
 
-impl From<RenderedEvent> for VEvent {
+impl From<RenderedEvent> for VisEvent {
     fn from(_: RenderedEvent) -> Self {
         Self::Rendered
     }
 }
 
-impl From<QuitEvent> for VEvent {
+impl From<QuitEvent> for VisEvent {
     fn from(_: QuitEvent) -> Self {
         Self::Quit
     }
 }
 
-impl From<TimeOut> for VEvent {
+impl From<TimeOut> for VisEvent {
     fn from(value: TimeOut) -> Self {
         Self::TimeOut(value)
     }
 }
 
-impl From<ratatui::crossterm::event::Event> for VEvent {
+impl From<ratatui::crossterm::event::Event> for VisEvent {
     fn from(value: ratatui::crossterm::event::Event) -> Self {
         Self::Event(value)
     }

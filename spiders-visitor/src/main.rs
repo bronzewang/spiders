@@ -1,5 +1,5 @@
 use anyhow::Error;
-use global::VEvent;
+use global::VisEvent;
 use global::GlobalCtx;
 use rat_salsa::Control;
 use rat_salsa::{poll::{PollCrossterm, PollQuit, PollRendered, PollTasks, PollTimers}, run_tui, RunConfig};
@@ -7,7 +7,7 @@ use ratatui::{buffer::Buffer, layout::Rect};
 
 mod global;
 
-fn main() -> Result<(), Error>{
+fn main() -> Result<(), Error> {
 
     let mut global_ctx = GlobalCtx::new();
     let mut scenery_state = SceneryState::default();
@@ -49,10 +49,10 @@ fn render(
 }
 
 fn event(
-    _event: &VEvent, //
+    _event: &VisEvent, //
     _scenery_state: &mut SceneryState,
     _global_ctx: &mut GlobalCtx,
-) -> Result<Control<VEvent>, Error>
+) -> Result<Control<VisEvent>, Error>
 {
     Ok(Control::Continue)
 }
@@ -61,7 +61,7 @@ fn error(
     _error: Error, //
     _scenery_state: &mut SceneryState,
     _global_ctx: &mut GlobalCtx,
-) -> Result<Control<VEvent>, Error>
+) -> Result<Control<VisEvent>, Error>
 {
     Ok(Control::Continue)
 }
