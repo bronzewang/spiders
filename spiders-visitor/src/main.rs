@@ -15,11 +15,11 @@ use rat_widget::focus::HasFocus;
 use rat_widget::menu::MenuBuilder;
 use rat_widget::menu::MenuStructure;
 use rat_widget::menu::Menubar;
-use rat_widget::menu::MenubarLine;
-use rat_widget::menu::MenubarPopup;
+// use rat_widget::menu::MenubarLine;
+// use rat_widget::menu::MenubarPopup;
 use rat_widget::menu::MenubarState;
 use rat_widget::popup::Placement;
-use rat_widget::statusline::StatusLine;
+// use rat_widget::statusline::StatusLine;
 use ratatui::layout::Constraint;
 use ratatui::layout::Layout;
 use ratatui::prelude::StatefulWidget;
@@ -64,7 +64,7 @@ fn render(
     area: Rect, //
     buf: &mut Buffer,
     state: &mut SceneryState,
-    context: &mut GlobalContext,
+    _context: &mut GlobalContext,
 ) -> Result<(), Error> {
     let l = Layout::vertical([Constraint::Fill(1), Constraint::Length(1)]).split(area);
     let s =
@@ -83,13 +83,15 @@ fn render(
     //     .layout([Constraint::Fill(1), Constraint::Length(14)]);
     // status.render(s[1], buf, &mut state.status);
 
+    menu_popup.render(s[0], buf, &mut state.menu);
+
     Ok(())
 }
 
 fn event(
     event: &VisEvent, //
-    state: &mut SceneryState,
-    context: &mut GlobalContext,
+    _state: &mut SceneryState,
+    _context: &mut GlobalContext,
 ) -> Result<Control<VisEvent>, Error> {
     match event {
         VisEvent::Event(event) => {
