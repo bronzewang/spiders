@@ -1,6 +1,6 @@
 use anyhow::Error;
-use global::GlobalCtx;
 use global::VisEvent;
+use global::GlobalContext;
 use rat_salsa::Control;
 use rat_salsa::{
     RunConfig,
@@ -12,16 +12,16 @@ use ratatui::{buffer::Buffer, layout::Rect};
 mod global;
 
 fn main() -> Result<(), Error> {
-    let mut global_ctx = GlobalCtx::new();
-    let mut scenery_state = SceneryState::default();
+    let mut context = GlobalContext::new();
+    let mut state = SceneryState::default();
 
     run_tui(
         init,
         render,
         event,
         error,
-        &mut global_ctx,
-        &mut scenery_state,
+        &mut context,
+        &mut state,
         RunConfig::default()?
             .poll(PollCrossterm)
             .poll(PollTasks::default())
@@ -34,8 +34,8 @@ fn main() -> Result<(), Error> {
 }
 
 fn init(
-    _scenery_state: &mut SceneryState, //
-    _global_ctx: &mut GlobalCtx,
+    _state: &mut SceneryState, //
+    _context: &mut GlobalContext,
 ) -> Result<(), Error> {
     Ok(())
 }
@@ -43,24 +43,24 @@ fn init(
 fn render(
     _area: Rect, //
     _buf: &mut Buffer,
-    _scenery_state: &mut SceneryState,
-    _global_ctx: &mut GlobalCtx,
+    _state: &mut SceneryState,
+    _context: &mut GlobalContext,
 ) -> Result<(), Error> {
     Ok(())
 }
 
 fn event(
     _event: &VisEvent, //
-    _scenery_state: &mut SceneryState,
-    _global_ctx: &mut GlobalCtx,
+    _state: &mut SceneryState,
+    _context: &mut GlobalContext,
 ) -> Result<Control<VisEvent>, Error> {
     Ok(Control::Continue)
 }
 
 fn error(
     _error: Error, //
-    _scenery_state: &mut SceneryState,
-    _global_ctx: &mut GlobalCtx,
+    _state: &mut SceneryState,
+    _context: &mut GlobalContext,
 ) -> Result<Control<VisEvent>, Error> {
     Ok(Control::Continue)
 }
