@@ -1,0 +1,4 @@
+[submodule "flakes/dora"]
+	path = flakes/dora
+	url = git@github.com:bronzewang/dora.git
+	branch = spiders
