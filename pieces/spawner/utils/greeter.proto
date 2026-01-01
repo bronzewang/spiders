@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package greeter;
+
+// 对外的api接口，类似restful接口
+service Greeter {
+	// 登签
+    rpc Sign(SignPing) returns (SignPong) {}
+
+	// 维持
+    rpc Keep(KeepPing) returns (KeepPong) {}
+
+	// 私语
+    // rpc Whisper(WhisperPing) returns (WhisperPong) {}
+
+	// 家庭信息
+	rpc Lustrum(LustrumPing) returns (LustrumPong) {}
+}
+
+// 签到信息
+message SignPing {
+	// 时间戳
+	int64 timestamp = 1;
+	string name = 2;
+}
+message SignPong {
+	// 时间戳
+	int64 timestamp = 1;
+}
+
+// 维持信息
+message KeepPing {
+	int64 timestamp = 1;
+}
+message KeepPong {
+	int64 timestamp = 1;
+}
+
+// 家庭普查信息
+message LustrumPing {
+	// 时间戳
+	int64 timestamp = 1;
+	// 家庭信息提供者ID
+	int32 id = 2;
+	// 家庭信息列表
+	repeated Menage menages = 3;
+}
+message LustrumPong {
+	// 时间戳
+	int64 timestamp = 1;
+}
+
+// 本地程序信息
+message Native {
+	string binary = 1;
+}
+
+// 本地程序信息
+message Assist {
+	int32 none = 1;
+}
+
+// 家庭信息
+message Menage {
+	// 家庭名称
+	string name = 1;
+	// 家庭组, 0表示原生组, 方便家庭信息来源.
+	int32 group = 2;
+	// 家庭等级
+	int32 grade = 3;
+	// 本机程序信息
+	Native native = 4;
+	// 辅助程序信息
+	Assist assist = 5;
+}

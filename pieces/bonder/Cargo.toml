@@ -1,0 +1,11 @@
+[package]
+name = "tribers-bonder"
+version = "0.0.1"
+edition = "2021"
+authors = ["Cuprum Wangzuo <cuprumwz@foxmail.com>"]
+description = "A embedded framework tribe use rust--sub module bonder"
+license = "MIT OR Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
