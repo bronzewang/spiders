@@ -2,3 +2,6 @@
 	path = flakes/dora
 	url = git@github.com:bronzewang/dora.git
 	branch = spiders
+[submodule "flakes/tribers"]
+	path = flakes/tribers
+	url = git@github.com:bronzewang/tribers.git
