@@ -60,7 +60,8 @@ cargo binstall aichat
 ## iamb
 cargo binstall iamb
 ## remmina的默认配置
-
+## 安装emoji字体
+sudo apt install fonts-noto
 # 桥接机
 ## 加快网络访问设置，隧道和镜像
 ## 更新安装基本软件
