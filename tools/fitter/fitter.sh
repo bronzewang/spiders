@@ -29,6 +29,8 @@ sudo apt install fcitx5-pinyin
 ## 更新安装基本软件
 ## rust环境
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+cp tools/fitter/config/cargo/config.toml ~/.cargo/
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 ## 安装vim
 sudo apt install vim
 ## 安装及配置yazi
@@ -36,13 +38,23 @@ sudo apt install vim
 ## 安装及配置helix
 https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64.AppImage
 sudo apt install -f helix_25.7.1-1_amd64.deb
+cargo binstall helix
 ## 安装及配置zellij
+cargo binstall zellij
+sudo apt install xclip
 ## 安装trans-shell
 sudo apt install translate-shell
 ## 配置浏览器的默认网址
 ## lazygit
+##//sudo apt install lazygit   //ubuntu25.10
+## gitu
+cargo binstall gitu
 ## shellharden
+cargo binstall shellharden
 ## 安装aichat,并加入agent配自
+cargo binstall aichat
+## iamb
+cargo binstall iamb
 
 # 桥接机
 ## 加快网络访问设置，隧道和镜像
