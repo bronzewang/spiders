@@ -1,0 +1,30 @@
+[source.crates-io]
+# replace-with = 'tuna'  # 可替换为 ustc/aliyun/rsproxy
+replace-with = 'aliyun'
+# replace-with = 'rsproxy'
+
+# 清华大学镜像源（完整git索引）
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+
+# 中国科学技术大学镜像源（完整git索引）
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+
+# 阿里云镜像源（稀疏索引，**需要 cargo >= 1.68**，速度最快）[^40^]
+[source.aliyun]
+registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
+
+# 字节跳动镜像源（稀疏索引，**需要 cargo >= 1.68**）[^37^]
+[source.rsproxy]
+registry = "sparse+https://rsproxy.cn/crates.io-index/"
+
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true  # 使用系统git，避免纯Rust实现可能的问题
+
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
+
