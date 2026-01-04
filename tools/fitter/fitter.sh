@@ -27,6 +27,7 @@ sudo apt install fcitx5-pinyin
 
 ## 加快网络访问设置，隧道和镜像
 ## 更新安装基本软件
+sudo apt install tree
 ## rust环境
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 cp tools/fitter/config/cargo/config.toml ~/.cargo/
@@ -45,6 +46,7 @@ sudo apt install xclip
 ## 安装trans-shell
 sudo apt install translate-shell
 ## 配置浏览器的默认网址
+## http://192.168.3.1/cgi-bin/luci/|http://192.168.3.8/cgi-bin/luci/|https://192.168.3.10:8006/#v1:0:18:4:::::::|https://192.168.3.11:8006/#v1:0:18:4:::::::|http://192.168.3.20:5666/login|http://192.168.3.21:5666/|https://192.168.3.30/bronze/spiders-fitter-bronze|http://192.168.3.47:3000/?orgId=1&from=now-6h&to=now&timezone=browser|https://chat.deepseek.com/|https://fanyi.baidu.com/mtpe-individual/transText#/
 ## lazygit
 ##//sudo apt install lazygit   //ubuntu25.10
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
@@ -60,8 +62,12 @@ cargo binstall aichat
 ## iamb
 cargo binstall iamb
 ## remmina的默认配置
+sudo apt install remmina remmina-plugin-rdp remmina-plugin-vnc
 ## 安装emoji字体
 sudo apt install fonts-noto
+## 安装zed
+curl -f https://zed.dev/install.sh | sh
+
 # 桥接机
 ## 加快网络访问设置，隧道和镜像
 ## 更新安装基本软件
