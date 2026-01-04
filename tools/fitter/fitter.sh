@@ -36,6 +36,7 @@ curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-
 sudo apt install vim
 ## 安装及配置yazi
 ## 安装及配置emacs
+sudo apt install emacs
 ## 安装及配置helix
 https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64.AppImage
 sudo apt install -f helix_25.7.1-1_amd64.deb
@@ -61,6 +62,7 @@ cargo binstall shellharden
 cargo binstall aichat
 ## iamb
 cargo binstall iamb
+~/.config/iamb/config.toml
 ## remmina的默认配置
 sudo apt install remmina remmina-plugin-rdp remmina-plugin-vnc
 ## 安装emoji字体
@@ -71,5 +73,7 @@ curl -f https://zed.dev/install.sh | sh
 # 桥接机
 ## 加快网络访问设置，隧道和镜像
 ## 更新安装基本软件
-## 安装最新的spider环境
-
+## 安装最新的spiders环境
+## 询问程序版本信息，dora安装信息
+## 是否创建安装软件服务器
+## systemd服务配置

@@ -1,14 +1,15 @@
 [workspace]
-resolver = "2"
+edition = "2024"
 members = [
   # "pieces/entity",
   # "pieces/scheme",
   # "pieces/widget",
   # "pieces/bailor",
-  # "spiders-spawner",
-  "spiders-dossier",
-  "spiders-snooper",
-  "spiders-visitor",
+  # "scenes/spawner",
+  # "scenes/browser",
+  "scenes/dossier",
+  "scenes/snooper",
+  "scenes/visitor",
 ]
 
 [package]
