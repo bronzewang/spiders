@@ -69,6 +69,8 @@ sudo apt install remmina remmina-plugin-rdp remmina-plugin-vnc
 sudo apt install fonts-noto
 ## 安装zed
 curl -f https://zed.dev/install.sh | sh
+## 安装rpi-imager
+sudo apt install rpi-imager
 
 # 桥接机
 ## 加快网络访问设置，隧道和镜像
