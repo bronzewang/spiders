@@ -73,6 +73,60 @@ curl -f https://zed.dev/install.sh | sh
 sudo apt install rpi-imager
 
 # 桥接机
+## 开启ssh服务, 理论上应该烧录镜像时开启
+sudo systemctl enable ssh
+sudo systemctl start ssh
+## 更改主机名称
+#!/bin/bash
+# 保存為 change_hostname.sh，然後執行: sudo bash change_hostname.sh
+
+# 設置新主機名
+NEW_HOSTNAME="raspberrypi-new"
+
+echo "正在將主機名更改為: $NEW_HOSTNAME"
+
+# 停止可能衝突的服務
+sudo systemctl stop avahi-daemon 2>/dev/null
+
+# 1. 更新 /etc/hostname
+echo "$NEW_HOSTNAME" | sudo tee /etc/hostname > /dev/null
+
+# 2. 更新 /etc/hosts
+if grep -q "127.0.1.1" /etc/hosts; then
+    sudo sed -i "s/127.0.1.1.*/127.0.1.1\t$NEW_HOSTNAME/" /etc/hosts
+else
+    echo "127.0.1.1\t$NEW_HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
+fi
+
+# 3. 使用 hostnamectl 設定
+sudo hostnamectl set-hostname "$NEW_HOSTNAME"
+
+# 4. 更新 Avahi (mDNS/Bonjour) 設定
+if [ -f /etc/avahi/avahi-daemon.conf ]; then
+    sudo sed -i "s/^#host-name=.*/host-name=$NEW_HOSTNAME/" /etc/avahi/avahi-daemon.conf
+    sudo sed -i "s/^host-name=.*/host-name=$NEW_HOSTNAME/" /etc/avahi/avahi-daemon.conf
+fi
+
+# 5. 重新啟動相關服務
+sudo systemctl restart systemd-hostnamed
+sudo systemctl restart avahi-daemon 2>/dev/null
+sudo systemctl restart dhcpcd 2>/dev/null
+
+# 6. 更新當前 shell 的環境變數
+export HOSTNAME="$NEW_HOSTNAME"
+
+echo "========================================"
+echo "主機名更改完成！"
+echo "新主機名: $NEW_HOSTNAME"
+echo ""
+echo "驗證命令:"
+echo "  hostname          # 顯示當前主機名"
+echo "  hostnamectl       # 顯示詳細主機名資訊"
+echo "  cat /etc/hostname # 檢查設定文件"
+echo ""
+echo "建議重新啟動系統使所有服務生效:"
+echo "  sudo reboot"
+echo "========================================"
 ## 加快网络访问设置，隧道和镜像
 ## 更新安装基本软件
 ## 安装最新的spiders环境
