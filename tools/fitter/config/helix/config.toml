@@ -63,6 +63,10 @@ W = ["move_next_long_word_start", "yank_main_selection_to_clipboard", "collapse_
 esc = ["collapse_selection", "normal_mode"]
 
 [keys.select]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+# G = "goto_file_end"
 "{" = ["extend_to_line_bounds", "goto_prev_paragraph"]
 "}" = ["extend_to_line_bounds", "goto_next_paragraph"]
 "%" = "match_brackets"
@@ -77,6 +81,8 @@ P = "paste_clipboard_before"
 
 u = ["switch_to_lowercase", "collapse_selection", "normal_mode"]
 U = ["switch_to_uppercase", "collapse_selection", "normal_mode"]
+
+esc = ["collapse_selection", "keep_primary_selection"]
 
 # # helix-vim推荐============================================================
 # [keys.normal]
