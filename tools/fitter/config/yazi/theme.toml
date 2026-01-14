@@ -1,0 +1,28 @@
+[file_size]
+# 启用文件大小显示
+show = true
+
+# 设置显示格式
+# format = "auto"  # 可选值: "auto", "bytes", "kb", "mb", "gb", "tb"
+format = "{mode} {permissions} {size:>10} {modified:12} {name}"
+
+# 文件列表样式
+style = { fg = "white" }
+
+# 选中文案样式
+selected = { fg = "black", bg = "blue" }
+hovered = { underline = true }
+
+# 预览区域配置
+preview = { size = "50%" }
+
+[filetype]
+# 根据扩展名设置颜色
+rules = [
+    { mime = "image/*", fg = "magenta" },
+    { mime = "video/*", fg = "cyan" },
+    { mime = "audio/*", fg = "green" },
+    { name = "*.txt", fg = "yellow" },
+    { name = "*.md", fg = "blue" },
+]
+ 

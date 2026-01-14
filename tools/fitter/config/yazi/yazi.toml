@@ -1,0 +1,29 @@
+[manager]
+# 显示设置
+show_hidden = false
+show_symlink = true
+sort_by = "modified"
+sort_reverse = false
+sort_dir_first = true
+sort_case_insensitive = true
+
+# 列设置
+columns = ["name", "size", "modified", "permissions"]
+
+## 5. **自定义列显示**
+# columns = [
+#     { name = "name", width = "50%" },
+#     { name = "size", width = "15%", align = "right" },
+#     { name = "modified", width = "25%" },
+#     { name = "permissions", width = "10%" }
+# ]
+
+# 文件大小显示格式
+[preview]
+# 文件大小显示
+max_size = 10485760  # 10MB
+
+[theme]
+# 使用自定义主题
+path = "~/.config/yazi/theme.toml"
+
