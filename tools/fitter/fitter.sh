@@ -28,6 +28,7 @@ sudo apt install fcitx5-pinyin
 ## 加快网络访问设置，隧道和镜像
 ## 更新安装基本软件
 sudo apt install tree
+sudo apt install build-essential
 ## rust环境
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 cp tools/fitter/config/cargo/config.toml ~/.cargo/
@@ -35,6 +36,9 @@ curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-
 ## 安装vim
 sudo apt install vim
 ## 安装及配置yazi
+sudo snap install yazi --classic
+## fonts emoj
+sudo apt install fonts-firacode
 ## 安装及配置emacs
 sudo apt install emacs
 ## 安装及配置helix
@@ -63,10 +67,26 @@ cargo binstall aichat
 ## iamb
 cargo binstall iamb
 ~/.config/iamb/config.toml
+## tokei
+cargo binstall tokei
 ## remmina的默认配置
 sudo apt install remmina remmina-plugin-rdp remmina-plugin-vnc
 ## 安装emoji字体
 sudo apt install fonts-noto
+### Ubuntu 24.04 需要这些字体
+sudo apt update
+sudo apt install -y \
+    fonts-noto-color-emoji \
+    fonts-noto-cjk \
+    fonts-dejavu-core \
+    fonts-symbola \
+    fonts-jetbrains-mono
+### 或者安装Nerd Fonts（包含图标字体）
+cd /tmp
+wget -O nerd-fonts.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+unzip -d ~/.local/share/fonts nerd-fonts.zip
+fc-cache -fv
+### 配置文件首选项，自定义字体 nerd font,选择第一个
 ## 安装zed
 curl -f https://zed.dev/install.sh | sh
 ## 安装rpi-imager
