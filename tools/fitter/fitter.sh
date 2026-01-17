@@ -91,6 +91,8 @@ fc-cache -fv
 curl -f https://zed.dev/install.sh | sh
 ## 安装rpi-imager
 sudo apt install rpi-imager
+## sqlite
+sudo apt install sqlite3
 
 # 桥接机
 ## 开启ssh服务, 理论上应该烧录镜像时开启
