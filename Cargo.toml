@@ -8,7 +8,7 @@ members = [
   # "scenes/spawner",
   # "scenes/browser",
   "scenes/dossier",
-  # "scenes/snooper",
+  "scenes/snooper",
   # "scenes/visitor",
 ]
 
@@ -35,10 +35,16 @@ authors = ["Bronze Wang<cuprumwz@foxmail.com>"]
 [workspace.dependencies]
 tribers = { version = "0" }
 
-spiders-scheme = { path = "./pieces/scheme" }
+# spiders-scheme = { path = "./pieces/scheme" }
 # spiders-entity = { path = "./pieces/entity" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
+
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7", features = ["full"] }
+tokio-stream = { version = "0.1" }
+
+tarpc = { version = "0.37", features = ["full"] }
 
 # ratatui = "0.29"
 # # crossterm = "0.29"
@@ -58,7 +64,7 @@ spiders-scheme = { path = "./pieces/scheme" }
 
 # futures = { version = "0.3" }
 # futures-util = { version = "0.3" }
-# tokio = { version = "1", features = ["full"] }
+
 # console = { version = "0.15" }
 # tracing = { version = "0.1" }
 # tracing-subscriber = { version = "0.3", features = ["env-filter"] }

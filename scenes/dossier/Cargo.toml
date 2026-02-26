@@ -9,10 +9,16 @@ authors.workspace = true
 [dependencies]
 tribers = { workspace = true }
 
-spiders-scheme = { workspace = true }
+# spiders-scheme = { workspace = true }
 # spiders-entity = { workspace = true }
 # spiders-widget = { workspace = true }
 # spiders-bailor = { workspace = true }
+
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+tokio-stream = { workspace = true }
+
+tarpc = { workspace = true }
 
 # ratatui = { workspace = true }
 # # crossterm = { workspace = true }
@@ -24,7 +30,6 @@ spiders-scheme = { workspace = true }
 # cfg-if = { workspace = true }
 
 # http = { workspace = true }
-# tokio = { workspace = true, features = ["full"] }
 # tower = { workspace = true, features = ["full"] }
 # tower-http = { workspace = true, features = ["full"] }
 
