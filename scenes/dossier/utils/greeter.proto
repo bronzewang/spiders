@@ -7,7 +7,7 @@ service Greeter {
     // 登签
     rpc Sign(SignPing) returns (SignPong) {}
 
-	// 链路维持
+	  // 链路维持
     rpc Keep(KeepPing) returns (KeepPong) {}
 
     // Toolkit列表
@@ -25,25 +25,25 @@ service Greeter {
 
 // 签到信息
 message SignPing {
-	int64 timestamp = 1;
-	string name = 2;
+    int64 timestamp = 1;
+    string name = 2;
 }
 message SignPong {
-	int64 timestamp = 1;
+    int64 timestamp = 1;
 }
 
 // 维持信息
 message KeepPing {
-	int64 timestamp = 1;
-	string name = 2;
+    int64 timestamp = 1;
+    string name = 2;
 }
 message KeepPong {
-	int64 timestamp = 1;
+    int64 timestamp = 1;
 }
 
 message ToolkitListPing {
-	int64 timestamp = 1;
-	string name = 2;
+    int64 timestamp = 1;
+    string name = 2;
 }
 
 message ToolkitListPong {
@@ -51,8 +51,8 @@ message ToolkitListPong {
 }
 
 message SnooperListPing {
-	int64 timestamp = 1;
-	string name = 2;
+    int64 timestamp = 1;
+    string name = 2;
 }
 
 message SnooperListPong {
@@ -60,14 +60,14 @@ message SnooperListPong {
 }
 
 message Toolkit {
-	int32 id = 1;
-	string name = 2;
-	// /dev/ttyUSB1:115200或192.168.1.100:8000
-	string path = 3;
+    int32 id = 1;
+    string name = 2;
+    // /dev/ttyUSB1:115200或192.168.1.100:8000
+    string path = 3;
 }
 
 message Snooper {
-	int32 id = 1;
-	string name = 2;
-	repeated Toolkit toolkits = 5;
+    int32 id = 1;
+    string name = 2;
+    repeated Toolkit toolkits = 5;
 }

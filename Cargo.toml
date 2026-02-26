@@ -8,8 +8,8 @@ members = [
   # "scenes/spawner",
   # "scenes/browser",
   "scenes/dossier",
-  "scenes/snooper",
-  "scenes/visitor",
+  # "scenes/snooper",
+  # "scenes/visitor",
 ]
 
 [package]
@@ -26,14 +26,6 @@ codegen-units = 1
 lto = true
 opt-level = 'z'
 
-# # Defines a size-optimized profile for the WASM bundle in release mode
-# [profile.wasm-release]
-# inherits = "release"
-# opt-level = 'z'
-# lto = true
-# codegen-units = 1
-# panic = "abort"
-
 [workspace.package]
 version = "0.0.0"
 edition = "2024"
@@ -44,94 +36,72 @@ authors = ["Bronze Wang<cuprumwz@foxmail.com>"]
 tribers = { version = "0" }
 
 spiders-scheme = { path = "./pieces/scheme" }
-spiders-entity = { path = "./pieces/entity" }
+# spiders-entity = { path = "./pieces/entity" }
 # spiders-widget = { path = "./pieces/widget" }
 # spiders-bailor = { path = "./pieces/bailor" }
 
-ratatui = "0.29"
-# crossterm = "0.29"
-crossterm = "0.28"
-tui-tree-widget = "0.23"
+# ratatui = "0.29"
+# # crossterm = "0.29"
+# crossterm = "0.28"
+# tui-tree-widget = "0.23"
 
-rat-salsa = "2"
-rat-dialog = "0.4"
-rat-widget = "1.1"
-rat-theme2 = "1.1"
+# rat-salsa = "2"
+# rat-dialog = "0.4"
+# rat-widget = "1.1"
+# rat-theme2 = "1.1"
 
-eyre = "0.6.8"
-dora-node-api = { version = "0.3" }
-dora-operator-api = { version = "0.3" }
+# eyre = "0.6.8"
 
-axum = { version = "0.8" }
+# axum = { version = "0.8" }
 
-cfg-if = { version = "1" }
+# cfg-if = { version = "1" }
 
-futures = { version = "0.3" }
-futures-util = { version = "0.3" }
-tokio = { version = "1", features = ["full"] }
-console = { version = "0.15" }
-tracing = { version = "0.1" }
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-tracing-opentelemetry = { version = "0.24" }
-log = { version = "0.4" }
+# futures = { version = "0.3" }
+# futures-util = { version = "0.3" }
+# tokio = { version = "1", features = ["full"] }
+# console = { version = "0.15" }
+# tracing = { version = "0.1" }
+# tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# tracing-opentelemetry = { version = "0.24" }
+# log = { version = "0.4" }
 
-opentelemetry = { version = "0.30", features = ["metrics"] }
-opentelemetry_sdk = { version = "0.30", features = ["metrics", "rt-tokio"] }
-opentelemetry-stdout = { version = "0.30", features = ["metrics", "metrics"] }
-opentelemetry-appender-log = { version = "0.30", default-features = false }
-opentelemetry-prometheus = { version = "0.29" }
-prometheus = { version = "0.14" }
+# opentelemetry = { version = "0.30", features = ["metrics"] }
+# opentelemetry_sdk = { version = "0.30", features = ["metrics", "rt-tokio"] }
+# opentelemetry-stdout = { version = "0.30", features = ["metrics", "metrics"] }
+# opentelemetry-appender-log = { version = "0.30", default-features = false }
+# opentelemetry-prometheus = { version = "0.29" }
+# prometheus = { version = "0.14" }
 
-clap = { version = "4", features = ["derive", "env"] }
+# clap = { version = "4", features = ["derive", "env"] }
 
-serde = { version = "1" }
-serde_json = { version = "1" }
+# serde = { version = "1" }
+# serde_json = { version = "1" }
 
-http = { version = "1.0"}
-hyper = { version = "1.0", features = ["full"] }
-tower = { version = "0.5", features = ["full"] }
-tower-http = { version = "0.6", features = ["full"] }
+# http = { version = "1.0"}
+# hyper = { version = "1.0", features = ["full"] }
+# tower = { version = "0.5", features = ["full"] }
+# tower-http = { version = "0.6", features = ["full"] }
 
-nusb = { version = "0.2" }
+# nusb = { version = "0.2" }
 
-# sqlx = { version = "0.8", features = ["sqlite", "time", "runtime-tokio"] }
-# sea-orm = { version = "1" }
+# # sqlx = { version = "0.8", features = ["sqlite", "time", "runtime-tokio"] }
+# # sea-orm = { version = "1" }
 
-udev = { version = "0.9" }
-tokio-udev = { version = "0.9" }
+# udev = { version = "0.9" }
+# tokio-udev = { version = "0.9" }
 
-serialport = { version = "4" }
-tokio-serial = { version = "5" }
+# serialport = { version = "4" }
+# tokio-serial = { version = "5" }
 
-prost = { version = "0.14" }
-prost-types = { version = "0.14" }
-tonic = { version = "0.14" }
-tonic-prost = { version = "0.14" }
+# prost = { version = "0.14" }
+# prost-types = { version = "0.14" }
+# tonic = { version = "0.14" }
+# tonic-prost = { version = "0.14" }
 
-prost-build = { version = "0.14" }
-tonic-build = { version = "0.14" }
-tonic-prost-build = { version = "0.14" }
+# prost-build = { version = "0.14" }
+# tonic-build = { version = "0.14" }
+# tonic-prost-build = { version = "0.14" }
 
-anyhow = { version = "1" }
-thiserror = { version = "1" }
-lazy_static = { version = "1" }
-
-# leptos = { version = "0.7" }
-# leptos_meta = { version = "0.7" }
-# leptos_router = { version = "0.7" }
-
-# leptos_axum = { version = "0.7" }
-
-# leptos-use = { version = "0.15" }
-# leptos-struct-table = { version = "0.14.0-beta2" }
-# thaw = { version = "0.4" }
-# charming = { version = "0.4" }
-
-# # for leptos 0.7->axum 0.7
-# # axum = { version = "0.8" }
-# axum = { version = "0.7" }
-
-# console_error_panic_hook = { version = "0.1" }
-# console_log = { version = "1" }
-# simple_logger = { version = "5" }
-# wasm-bindgen = "0.2"
+# anyhow = { version = "1" }
+# thiserror = { version = "1" }
+# lazy_static = { version = "1" }
