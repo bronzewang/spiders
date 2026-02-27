@@ -20,6 +20,11 @@ tokio-stream = { workspace = true }
 
 tarpc = { workspace = true }
 
+anyhow = { workspace = true }
+
+futures = { workspace = true }
+futures-util = { workspace = true }
+
 # ratatui = { workspace = true }
 # # crossterm = { workspace = true }
 
@@ -33,7 +38,6 @@ tarpc = { workspace = true }
 # tower = { workspace = true, features = ["full"] }
 # tower-http = { workspace = true, features = ["full"] }
 
-# anyhow = { workspace = true }
 # thiserror = { workspace = true }
 # lazy_static = { workspace = true }
 

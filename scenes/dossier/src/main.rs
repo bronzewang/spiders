@@ -1,32 +1,55 @@
-use std::{fs::remove_file, path::PathBuf};
+use std::path::PathBuf;
 
-use tarpc::context::Context;
+use anyhow::Result;
+use futures::StreamExt;
+use tarpc::{
+    context::Context,
+    server::{BaseChannel, Channel},
+    tokio_serde::formats::Bincode,
+};
 use tokio::net::UnixListener;
+use tokio_util::codec::LengthDelimitedCodec;
+// use futures::prelude::*;
 
 #[tarpc::service]
 trait DossierService {
     async fn handshake();
 }
 
+#[derive(Clone)]
 struct Service;
 
 impl DossierService for Service {
-    async fn handshake(self, _context: Context) -> () {
-        todo!()
-    }
+    async fn handshake(self, _context: Context) -> () {}
 }
 
 #[tokio::main]
-async fn main() -> ! {
+async fn main() -> Result<()> {
     let listener_path = PathBuf::from("/tmp").join("spiders");
-    let _ = tokio::fs::create_dir_all(&listener_path);
+    // tokio::fs::create_dir_all(&listener_path).await?;
+    tokio::fs::create_dir_all(&listener_path).await?;
     let listener_addr = listener_path
         .join(env!("CARGO_PKG_NAME"))
         .with_extension("sock");
-    let _ = tokio::fs::remove_file(&listener_addr);
+    tokio::fs::remove_file(&listener_addr).await?;
 
     let listener = UnixListener::bind(listener_addr).unwrap();
-    loop {}
+    let codec_builder = LengthDelimitedCodec::builder();
+    loop {
+        let (conn, _addr) = listener.accept().await?;
+        let framed = codec_builder.new_framed(conn);
+        let transport = tarpc::serde_transport::new(framed, Bincode::default());
+
+        let channel_fut = BaseChannel::with_defaults(transport)
+            .execute(Service.serve())
+            .for_each(spawn);
+
+        tokio::spawn(channel_fut);
+    }
+
+    async fn spawn(fut: impl Future<Output = ()> + Send + 'static) {
+        tokio::spawn(fut);
+    }
 }
 
 // use clap::Parser;

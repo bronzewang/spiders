@@ -20,6 +20,10 @@ tokio-stream = { workspace = true }
 
 tarpc = { workspace = true }
 
+anyhow = { workspace = true }
+
+futures = { workspace = true }
+futures-util = { workspace = true }
 
 # tribers = { version = "0" }
 
