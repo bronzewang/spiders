@@ -13,20 +13,19 @@ members = [
 
 [package]
 name = "spiders"
-version = "0.0.0"
-edition = "2024"
-license = "MIT OR Apache-2.0"
-authors = ["Bronze Wang <cuprumwz@foxmail.com>"]
+version = "0.0.1"
 description = "A embedded framework tribe use rust"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
 
-# need to be applied only to wasm build
 [profile.release]
 codegen-units = 1
 lto = true
 opt-level = 'z'
 
 [workspace.package]
-version = "0.0.0"
+version = "0.0.1"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 authors = ["Bronze Wang<cuprumwz@foxmail.com>"]

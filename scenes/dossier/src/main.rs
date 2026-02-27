@@ -26,7 +26,6 @@ impl DossierService for Service {
 #[tokio::main]
 async fn main() -> Result<()> {
     let listener_path = PathBuf::from("/tmp").join("spiders");
-    // tokio::fs::create_dir_all(&listener_path).await?;
     tokio::fs::create_dir_all(&listener_path).await?;
     let listener_addr = listener_path
         .join(env!("CARGO_PKG_NAME"))
