@@ -49,6 +49,23 @@ anyhow = { version = "1" }
 futures = { version = "0.3" }
 futures-util = { version = "0.3" }
 
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3" }
+tracing-opentelemetry = { version = "0.32" }
+
+console-subscriber = { version = "0.5" }
+
+opentelemetry = { version = "0.31" }
+opentelemetry_sdk = { version = "0.31" }
+opentelemetry-otlp = { version = "0.31" }
+opentelemetry-stdout = { version = "0.31" }
+opentelemetry-appender-tracing = { version = "0.31" }
+# opentelemetry-semantic-conventions = { version = "0.31", features = [
+#     "semconv_experimental",
+# ] }
+
+opentelemetry-system-metrics = { version = "0.31" }
+
 # ratatui = "0.29"
 # # crossterm = "0.29"
 # crossterm = "0.28"

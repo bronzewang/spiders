@@ -1,7 +1,11 @@
 use std::path::PathBuf;
 
 use anyhow::Result;
+use console_subscriber::ConsoleLayer;
 use futures::StreamExt;
+use opentelemetry_sdk::{
+    logs::SdkLoggerProvider, metrics::SdkMeterProvider, trace::SdkTracerProvider,
+};
 use tarpc::{
     context::Context,
     server::{BaseChannel, Channel},
@@ -9,6 +13,7 @@ use tarpc::{
 };
 use tokio::net::UnixListener;
 use tokio_util::codec::LengthDelimitedCodec;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 // use futures::prelude::*;
 
 #[tarpc::service]
@@ -23,8 +28,32 @@ impl DossierService for Service {
     async fn handshake(self, _context: Context) -> () {}
 }
 
+struct OtelGuard {
+    // logger_provider: SdkLoggerProvider,
+    // metrics_provider: SdkMeterProvider,
+    // tracer_provider: SdkTracerProvider,
+}
+impl Drop for OtelGuard {
+    fn drop(&mut self) {
+        todo!()
+    }
+}
+
+fn init_tracing_subscriber() -> OtelGuard {
+    let console_layzer = ConsoleLayer::builder()
+        .retention(ConsoleLayer::DEFAULT_RETENTION)
+        .server_addr(([127, 0, 0, 1], 6669))
+        .spawn();
+
+    tracing_subscriber::registry().with(console_layzer).init();
+
+    OtelGuard {}
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
+    let _otel_guard = init_tracing_subscriber();
+
     let listener_path = PathBuf::from("/tmp").join("spiders");
     tokio::fs::create_dir_all(&listener_path).await?;
     let listener_addr = listener_path
