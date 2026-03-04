@@ -45,6 +45,8 @@ sudo apt install emacs
 https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64.AppImage
 sudo apt install -f helix_25.7.1-1_amd64.deb
 cargo binstall helix
+## tokio-console
+cargo install --locked tokio-console
 ## 安装及配置zellij
 cargo binstall zellij
 sudo apt install xclip

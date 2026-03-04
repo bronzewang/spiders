@@ -3,8 +3,10 @@ use std::path::PathBuf;
 use anyhow::Result;
 use console_subscriber::ConsoleLayer;
 use futures::StreamExt;
+use opentelemetry_appender_tracing::layer::OpenTelemetryTracingBridge;
+use opentelemetry_otlp::WithExportConfig;
 use opentelemetry_sdk::{
-    logs::SdkLoggerProvider, metrics::SdkMeterProvider, trace::SdkTracerProvider,
+    Resource, logs::SdkLoggerProvider, metrics::SdkMeterProvider, trace::SdkTracerProvider,
 };
 use tarpc::{
     context::Context,
@@ -13,7 +15,7 @@ use tarpc::{
 };
 use tokio::net::UnixListener;
 use tokio_util::codec::LengthDelimitedCodec;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use tracing_subscriber::{EnvFilter, Layer, layer::SubscriberExt, util::SubscriberInitExt};
 // use futures::prelude::*;
 
 #[tarpc::service]
@@ -29,25 +31,68 @@ impl DossierService for Service {
 }
 
 struct OtelGuard {
-    // logger_provider: SdkLoggerProvider,
+    logger_provider: SdkLoggerProvider,
     // metrics_provider: SdkMeterProvider,
     // tracer_provider: SdkTracerProvider,
 }
 impl Drop for OtelGuard {
     fn drop(&mut self) {
-        todo!()
+        if let Err(e) = self.logger_provider.shutdown() {
+            eprintln!("logger_provider shutdown fail error {e}");
+        }
     }
 }
 
 fn init_tracing_subscriber() -> OtelGuard {
+    let logger_provider = init_logger_provider();
+
+    let otel_filter = EnvFilter::new("debug")
+        .add_directive("hyper=off".parse().unwrap())
+        .add_directive("tonic=off".parse().unwrap())
+        .add_directive("h2=off".parse().unwrap())
+        .add_directive("reqwest=off".parse().unwrap());
+    let otel_layer = OpenTelemetryTracingBridge::new(&logger_provider).with_filter(otel_filter);
+
+    let term_filter = EnvFilter::new("debug");
+    let term_layer = tracing_subscriber::fmt::layer()
+        .with_file(true)
+        .with_target(true)
+        .with_level(true)
+        .with_line_number(true)
+        .with_filter(term_filter);
+
     let console_layzer = ConsoleLayer::builder()
         .retention(ConsoleLayer::DEFAULT_RETENTION)
         .server_addr(([127, 0, 0, 1], 6669))
         .spawn();
 
-    tracing_subscriber::registry().with(console_layzer).init();
+    tracing_subscriber::registry()
+        .with(console_layzer)
+        .with(otel_layer)
+        .with(term_layer)
+        .init();
 
-    OtelGuard {}
+    OtelGuard { logger_provider }
+}
+
+const TONIC_ENDPOINT: &str = "http://192.168.3.47:4317";
+
+fn resource() -> Resource {
+    Resource::builder()
+        .with_service_name(env!("CARGO_PKG_NAME"))
+        .build()
+}
+
+fn init_logger_provider() -> SdkLoggerProvider {
+    let exporter = opentelemetry_otlp::LogExporter::builder()
+        .with_tonic()
+        .with_endpoint(TONIC_ENDPOINT)
+        .build()
+        .expect("init log exporter fail");
+    SdkLoggerProvider::builder()
+        .with_resource(resource())
+        .with_batch_exporter(exporter)
+        .build()
 }
 
 #[tokio::main]

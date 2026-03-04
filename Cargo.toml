@@ -57,7 +57,7 @@ console-subscriber = { version = "0.5" }
 
 opentelemetry = { version = "0.31" }
 opentelemetry_sdk = { version = "0.31" }
-opentelemetry-otlp = { version = "0.31" }
+opentelemetry-otlp = { version = "0.31", features = ["grpc-tonic"] }
 opentelemetry-stdout = { version = "0.31" }
 opentelemetry-appender-tracing = { version = "0.31" }
 # opentelemetry-semantic-conventions = { version = "0.31", features = [
