@@ -3,7 +3,7 @@ use std::{path::PathBuf, time::Duration};
 use anyhow::Result;
 use console_subscriber::ConsoleLayer;
 use futures::StreamExt;
-use opentelemetry::global;
+use opentelemetry::{InstrumentationScope, global, trace::TracerProvider};
 use opentelemetry_appender_tracing::layer::OpenTelemetryTracingBridge;
 use opentelemetry_otlp::WithExportConfig;
 use opentelemetry_sdk::{
@@ -12,6 +12,7 @@ use opentelemetry_sdk::{
     metrics::{PeriodicReader, SdkMeterProvider},
     trace::{RandomIdGenerator, Sampler, SdkTracerProvider},
 };
+use opentelemetry_system_metrics::init_process_observer;
 use tarpc::{
     context::Context,
     server::{BaseChannel, Channel},
@@ -19,6 +20,7 @@ use tarpc::{
 };
 use tokio::net::UnixListener;
 use tokio_util::codec::LengthDelimitedCodec;
+use tracing_opentelemetry::{MetricsLayer, OpenTelemetryLayer};
 use tracing_subscriber::{EnvFilter, Layer, layer::SubscriberExt, util::SubscriberInitExt};
 // use futures::prelude::*;
 
@@ -65,7 +67,7 @@ fn init_tracing_subscriber() -> OtelGuard {
         .add_directive("reqwest=off".parse().unwrap());
     let otel_layer = OpenTelemetryTracingBridge::new(&logger_provider).with_filter(otel_filter);
 
-    let term_filter = EnvFilter::new("debug");
+    let term_filter = EnvFilter::new("warn");
     let term_layer = tracing_subscriber::fmt::layer()
         .with_file(true)
         .with_target(true)
@@ -78,11 +80,20 @@ fn init_tracing_subscriber() -> OtelGuard {
         .server_addr(([127, 0, 0, 1], 6669))
         .spawn();
 
+    let tracer = tracer_provider.tracer("dossier");
     tracing_subscriber::registry()
         .with(console_layzer)
         .with(otel_layer)
         .with(term_layer)
+        .with(MetricsLayer::new(meter_provider.clone()))
+        .with(OpenTelemetryLayer::new(tracer))
         .init();
+
+    let scope = InstrumentationScope::builder("dossier")
+        .with_version("0.1")
+        .build();
+    let meter = global::meter_with_scope(scope);
+    tokio::spawn(init_process_observer(meter));
 
     OtelGuard {
         logger_provider,
@@ -100,14 +111,17 @@ fn resource() -> Resource {
 }
 
 fn init_logger_provider() -> SdkLoggerProvider {
-    let exporter = opentelemetry_otlp::LogExporter::builder()
+    let otel_exporter = opentelemetry_otlp::LogExporter::builder()
         .with_tonic()
         .with_endpoint(TONIC_ENDPOINT)
         .build()
         .expect("init log exporter fail");
+    let term_exporter = opentelemetry_stdout::LogExporter::default();
+
     SdkLoggerProvider::builder()
         .with_resource(resource())
-        .with_batch_exporter(exporter)
+        .with_batch_exporter(otel_exporter)
+        .with_batch_exporter(term_exporter)
         .build()
 }
 
@@ -154,7 +168,6 @@ fn init_tracer_provider() -> SdkTracerProvider {
         //     1.0,
         // ))))
         .build();
-
     global::set_tracer_provider(otel_provider.clone());
 
     otel_provider

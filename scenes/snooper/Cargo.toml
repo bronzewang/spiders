@@ -25,6 +25,22 @@ anyhow = { workspace = true }
 futures = { workspace = true }
 futures-util = { workspace = true }
 
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+tracing-opentelemetry = { workspace = true }
+
+console-subscriber = { workspace = true }
+
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+opentelemetry-otlp = { workspace = true }
+opentelemetry-stdout = { workspace = true }
+opentelemetry-appender-tracing = { workspace = true }
+# opentelemetry-semantic-conventions = { workspace = true }
+
+opentelemetry-system-metrics = { workspace = true }
+
+
 # tribers = { version = "0" }
 
 # spiders-scheme = { workspace = true }
