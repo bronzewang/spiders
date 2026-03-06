@@ -10,7 +10,7 @@ use opentelemetry_sdk::{
     Resource,
     logs::SdkLoggerProvider,
     metrics::{PeriodicReader, SdkMeterProvider},
-    trace::SdkTracerProvider,
+    trace::{RandomIdGenerator, Sampler, SdkTracerProvider},
 };
 use tarpc::{
     context::Context,
@@ -37,16 +37,18 @@ impl DossierService for Service {
 struct OtelGuard {
     logger_provider: SdkLoggerProvider,
     meter_provider: SdkMeterProvider,
-    // tracer_provider: SdkTracerProvider,
+    tracer_provider: SdkTracerProvider,
 }
 impl Drop for OtelGuard {
     fn drop(&mut self) {
         if let Err(e) = self.logger_provider.shutdown() {
             eprintln!("logger_provider shutdown fail error {e}");
         }
-
         if let Err(e) = self.meter_provider.shutdown() {
             eprintln!("meter_provider shutdown fail error {e}");
+        }
+        if let Err(e) = self.tracer_provider.shutdown() {
+            eprintln!("tracer_provider shutdown fail error {e}");
         }
     }
 }
@@ -54,6 +56,7 @@ impl Drop for OtelGuard {
 fn init_tracing_subscriber() -> OtelGuard {
     let logger_provider = init_logger_provider();
     let meter_provider = init_meter_provider();
+    let tracer_provider = init_tracer_provider();
 
     let otel_filter = EnvFilter::new("debug")
         .add_directive("hyper=off".parse().unwrap())
@@ -84,6 +87,7 @@ fn init_tracing_subscriber() -> OtelGuard {
     OtelGuard {
         logger_provider,
         meter_provider,
+        tracer_provider,
     }
 }
 
@@ -114,21 +118,46 @@ fn init_meter_provider() -> SdkMeterProvider {
         .build()
         .expect("metric exporter build fail");
     let otel_reader = PeriodicReader::builder(otel_exporter)
-        .with_interval(Duration::from_secs(15))
+        .with_interval(Duration::from_secs(5))
         .build();
 
     let term_exportor = opentelemetry_stdout::MetricExporter::builder().build();
     let term_reader = PeriodicReader::builder(term_exportor)
-        .with_interval(Duration::from_secs(15))
+        .with_interval(Duration::from_secs(5))
         .build();
 
     let meter_provider = SdkMeterProvider::builder()
+        .with_resource(resource())
         .with_reader(otel_reader)
         .with_reader(term_reader)
         .build();
     global::set_meter_provider(meter_provider.clone());
 
     meter_provider
+}
+
+fn init_tracer_provider() -> SdkTracerProvider {
+    let otel_exporter = opentelemetry_otlp::SpanExporter::builder()
+        .with_tonic()
+        .with_endpoint(TONIC_ENDPOINT)
+        .build()
+        .expect("span exporter build fail");
+    let term_exporter = opentelemetry_stdout::SpanExporter::default();
+
+    let otel_provider = SdkTracerProvider::builder()
+        .with_resource(resource())
+        .with_batch_exporter(otel_exporter)
+        .with_batch_exporter(term_exporter)
+        .with_id_generator(RandomIdGenerator::default())
+        .with_sampler(Sampler::AlwaysOn)
+        // .with_sampler(Sampler::ParentBased(Box::new(Sampler::TraceIdRatioBased(
+        //     1.0,
+        // ))))
+        .build();
+
+    global::set_tracer_provider(otel_provider.clone());
+
+    otel_provider
 }
 
 #[tokio::main]
