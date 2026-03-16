@@ -71,6 +71,8 @@ cargo binstall iamb
 ~/.config/iamb/config.toml
 ## tokei
 cargo binstall tokei
+## binsider
+cargo install binsider
 ## remmina的默认配置
 sudo apt install remmina remmina-plugin-rdp remmina-plugin-vnc
 ## 安装emoji字体
@@ -95,6 +97,14 @@ curl -f https://zed.dev/install.sh | sh
 sudo apt install rpi-imager
 ## sqlite
 sudo apt install sqlite3
+## gcc-linker
+sudo apt install gcc-arm-none-eabi
+## cross
+cargo install cross --git https://github.com/cross-rs/cross
+## 或
+cargo binstall cross
+## rgx
+cargo install rgx-cli
 
 # 桥接机
 ## 开启ssh服务, 理论上应该烧录镜像时开启
