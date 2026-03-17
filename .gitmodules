@@ -1,3 +1,6 @@
 [submodule "flakes/tribers"]
 	path = flakes/tribers
 	url = git@github.com:bronzewang/tribers.git
+[submodule "basanos"]
+	path = basanos
+	url = git@github.com:bronzewang/basanos.git
