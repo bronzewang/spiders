@@ -1,14 +1,15 @@
 [workspace]
 members = [
-  # "pieces/entity",
-  # "pieces/scheme",
-  # "pieces/widget",
-  # "pieces/bailor",
-  # "scenes/spawner",
-  # "scenes/browser",
-  "scenes/dossier",
-  "scenes/snooper",
-  # "scenes/visitor",
+    # "pieces/entity",
+    # "pieces/scheme",
+    # "pieces/widget",
+    # "pieces/bailor",
+    # "scenes/spawner",
+    # "scenes/browser",
+    "scenes/dossier",
+    "scenes/snooper",
+    # "scenes/visitor",
+    "basanos/catcher",
 ]
 
 [package]
