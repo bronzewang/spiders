@@ -3,3 +3,6 @@ catch = "run -p basanos-catcher"
 
 [build]
 rustflags = ["--cfg", "tokio_unstable"]
+
+[env]
+RUST_LOG = "debug"

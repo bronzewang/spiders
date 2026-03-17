@@ -1,0 +1,41 @@
+(
+    id: "demo",
+    name: Some("spider demo"),
+    note: None,
+    nodes: [
+        (
+            id: "spiders-dossier",
+            name: None,
+            note: None,
+            source: (
+                repo: Native("./"),
+            ),
+            casting: (
+                cmd: "cargo b -p spiders-dossier",
+            ),
+            output: (
+                path: "./target",
+            ),
+            target: (
+                path: "./"
+            ),
+        ),
+        (
+            id: "spiders-snooper",
+            name: None,
+            note: None,
+            source: (
+                repo: Native("./"),
+            ),
+            casting: (
+                cmd: "cargo b -p spiders-snooper",
+            ),
+            output: (
+                path: "./target",
+            ),
+            target: (
+                path: "./"
+            ),
+        ),
+    ]
+)
