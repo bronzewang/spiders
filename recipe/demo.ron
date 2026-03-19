@@ -10,7 +10,7 @@
             source: (
                 repo: Native("./"),
             ),
-            casting: (
+            create: (
                 cmd: "cargo b -p spiders-dossier",
             ),
             output: (
@@ -27,7 +27,7 @@
             source: (
                 repo: Native("./"),
             ),
-            casting: (
+            create: (
                 cmd: "cargo b -p spiders-snooper",
             ),
             output: (
