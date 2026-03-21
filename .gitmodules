@@ -4,3 +4,6 @@
 [submodule "basanos"]
 	path = basanos
 	url = git@github.com:bronzewang/basanos.git
+[submodule "petit"]
+	path = petit
+	url = https://github.com/PedramNavid/petit.git
