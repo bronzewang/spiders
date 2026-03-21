@@ -25,6 +25,8 @@ codegen-units = 1
 lto = true
 opt-level = 'z'
 
+[dependencies]
+
 [workspace.package]
 version = "0.0.1"
 edition = "2024"
@@ -66,6 +68,8 @@ opentelemetry-appender-tracing = { version = "0.31" }
 # ] }
 
 opentelemetry-system-metrics = { version = "0.31" }
+
+uuid = "1"
 
 # ratatui = "0.29"
 # # crossterm = "0.29"
