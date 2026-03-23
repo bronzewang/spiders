@@ -10,6 +10,7 @@ members = [
     "scenes/snooper",
     # "scenes/visitor",
     "basanos/catcher",
+    "petit",
 ]
 
 [package]
@@ -70,6 +71,7 @@ opentelemetry-appender-tracing = { version = "0.31" }
 opentelemetry-system-metrics = { version = "0.31" }
 
 uuid = "1"
+thiserror = "2"
 
 # ratatui = "0.29"
 # # crossterm = "0.29"
