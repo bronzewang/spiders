@@ -105,6 +105,8 @@ cargo install cross --git https://github.com/cross-rs/cross
 cargo binstall cross
 ## rgx
 cargo install rgx-cli
+## gitoxide
+cargo binstall gitoxide
 
 # 桥接机
 ## 开启ssh服务, 理论上应该烧录镜像时开启
